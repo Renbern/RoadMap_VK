@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044DB4E62911AAA800E4D595 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */; };
 		04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11529104BB100450FF0 /* AppDelegate.swift */; };
 		04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11729104BB100450FF0 /* SceneDelegate.swift */; };
-		04DAD11A29104BB100450FF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11929104BB100450FF0 /* ViewController.swift */; };
+		04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11929104BB100450FF0 /* SignInViewController.swift */; };
 		04DAD11D29104BB100450FF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11B29104BB100450FF0 /* Main.storyboard */; };
 		04DAD11F29104BB400450FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11E29104BB400450FF0 /* Assets.xcassets */; };
 		04DAD12229104BB400450FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		04DAD11229104BB100450FF0 /* RoadMap_VK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoadMap_VK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DAD11529104BB100450FF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DAD11729104BB100450FF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		04DAD11929104BB100450FF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		04DAD11929104BB100450FF0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		04DAD11C29104BB100450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04DAD11E29104BB400450FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DAD12129104BB400450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,7 +60,8 @@
 			children = (
 				04DAD11529104BB100450FF0 /* AppDelegate.swift */,
 				04DAD11729104BB100450FF0 /* SceneDelegate.swift */,
-				04DAD11929104BB100450FF0 /* ViewController.swift */,
+				04DAD11929104BB100450FF0 /* SignInViewController.swift */,
+				044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */,
 				04DAD11B29104BB100450FF0 /* Main.storyboard */,
 				04DAD11E29104BB400450FF0 /* Assets.xcassets */,
 				04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */,
@@ -179,7 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04DAD11A29104BB100450FF0 /* ViewController.swift in Sources */,
+				044DB4E62911AAA800E4D595 /* UITextField+Extension.swift in Sources */,
+				04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */,
 				04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */,
 				04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */,
 			);
