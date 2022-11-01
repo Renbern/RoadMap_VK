@@ -27,11 +27,11 @@ final class SignInViewController: UIViewController {
     }
     // MARK: - IBOutlets
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet private weak var loginTextField: UITextField!
     
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ final class SignInViewController: UIViewController {
         removeKeyboardNotificationCenter()
     }
     
-    // MARK: - Public properties
+    // MARK: - Public methods
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == Constants.segueIdentifier {
             if checkLoginInfo() {
@@ -58,7 +58,7 @@ final class SignInViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    @objc func keyboardWillShownAction(notification: Notification) {
+    @objc private func keyboardWillShownAction(notification: Notification) {
         let info  = notification.userInfo as? NSDictionary
         let kbSize = (info?.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue.size
         
@@ -67,12 +67,12 @@ final class SignInViewController: UIViewController {
         scrollView.scrollIndicatorInsets = contentInset
     }
     
-    @objc func keyboardWillHideAction(notification: Notification) {
+    @objc private func keyboardWillHideAction(notification: Notification) {
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
-    @objc func hideKeyboardAction() {
+    @objc private func hideKeyboardAction() {
         scrollView.endEditing(true)
     }
     
