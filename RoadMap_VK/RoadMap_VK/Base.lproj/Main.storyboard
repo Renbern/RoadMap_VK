@@ -259,6 +259,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4Sk-Dh-UDj"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ooF-YN-isT">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -306,9 +307,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="0c9-ku-Hpf" kind="show" id="Qjr-hW-K79"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -316,7 +314,13 @@
                             <outlet property="delegate" destination="Ps7-Ya-ucd" id="XgA-aG-hCI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2e4-8Q-kmP"/>
+                    <navigationItem key="navigationItem" id="2e4-8Q-kmP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zOV-Bw-5pc">
+                            <connections>
+                                <segue destination="0c9-ku-Hpf" kind="show" id="iqc-Vc-h6l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWK-Fm-6j5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
