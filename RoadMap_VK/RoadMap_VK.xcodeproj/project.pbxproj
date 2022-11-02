@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		044DB4E62911AAA800E4D595 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */; };
+		044DB4E82912C8E100E4D595 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */; };
 		04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11529104BB100450FF0 /* AppDelegate.swift */; };
 		04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11729104BB100450FF0 /* SceneDelegate.swift */; };
 		04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAD11929104BB100450FF0 /* SignInViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		04DAD11229104BB100450FF0 /* RoadMap_VK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoadMap_VK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DAD11529104BB100450FF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DAD11729104BB100450FF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044DB4E92912CB1A00E4D595 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */,
+				044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		04DAD10929104BB100450FF0 = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +72,7 @@
 				04DAD11529104BB100450FF0 /* AppDelegate.swift */,
 				04DAD11729104BB100450FF0 /* SceneDelegate.swift */,
 				04DAD11929104BB100450FF0 /* SignInViewController.swift */,
-				044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */,
+				044DB4E92912CB1A00E4D595 /* Extensions */,
 				04DAD11B29104BB100450FF0 /* Main.storyboard */,
 				04DAD11E29104BB400450FF0 /* Assets.xcassets */,
 				04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */,
@@ -185,6 +196,7 @@
 				044DB4E62911AAA800E4D595 /* UITextField+Extension.swift in Sources */,
 				04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */,
 				04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */,
+				044DB4E82912C8E100E4D595 /* UIViewController+Extension.swift in Sources */,
 				04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

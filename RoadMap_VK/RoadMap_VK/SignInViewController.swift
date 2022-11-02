@@ -1,4 +1,4 @@
-// ViewController.swift
+// SignInViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
@@ -19,10 +19,9 @@ final class SignInViewController: UIViewController {
             static let fail = "Fail"
         }
         
-        enum AlertText {
+        enum ErrorText {
             static let errorTitle = "Ошибка!"
             static let errorText = "Неправильный логин или пароль"
-            static let okActionText = "Ok"
         }
     }
     // MARK: - IBOutlets
@@ -46,13 +45,11 @@ final class SignInViewController: UIViewController {
     
     // MARK: - Public methods
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == Constants.segueIdentifier {
-            if checkLoginInfo() {
-                return true
-            } else {
-                showLoginErrorAlertController()
-                return false
-            }
+        guard identifier == Constants.segueIdentifier,
+              checkLoginInfo()
+        else {
+            showLoginErrorAlertController()
+            return false
         }
         return true
     }
@@ -81,6 +78,11 @@ final class SignInViewController: UIViewController {
         configurateLeftPadding()
     }
     
+    private func setupTapGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
+        scrollView.addGestureRecognizer(tapGesture)
+    }
+    
     private func configurateKeyboardNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
@@ -95,9 +97,7 @@ final class SignInViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
-        scrollView.addGestureRecognizer(tapGesture)
+        setupTapGestureRecognizer()
     }
     
     private func removeKeyboardNotificationCenter() {
@@ -107,30 +107,17 @@ final class SignInViewController: UIViewController {
     
     private func checkLoginInfo() -> Bool {
         guard let loginText = loginTextField.text,
-              let passwordText = passwordTextField.text
+              let passwordText = passwordTextField.text,
+              loginText == Constants.AdminProfile.username,
+              passwordText == Constants.AdminProfile.password
         else {
             return false
         }
-        if loginText == Constants.AdminProfile.username, passwordText == Constants.AdminProfile.password {
-            print(Constants.SignInResult.success)
-            return true
-        } else {
-            print(Constants.SignInResult.fail)
-            return false
-        }
+        return true
     }
     
     private func showLoginErrorAlertController() {
-        let loginErrorAlertController = UIAlertController(
-            title: Constants.AlertText.errorTitle,
-            message: Constants.AlertText.errorText,
-            preferredStyle: .alert
-        )
-        let okLoginErrorAlertControllerAction = UIAlertAction(title: Constants.AlertText.okActionText, style: .cancel)
-        
-        loginErrorAlertController.addAction(okLoginErrorAlertControllerAction)
-        
-        present(loginErrorAlertController, animated: true)
+        showAlert(title: Constants.ErrorText.errorTitle, message: Constants.ErrorText.errorText)
     }
     
     private func configurateLeftPadding() {
