@@ -4,7 +4,7 @@
 import UIKit
 /// Ячейка таблицы друзей
 final class FriendsTableViewCell: UITableViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private visual elements
 
     @IBOutlet private var friendPhotoImageView: UIImageView!
     @IBOutlet private var friendView: FriendView!
@@ -22,12 +22,13 @@ final class FriendsTableViewCell: UITableViewCell {
     }
 
     // MARK: - Public methods
+
     func refreshPhoto(_ model: User) {
         friendPhotoImageView.image = UIImage(named: model.friendPhotoImageName)
         friendNameLabel.text = model.name
         friendPhotoImageName = model.friendPhotoImageName
     }
-    
+
     // MARK: - Private methods
 
     private func setupUI() {

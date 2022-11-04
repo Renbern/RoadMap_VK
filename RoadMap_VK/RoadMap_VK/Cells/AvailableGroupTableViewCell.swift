@@ -5,21 +5,23 @@ import UIKit
 
 /// Ячейка таблицы групп доступных для подписки
 final class AvailableGroupTableViewCell: UITableViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private visual elements
 
     @IBOutlet private var groupPhotoImageView: UIImageView!
-
     @IBOutlet private var groupNameLabel: UILabel!
 
     // MARK: - Public properties
+
     var groupPhotoImageName: String?
 
     // MARK: - Lifecycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-// MARK: - Public properties
+    // MARK: - Public properties
+
     func refreshPhoto(_ model: Group) {
         groupPhotoImageView.image = UIImage(named: model.groupImageName)
         groupNameLabel.text = model.name

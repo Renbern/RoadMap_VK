@@ -5,7 +5,8 @@ import UIKit
 
 /// Ячейка коллекции фото друга
 final class FriendPhotoCollectionViewCell: UICollectionViewCell {
-    @IBOutlet private var friendPhotoImageView: UIImageView!
+    // MARK: - Public visual elements
+    @IBOutlet var friendPhotoImageView: UIImageView!
 
     // MARK: - Public methods
 
