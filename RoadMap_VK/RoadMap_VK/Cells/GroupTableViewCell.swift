@@ -14,12 +14,6 @@ final class GroupTableViewCell: UITableViewCell {
 
     var groupPhotoImageName: String?
 
-    // MARK: - Lifecycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     // MARK: - Public methods
 
     func refreshPhoto(_ model: Group) {

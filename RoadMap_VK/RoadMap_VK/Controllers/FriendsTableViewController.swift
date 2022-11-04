@@ -60,12 +60,6 @@ final class FriendsTableViewController: UITableViewController {
             friendPhotoImageName: Constants.FriendsImageNames.rossImageName
         )
     ]
-
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }
 
 // MARK: - UITableViewDataSource

@@ -19,7 +19,7 @@ final class LikeControl: UIControl {
     // MARK: - Private properties
 
     private var isLiked = false
-    private var like = 0
+    private var likeCount = 0
 
     // MARK: - Lifecycle
 
@@ -32,10 +32,10 @@ final class LikeControl: UIControl {
 
     @IBAction private func likeAction() {
         if isLiked == false {
-            likeNumberLabel.text = String(like + 1)
+            likeNumberLabel.text = String(likeCount + 1)
             isLiked = true
         } else {
-            likeNumberLabel.text = String(like + 0)
+            likeNumberLabel.text = String(likeCount + 0)
             isLiked = false
         }
     }
@@ -45,6 +45,6 @@ final class LikeControl: UIControl {
     private func setupUI() {
         likeButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
         likeButton.tintColor = .systemRed
-        likeNumberLabel.text = String(like)
+        likeNumberLabel.text = String(likeCount)
     }
 }

@@ -6,20 +6,15 @@ import UIKit
 /// Таблица фото друга
 final class FriendPhotosCollectionViewController: UICollectionViewController {
     // MARK: - Constants
-
+    
     private enum Constants {
         static let reuseIdentifier = "friendPhotoCell"
     }
-
+    
     // MARK: - Public properties
-
+    
     var friendImageName: String?
-
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -40,7 +35,7 @@ extension FriendPhotosCollectionViewController {
         else {
             return UICollectionViewCell()
         }
-        cell.friendPhotoImageView.image = UIImage(named: friendImageName ?? "")
+        cell.refreshPhoto(friendImageName)
 
         return cell
     }

@@ -5,12 +5,13 @@ import UIKit
 
 /// Ячейка коллекции фото друга
 final class FriendPhotoCollectionViewCell: UICollectionViewCell {
-    // MARK: - Public visual elements
-    @IBOutlet var friendPhotoImageView: UIImageView!
+    // MARK: - IBOutlet
+
+    @IBOutlet private var friendPhotoImageView: UIImageView!
 
     // MARK: - Public methods
 
-    func refreshPhoto(_ model: User) {
-        friendPhotoImageView.image = UIImage(named: model.friendPhotoImageName)
+    func refreshPhoto(_ imageName: String?) {
+        friendPhotoImageView.image = UIImage(named: imageName ?? "")
     }
 }

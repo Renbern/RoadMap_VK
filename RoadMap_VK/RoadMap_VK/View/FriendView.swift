@@ -9,6 +9,8 @@ import UIKit
         CAShapeLayer.self
     }
 
+    // MARK: - Private properties
+
     @IBInspectable private var shadowColor: UIColor = .black {
         didSet {
             setNeedsDisplay()
@@ -32,6 +34,8 @@ import UIKit
             setNeedsDisplay()
         }
     }
+
+    // MARK: - Private method
 
     func configureShadow() {
         layer.borderWidth = borderWidth

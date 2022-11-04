@@ -14,13 +14,7 @@ final class AvailableGroupTableViewCell: UITableViewCell {
 
     var groupPhotoImageName: String?
 
-    // MARK: - Lifecycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    // MARK: - Public properties
+    // MARK: - Public methods
 
     func refreshPhoto(_ model: Group) {
         groupPhotoImageView.image = UIImage(named: model.groupImageName)

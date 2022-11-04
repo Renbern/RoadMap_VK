@@ -26,7 +26,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    var groups: [Group] = [
+    private var groups: [Group] = [
         Group(
             name: Constants.GroupNames.hearedVologda,
             groupImageName: Constants.GroupsImageNames.hearedVologdaImageName
@@ -37,25 +37,18 @@ final class GroupTableViewController: UITableViewController {
         )
     ]
 
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     // MARK: - IBActions
 
     @IBAction private func addGroupAction(segue: UIStoryboardSegue) {
-        if segue.identifier == Constants.Identifiers.groupUnwindId {
-            guard let userGroupsController = segue.source as? AvailableGroupTableViewController
-            else { return }
-            if let indexPath = userGroupsController.tableView.indexPathForSelectedRow {
-                let group = userGroupsController.groups[indexPath.row]
-                if groups.contains(where: { $0.name == groups[indexPath.row].name }) {
-                    groups.append(group)
-                    tableView.reloadData()
-                }
-            }
+        guard
+            segue.identifier == Constants.Identifiers.groupUnwindId,
+            let userGroupsController = segue.source as? AvailableGroupTableViewController,
+            let indexPath = userGroupsController.tableView.indexPathForSelectedRow
+        else { return }
+        let group = userGroupsController.groups[indexPath.row]
+        if groups.contains(where: { $0.name == groups[indexPath.row].name }) {
+            groups.append(group)
+            tableView.reloadData()
         }
     }
 }

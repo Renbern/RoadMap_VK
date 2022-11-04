@@ -23,7 +23,7 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    var groups: [Group] = [
+    private(set) var groups: [Group] = [
         Group(
             name: Constants.GroupNames.sport,
             groupImageName: Constants.GroupsImageNames.sportImageName
