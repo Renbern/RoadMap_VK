@@ -1,7 +1,5 @@
-//
-//  UITextField+Extension.swift
-//  RoadMap_VK
-//
+// UITextField+Extension.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
