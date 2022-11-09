@@ -60,23 +60,18 @@ final class FriendsTableViewController: UITableViewController {
             friendPhotoImageName: Constants.FriendsImageNames.rossImageName
         )
     ]
-}
 
-// MARK: - UITableViewDataSource
+    private var sections: [Character: [User]] = [:]
+    private var sectionTitles: [Character] = []
 
-extension FriendsTableViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friends.count
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupSections()
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.Identifiers.friendsIdentifier,
-            for: indexPath
-        ) as? FriendsTableViewCell else { return UITableViewCell() }
-        cell.refreshPhoto(friends[indexPath.row])
-        return cell
-    }
+    // MARK: - Public methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -85,5 +80,57 @@ extension FriendsTableViewController {
            let destination = segue
            .destination as?
            FriendPhotosCollectionViewController { destination.friendImageName = cell.friendPhotoImageName }
+    }
+
+    // MARK: - Private methods
+
+    private func setupSections() {
+        for friend in friends {
+            guard let firstLetter = friend.name.first else { return }
+            if sections[firstLetter] != nil {
+                sections[firstLetter]?.append(friend)
+            } else {
+                sections[firstLetter] = [friend]
+            }
+        }
+        sectionTitles = Array(sections.keys).sorted()
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension FriendsTableViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        sections[sectionTitles[section]]?.count ?? 0
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.Identifiers.friendsIdentifier,
+            for: indexPath
+        ) as? FriendsTableViewCell,
+            let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row]
+        else {
+            return UITableViewCell()
+        }
+        cell.refreshPhoto(friend)
+        return cell
+    }
+
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        sectionTitles.compactMap { String($0) }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        (view as? UITableViewHeaderFooterView)?.textLabel?.textColor = UIColor.white
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(sectionTitles[section])
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
     }
 }

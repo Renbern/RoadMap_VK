@@ -6,15 +6,14 @@ import UIKit
 /// Таблица фото друга
 final class FriendPhotosCollectionViewController: UICollectionViewController {
     // MARK: - Constants
-    
+
     private enum Constants {
         static let reuseIdentifier = "friendPhotoCell"
     }
-    
+
     // MARK: - Public properties
-    
+
     var friendImageName: String?
-    
 }
 
 // MARK: - UICollectionViewDataSource

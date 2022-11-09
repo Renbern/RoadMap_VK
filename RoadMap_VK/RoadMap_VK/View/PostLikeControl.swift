@@ -1,14 +1,17 @@
-// LikeControl.swift
+// PostLikeControl.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
-/// Контрол лайка
-final class LikeControl: UIControl {
+/// Контрол лайков поста
+final class PostLikeControl: UIControl {
     // MARK: - Constants
 
     private enum Constants {
         static let heart = "heart"
+        static let filledHeart = "heart.fill"
+        static let likeText = "Нравится"
+        static let unlikeText = "Не нравится"
     }
 
     // MARK: - Private IBOutlets
@@ -33,18 +36,31 @@ final class LikeControl: UIControl {
     @IBAction private func likeAction() {
         if isLiked == false {
             likeNumberLabel.text = String(likeCount + 1)
+            setupLikeAnimation()
+            likeButton.setImage(UIImage(systemName: Constants.filledHeart), for: .normal)
+            likeButton.setTitle(Constants.unlikeText, for: .normal)
             isLiked = true
         } else {
             likeNumberLabel.text = String(likeCount + 0)
+            setupLikeAnimation()
+            likeButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
+            likeButton.setTitle(Constants.likeText, for: .normal)
             isLiked = false
         }
     }
 
-    // MARK: - Private method
+    // MARK: - Private methods
 
     private func setupUI() {
-        likeButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
-        likeButton.tintColor = .systemRed
         likeNumberLabel.text = String(likeCount)
+    }
+
+    private func setupLikeAnimation() {
+        UIView.transition(
+            with: likeNumberLabel,
+            duration: 1.0,
+            options: .transitionFlipFromRight,
+            animations: nil
+        )
     }
 }
