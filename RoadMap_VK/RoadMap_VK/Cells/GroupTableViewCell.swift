@@ -21,10 +21,10 @@ final class GroupTableViewCell: UITableViewCell {
         setupUI()
     }
 
-    func refreshPhoto(_ model: Group) {
-        groupPhotoImageView.image = UIImage(named: model.groupImageName)
-        groupNameLabel.text = model.name
-        groupPhotoImageName = model.groupImageName
+    func configure(_ group: Group) {
+        groupPhotoImageView.image = UIImage(named: group.groupImageName)
+        groupNameLabel.text = group.name
+        groupPhotoImageName = group.groupImageName
     }
 
     // MARK: - Private methods
@@ -49,10 +49,10 @@ final class GroupTableViewCell: UITableViewCell {
     }
 
     private func setupUI() {
-        setupPhotoTapAnimation()
+        setupPhotoTapGestureRecognizer()
     }
 
-    private func setupPhotoTapAnimation() {
+    private func setupPhotoTapGestureRecognizer() {
         let photoGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(animatePhotoTapAction))
         groupPhotoImageView.isUserInteractionEnabled = true
         groupPhotoImageView.addGestureRecognizer(photoGestureRecognizer)

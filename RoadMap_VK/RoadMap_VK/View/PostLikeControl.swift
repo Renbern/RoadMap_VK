@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Контрол лайков поста
+/// Контрол лайков
 final class PostLikeControl: UIControl {
     // MARK: - Constants
 
@@ -21,8 +21,9 @@ final class PostLikeControl: UIControl {
 
     // MARK: - Private properties
 
-    private var isLiked = false
     private var likeCount = 0
+    private var likeControlImageName = ""
+    private var likeControlButtonTitle = ""
 
     // MARK: - Lifecycle
 
@@ -34,19 +35,14 @@ final class PostLikeControl: UIControl {
     // MARK: - Private IBActions
 
     @IBAction private func likeAction() {
-        if isLiked == false {
-            likeNumberLabel.text = String(likeCount + 1)
-            setupLikeAnimation()
-            likeButton.setImage(UIImage(systemName: Constants.filledHeart), for: .normal)
-            likeButton.setTitle(Constants.unlikeText, for: .normal)
-            isLiked = true
-        } else {
-            likeNumberLabel.text = String(likeCount + 0)
-            setupLikeAnimation()
-            likeButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
-            likeButton.setTitle(Constants.likeText, for: .normal)
-            isLiked = false
-        }
+        isSelected = !isSelected
+        likeCount = isSelected ? +1 : +0
+        likeNumberLabel.text = String(likeCount)
+        likeControlImageName = isSelected ? Constants.filledHeart : Constants.heart
+        likeButton.setImage(UIImage(systemName: likeControlImageName), for: .normal)
+        likeControlButtonTitle = isSelected ? Constants.unlikeText : Constants.likeText
+        likeButton.setTitle(likeControlButtonTitle, for: .normal)
+        setupLikeAnimation()
     }
 
     // MARK: - Private methods

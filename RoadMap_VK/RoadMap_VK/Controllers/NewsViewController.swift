@@ -16,7 +16,7 @@ final class NewsViewController: UIViewController {
 
     // MARK: - Private IBOutlets
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
 
     // MARK: - Private properties
 
@@ -59,7 +59,7 @@ extension NewsViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.refreshPost(posts[indexPath.row])
+        cell.configure(posts[indexPath.row])
         return cell
     }
 }

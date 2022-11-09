@@ -4,7 +4,7 @@
 import UIKit
 
 /// Представление градиента
-@IBDesignable class GradientView: UIView {
+@IBDesignable final class GradientView: UIView {
     // MARK: - Public properties
 
     override class var layerClass: AnyClass {

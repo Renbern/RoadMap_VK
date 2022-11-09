@@ -61,7 +61,7 @@ final class FriendsTableViewController: UITableViewController {
         )
     ]
 
-    private var sections: [Character: [User]] = [:]
+    private var sectionsMap: [Character: [User]] = [:]
     private var sectionTitles: [Character] = []
 
     // MARK: - Lifecycle
@@ -87,13 +87,13 @@ final class FriendsTableViewController: UITableViewController {
     private func setupSections() {
         for friend in friends {
             guard let firstLetter = friend.name.first else { return }
-            if sections[firstLetter] != nil {
-                sections[firstLetter]?.append(friend)
+            if sectionsMap[firstLetter] != nil {
+                sectionsMap[firstLetter]?.append(friend)
             } else {
-                sections[firstLetter] = [friend]
+                sectionsMap[firstLetter] = [friend]
             }
         }
-        sectionTitles = Array(sections.keys).sorted()
+        sectionTitles = Array(sectionsMap.keys).sorted()
     }
 }
 
@@ -101,7 +101,7 @@ final class FriendsTableViewController: UITableViewController {
 
 extension FriendsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sections[sectionTitles[section]]?.count ?? 0
+        sectionsMap[sectionTitles[section]]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,7 +109,7 @@ extension FriendsTableViewController {
             withIdentifier: Constants.Identifiers.friendsIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row]
+            let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else {
             return UITableViewCell()
         }
@@ -131,6 +131,6 @@ extension FriendsTableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
+        sectionsMap.count
     }
 }

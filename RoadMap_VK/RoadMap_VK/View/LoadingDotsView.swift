@@ -8,7 +8,7 @@ final class LoadingDotsView: UIView {
     // MARK: - Constants
 
     private enum Constants {
-        static let whiteColor = "VKWhite"
+        static let whiteColorName = "VKWhite"
         static let opacityKeyPath = "opacity"
     }
 
@@ -42,7 +42,7 @@ final class LoadingDotsView: UIView {
     private func setupView() {
         for _ in 0 ..< 3 {
             let view = UIView()
-            view.backgroundColor = UIColor(named: Constants.whiteColor)
+            view.backgroundColor = UIColor(named: Constants.whiteColorName)
             view.heightAnchor.constraint(equalToConstant: bounds.height - 5).isActive = true
             view.layer.cornerRadius = (bounds.height - 5) / 2
             view.alpha = 0.5

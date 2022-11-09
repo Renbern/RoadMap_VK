@@ -68,10 +68,10 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private methods
 
     private func setupUI() {
-        setupSearchbar()
+        setupSearchBar()
     }
 
-    private func setupSearchbar() {
+    private func setupSearchBar() {
         searchBar.delegate = self
         searchedGroups = groups
     }
@@ -90,7 +90,7 @@ extension GroupTableViewController {
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
         let group = searchedGroups[indexPath.row]
-        cell.refreshPhoto(group)
+        cell.configure(group)
         return cell
     }
 
