@@ -35,7 +35,7 @@ import UIKit
         }
     }
 
-    // MARK: - Private method
+    // MARK: - Public method
 
     func configureShadow() {
         layer.borderWidth = borderWidth

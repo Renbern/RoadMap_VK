@@ -24,6 +24,10 @@ final class GroupTableViewController: UITableViewController {
         }
     }
 
+    // MARK: - Private IBOutlets
+
+    @IBOutlet private var searchBar: UISearchBar!
+
     // MARK: - Private properties
 
     private var groups: [Group] = [
@@ -37,7 +41,16 @@ final class GroupTableViewController: UITableViewController {
         )
     ]
 
-    // MARK: - IBActions
+    private var searchedGroups: [Group] = []
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+
+    // MARK: - Private IBActions
 
     @IBAction private func addGroupAction(segue: UIStoryboardSegue) {
         guard
@@ -45,11 +58,22 @@ final class GroupTableViewController: UITableViewController {
             let userGroupsController = segue.source as? AvailableGroupTableViewController,
             let indexPath = userGroupsController.tableView.indexPathForSelectedRow
         else { return }
-        let group = userGroupsController.groups[indexPath.row]
-        if groups.contains(where: { $0.name == groups[indexPath.row].name }) {
-            groups.append(group)
+        let group = userGroupsController.searchedGroups[indexPath.row]
+        if searchedGroups.contains(where: { $0.name == searchedGroups[indexPath.row].name }) {
+            searchedGroups.append(group)
             tableView.reloadData()
         }
+    }
+
+    // MARK: - Private methods
+
+    private func setupUI() {
+        setupSearchBar()
+    }
+
+    private func setupSearchBar() {
+        searchBar.delegate = self
+        searchedGroups = groups
     }
 }
 
@@ -57,7 +81,7 @@ final class GroupTableViewController: UITableViewController {
 
 extension GroupTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groups.count
+        searchedGroups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,7 +89,8 @@ extension GroupTableViewController {
             withIdentifier: Constants.Identifiers.addGroupSegueId,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.refreshPhoto(groups[indexPath.row])
+        let group = searchedGroups[indexPath.row]
+        cell.configure(group)
         return cell
     }
 
@@ -75,8 +100,17 @@ extension GroupTableViewController {
         forRowAt indexPath: IndexPath
     ) {
         if editingStyle == .delete {
-            groups.remove(at: indexPath.row)
+            searchedGroups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension GroupTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedGroups = searchText.isEmpty ? groups : groups.filter { $0.name.contains(searchText) }
+        tableView.reloadData()
     }
 }

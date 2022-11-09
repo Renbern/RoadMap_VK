@@ -11,7 +11,7 @@ final class LikeControl: UIControl {
         static let heart = "heart"
     }
 
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var likeButton: UIButton!
     @IBOutlet private var likeNumberLabel: UILabel!
@@ -28,7 +28,7 @@ final class LikeControl: UIControl {
         setupUI()
     }
 
-    // MARK: - IBActions
+    // MARK: - Private IBActions
 
     @IBAction private func likeAction() {
         if isLiked == false {
@@ -40,7 +40,7 @@ final class LikeControl: UIControl {
         }
     }
 
-    // MARK: - Private methods
+    // MARK: - Private method
 
     private func setupUI() {
         likeButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
