@@ -7,4 +7,5 @@ import Foundation
 struct User {
     let name: String
     let friendPhotoImageName: String
+    let photos: [String]
 }
