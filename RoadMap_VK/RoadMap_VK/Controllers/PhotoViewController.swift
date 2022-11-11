@@ -5,13 +5,13 @@ import UIKit
 
 /// Экран показа фото
 final class PhotoViewController: UIViewController {
+    // MARK: - Private visual components
+
+    private lazy var contentView = self.view as? PhotoView
+
     // MARK: - Public properties
 
     var photoNames: [String] = []
-
-    // MARK: - Private properties
-
-    private lazy var contentView = self.view as? PhotoView
 
     // MARK: - Lifecycle
 
@@ -27,18 +27,17 @@ final class PhotoViewController: UIViewController {
         contentView.stopActivityIndicator()
         contentView.createSwipeGesture()
         contentView.navController = navigationController
-        updatePhoto(view: contentView, photo: photoNames)
+        updatePhoto(view: contentView, photoNames: photoNames)
     }
 
-    private func updatePhoto(view contentView: PhotoView, photo: [String]) {
-        contentView.photos = []
-        let photos = Array(photo)
-        for photo in photos {
-            guard let usersPhoto = UIImage(named: photo) else {
+    private func updatePhoto(view contentView: PhotoView, photoNames: [String]) {
+        contentView.photoImages = []
+        for photoName in photoNames {
+            guard let userPhotoImage = UIImage(named: photoName) else {
                 return
             }
-            contentView.photos.append(usersPhoto)
-            let photoCount = contentView.photos.count
+            contentView.photoImages.append(userPhotoImage)
+            let photoCount = contentView.photoImages.count
             contentView.updatePhoto(count: photoCount)
         }
     }

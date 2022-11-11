@@ -159,7 +159,7 @@
         <!--Главная-->
         <scene sceneID="8lF-6i-cgG">
             <objects>
-                <navigationController title="Главная" automaticallyAdjustsScrollViewInsets="NO" id="6Xk-ir-axT" customClass="CustomViewController" customModule="RoadMap_VK" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController title="Главная" automaticallyAdjustsScrollViewInsets="NO" id="6Xk-ir-axT" customClass="CustomNavigationController" customModule="RoadMap_VK" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="person.2.fill" catalog="system" id="HtC-wC-eox"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B82-n1-Xya">

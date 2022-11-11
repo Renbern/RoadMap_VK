@@ -26,7 +26,7 @@ final class PhotoView: UIView {
 
     // MARK: - Public properties
 
-    var photos: [UIImage] = []
+    var photoImages: [UIImage] = []
     var navController: UINavigationController?
 
     // MARK: - Private properties
@@ -48,7 +48,7 @@ final class PhotoView: UIView {
 
     func updatePhoto(count: Int) {
         currentNumberLabel.text = "1 / \(count)"
-        friendImageView.image = photos.first
+        friendImageView.image = photoImages.first
     }
 
     func createSwipeGesture() {
@@ -63,11 +63,28 @@ final class PhotoView: UIView {
         addGestureRecognizer(swipeDown)
     }
 
+    // MARK: - Private IBActions
+
+    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.left:
+                swipe(translationX: -500, increaseIndex: 1)
+            case UISwipeGestureRecognizer.Direction.right:
+                swipe(translationX: 500, increaseIndex: -1)
+            case UISwipeGestureRecognizer.Direction.down:
+                swipeDown()
+            default:
+                break
+            }
+        }
+    }
+
     // MARK: - Private methods
 
     private func swipe(translationX: Int, increaseIndex: Int) {
         index += increaseIndex
-        guard index < photos.count, index >= 0 else {
+        guard index < photoImages.count, index >= 0 else {
             index -= increaseIndex
             return
         }
@@ -81,8 +98,8 @@ final class PhotoView: UIView {
             }, completion: { _ in
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
-                self.friendImageView.image = self.photos[self.index]
-                self.currentNumberLabel.text = "\(self.index + 1) / \(self.photos.count)"
+                self.friendImageView.image = self.photoImages[self.index]
+                self.currentNumberLabel.text = "\(self.index + 1) / \(self.photoImages.count)"
             }
         )
     }
@@ -99,22 +116,5 @@ final class PhotoView: UIView {
                 self.navController?.popViewController(animated: true)
             }
         )
-    }
-
-    // MARK: - IBActions
-
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizer.Direction.left:
-                swipe(translationX: -500, increaseIndex: 1)
-            case UISwipeGestureRecognizer.Direction.right:
-                swipe(translationX: 500, increaseIndex: -1)
-            case UISwipeGestureRecognizer.Direction.down:
-                swipeDown()
-            default:
-                break
-            }
-        }
     }
 }

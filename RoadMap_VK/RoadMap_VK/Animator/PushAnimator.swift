@@ -21,7 +21,7 @@ final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             translationX: source.view.frame.height / 2,
             y: -source.view.frame.width / 2
         )
-        let rotation = CGAffineTransform(rotationAngle: 278 * .pi / 180)
+        let rotation = CGAffineTransform(rotationAngle: .pi / -2)
         destination.view.transform = rotation.concatenating(translation)
 
         UIView.animateKeyframes(

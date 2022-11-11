@@ -4,10 +4,12 @@
 import UIKit
 
 /// Конфигурация кастомного навигейшн контроллера
-final class CustomViewController: UINavigationController {
+final class CustomNavigationController: UINavigationController {
     // MARK: - Private properties
 
     private let interactiveTransition = InteractiveTransition()
+
+    // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +19,7 @@ final class CustomViewController: UINavigationController {
 
 // MARK: - UIViewControllerTransitioningDelegate
 
-extension CustomViewController: UIViewControllerTransitioningDelegate {
+extension CustomNavigationController: UIViewControllerTransitioningDelegate {
     func animationController(
         forPresented presented: UIViewController,
         presenting: UIViewController,
@@ -33,7 +35,7 @@ extension CustomViewController: UIViewControllerTransitioningDelegate {
 
 // MARK: UINavigationControllerDelegate
 
-extension CustomViewController: UINavigationControllerDelegate {
+extension CustomNavigationController: UINavigationControllerDelegate {
     func navigationController(
         _ navigationController: UINavigationController,
         animationControllerFor operation: UINavigationController.Operation,
@@ -55,6 +57,6 @@ extension CustomViewController: UINavigationControllerDelegate {
         _ navigationController: UINavigationController,
         interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
     ) -> UIViewControllerInteractiveTransitioning? {
-        interactiveTransition.hasStarted ? interactiveTransition : nil
+        interactiveTransition.isStarted ? interactiveTransition : nil
     }
 }
