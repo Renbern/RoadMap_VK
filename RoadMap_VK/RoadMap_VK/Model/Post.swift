@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Модель поста
+/// Пост
 struct Post {
     let postAuthor: String
     let postText: String

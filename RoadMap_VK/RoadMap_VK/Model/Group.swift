@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Модель группы
+/// Группа
 struct Group {
     let name: String
     let groupImageName: String
