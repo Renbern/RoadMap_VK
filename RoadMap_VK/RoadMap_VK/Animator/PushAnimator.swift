@@ -5,6 +5,13 @@ import UIKit
 
 /// Анимация перехода вперед
 final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let rotationAngle: CGFloat = -90
+        static let translationXPoints: CGFloat = -200
+    }
+
     // MARK: - Public methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -21,7 +28,7 @@ final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             translationX: source.view.frame.height / 2,
             y: -source.view.frame.width / 2
         )
-        let rotation = CGAffineTransform(rotationAngle: .pi / -2)
+        let rotation = CGAffineTransform(rotationAngle: Constants.rotationAngle)
         destination.view.transform = rotation.concatenating(translation)
 
         UIView.animateKeyframes(
@@ -34,7 +41,7 @@ final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     relativeDuration: 0.75
                 ) {
                     let transform = CGAffineTransform(
-                        translationX: -200,
+                        translationX: Constants.translationXPoints,
                         y: 0
                     )
                     let scale = CGAffineTransform(

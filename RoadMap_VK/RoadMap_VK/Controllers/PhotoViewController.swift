@@ -25,7 +25,7 @@ final class PhotoViewController: UIViewController {
     private func setupView() {
         guard let contentView = contentView else { return }
         contentView.stopActivityIndicator()
-        contentView.createSwipeGesture()
+        contentView.createSwipeGestureRecognizer()
         contentView.navController = navigationController
         updatePhoto(view: contentView, photoNames: photoNames)
     }

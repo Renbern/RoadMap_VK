@@ -5,10 +5,19 @@ import UIKit
 
 /// Конфигурация интерактивного перехода
 final class InteractiveTransition: UIPercentDrivenInteractiveTransition {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let pullPercent = 0.33
+    }
+
     // MARK: - Public properties
 
     var isStarted = false
     var isFinished = false
+
+    // MARK: - Visual elements
+
     var viewController: UIViewController? {
         didSet {
             let recognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePanAction(_:)))
@@ -28,7 +37,7 @@ final class InteractiveTransition: UIPercentDrivenInteractiveTransition {
             let translation = gesture.translation(in: gesture.view)
             let relativeTranslation = translation.x / (gesture.view?.bounds.width ?? 1)
             let progress = max(0, min(1, relativeTranslation))
-            isFinished = progress > 0.33
+            isFinished = progress > Constants.pullPercent
             update(progress)
         case .ended:
             isStarted = false

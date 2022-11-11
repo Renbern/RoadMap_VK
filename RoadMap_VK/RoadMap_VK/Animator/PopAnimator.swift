@@ -5,6 +5,12 @@ import UIKit
 
 /// Анимация перехода назад
 final class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let rotationAngle: CGFloat = 90
+    }
+
     // MARK: - Public methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -24,7 +30,7 @@ final class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             y: -source.view.frame.width / 2
         )
 
-        let rotation = CGAffineTransform(rotationAngle: 90 * .pi / 180)
+        let rotation = CGAffineTransform(rotationAngle: Constants.rotationAngle)
 
         destination.view.transform = rotation.concatenating(translation)
 

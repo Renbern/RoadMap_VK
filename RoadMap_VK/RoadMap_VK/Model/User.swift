@@ -3,9 +3,9 @@
 
 import Foundation
 
-/// Модель друга
+/// Пользователь
 struct User {
     let name: String
     let friendPhotoImageName: String
-    let photos: [String]
+    let photoNames: [String]
 }

@@ -27,54 +27,78 @@ final class FriendsTableViewController: UITableViewController {
         }
 
         enum Photos {
-            static let goblinPhoto = "goblin"
-            static let iron1Photo = "iron1"
-            static let iron2Photo = "iron2"
-            static let iron3Photo = "iron3"
-            static let iron4Photo = "iron4"
-            static let tonyPhoto = "tony"
+            static let goblinPhotoName = "goblin"
+            static let ironOnePhotoName = "iron1"
+            static let ironTwoPhotoName = "iron2"
+            static let ironThreePhotoName = "iron3"
+            static let ironFourPhotoName = "iron4"
+            static let tonyPhotoName = "tony"
         }
 
         enum Identifiers {
             static let friendsIdentifier = "friendsCell"
-            static let friendSegue = "friendSegue"
-            static let photoSegue = "photoSegue"
+            static let friendSegueID = "friendSegue"
+            static let photoSegueID = "photoSegue"
         }
     }
 
     // MARK: - Private properties
 
-    private var animator: UIViewPropertyAnimator?
-    private var friends: [User] = [
+    private var propertyAnimator: UIViewPropertyAnimator?
+    private var users: [User] = [
         User(
             name: Constants.FriendsNames.joeName,
             friendPhotoImageName: Constants.FriendsImageNames.joeImageName,
-            photos: [Constants.Photos.iron1Photo, Constants.Photos.iron4Photo, Constants.Photos.tonyPhoto]
+            photoNames: [
+                Constants.Photos.ironOnePhotoName,
+                Constants.Photos.ironFourPhotoName,
+                Constants.Photos.tonyPhotoName
+            ]
         ),
         User(
             name: Constants.FriendsNames.chendlerName,
             friendPhotoImageName: Constants.FriendsImageNames.chendlerImageName,
-            photos: [Constants.Photos.iron2Photo, Constants.Photos.iron3Photo, Constants.Photos.goblinPhoto]
+            photoNames: [
+                Constants.Photos.ironTwoPhotoName,
+                Constants.Photos.ironThreePhotoName,
+                Constants.Photos.goblinPhotoName
+            ]
         ),
         User(
             name: Constants.FriendsNames.monicaName,
             friendPhotoImageName: Constants.FriendsImageNames.monicaImageName,
-            photos: [Constants.Photos.iron3Photo, Constants.Photos.iron4Photo, Constants.Photos.iron1Photo]
+            photoNames: [
+                Constants.Photos.ironThreePhotoName,
+                Constants.Photos.ironFourPhotoName,
+                Constants.Photos.ironOnePhotoName
+            ]
         ),
         User(
             name: Constants.FriendsNames.phibieName,
             friendPhotoImageName: Constants.FriendsImageNames.phibieImageName,
-            photos: [Constants.Photos.goblinPhoto, Constants.Photos.iron2Photo, Constants.Photos.iron1Photo]
+            photoNames: [
+                Constants.Photos.goblinPhotoName,
+                Constants.Photos.ironTwoPhotoName,
+                Constants.Photos.ironOnePhotoName
+            ]
         ),
         User(
             name: Constants.FriendsNames.rachelName,
             friendPhotoImageName: Constants.FriendsImageNames.rachelImageName,
-            photos: [Constants.Photos.iron3Photo, Constants.Photos.iron2Photo, Constants.Photos.tonyPhoto]
+            photoNames: [
+                Constants.Photos.ironThreePhotoName,
+                Constants.Photos.ironTwoPhotoName,
+                Constants.Photos.tonyPhotoName
+            ]
         ),
         User(
             name: Constants.FriendsNames.rossName,
             friendPhotoImageName: Constants.FriendsImageNames.rossImageName,
-            photos: [Constants.Photos.tonyPhoto, Constants.Photos.iron1Photo, Constants.Photos.iron3Photo]
+            photoNames: [
+                Constants.Photos.tonyPhotoName,
+                Constants.Photos.ironOnePhotoName,
+                Constants.Photos.ironThreePhotoName
+            ]
         )
     ]
 
@@ -92,16 +116,16 @@ final class FriendsTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        guard segue.identifier == Constants.Identifiers.photoSegue,
+        guard segue.identifier == Constants.Identifiers.photoSegueID,
               let cell = sender as? FriendsTableViewCell,
               let destination = segue.destination as? PhotoViewController else { return }
-        destination.photoNames = cell.friendPhotos
+        destination.photoNames = cell.friendPhotosNames
     }
 
     // MARK: - Private methods
 
     private func setupSections() {
-        for friend in friends {
+        for friend in users {
             guard let firstLetter = friend.name.first else { return }
             if sectionsMap[firstLetter] != nil {
                 sectionsMap[firstLetter]?.append(friend)
