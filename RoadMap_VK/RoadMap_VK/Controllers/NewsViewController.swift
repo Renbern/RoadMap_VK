@@ -20,6 +20,7 @@ final class NewsViewController: UIViewController {
 
     // MARK: - Private properties
 
+    private lazy var service = VKService()
     private var posts: [Post] = [
         Post(
             postAuthor: Constants.author,
@@ -41,6 +42,8 @@ final class NewsViewController: UIViewController {
 
     private func setupTableView() {
         tableView.dataSource = self
+        service.getFriends()
+        service.getPhotos()
     }
 }
 

@@ -27,6 +27,7 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
+    private lazy var service = VKService()
     private var groups: [Group] = [
         Group(
             name: Constants.GroupNames.sport,
@@ -82,5 +83,6 @@ extension AvailableGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedGroups = searchText.isEmpty ? groups : groups.filter { $0.name.contains(searchText) }
         tableView.reloadData()
+        service.getSearchedGroups(group: searchText)
     }
 }

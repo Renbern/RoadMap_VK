@@ -30,6 +30,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
+    private lazy var service = VKService()
     private var groups: [Group] = [
         Group(
             name: Constants.GroupNames.hearedVologda,
@@ -69,6 +70,7 @@ final class GroupTableViewController: UITableViewController {
 
     private func setupUI() {
         setupSearchBar()
+        service.getCurrentUserGroups()
     }
 
     private func setupSearchBar() {
