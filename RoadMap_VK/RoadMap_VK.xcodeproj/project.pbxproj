@@ -41,6 +41,7 @@
 		04DAD11D29104BB100450FF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11B29104BB100450FF0 /* Main.storyboard */; };
 		04DAD11F29104BB400450FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11E29104BB400450FF0 /* Assets.xcassets */; };
 		04DAD12229104BB400450FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */; };
+		7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,9 @@
 		04DAD11E29104BB400450FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DAD12129104BB400450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DAD12329104BB400450FF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadMap_VK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.debug.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.debug.xcconfig"; sourceTree = "<group>"; };
+		F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.release.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +182,7 @@
 				04DAD11429104BB100450FF0 /* RoadMap_VK */,
 				04DAD11329104BB100450FF0 /* Products */,
 				23AE4FB9EDBE0FA10DCE94EE /* Pods */,
+				84BD438DC84A69BDAA38C8C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -211,8 +217,18 @@
 		23AE4FB9EDBE0FA10DCE94EE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */,
+				F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		84BD438DC84A69BDAA38C8C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,11 +238,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04DAD12629104BB400450FF0 /* Build configuration list for PBXNativeTarget "RoadMap_VK" */;
 			buildPhases = (
+				172DB36CDF20AC68454ED4C7 /* [CP] Check Pods Manifest.lock */,
 				04DAD10E29104BB100450FF0 /* Sources */,
 				04DAD10F29104BB100450FF0 /* Frameworks */,
 				04DAD11029104BB100450FF0 /* Resources */,
 				04DAD12A29104CAE00450FF0 /* SwiftFormatter */,
 				04DAD12929104C5A00450FF0 /* SwiftLint */,
+				0F5BA44CC7CCF5ADE82CAEFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,6 +337,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+		0F5BA44CC7CCF5ADE82CAEFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		172DB36CDF20AC68454ED4C7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoadMap_VK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -499,6 +556,7 @@
 		};
 		04DAD12729104BB400450FF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -528,6 +586,7 @@
 		};
 		04DAD12829104BB400450FF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
