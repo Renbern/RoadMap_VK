@@ -77,6 +77,7 @@ final class AuthorizationViewController: UIViewController {
 }
 
 // MARK: - WKNavigationDelegate
+
 extension AuthorizationViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,

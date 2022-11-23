@@ -5,9 +5,13 @@ import Foundation
 
 /// Синглтон для хранения данных о текущей сессии
 final class Session {
-    static let shared = Session()
-    private init() {}
+    // MARK: - Public properties
 
     var userId = ""
     var token = ""
+    static let shared = Session()
+
+    // MARK: - Init
+
+    private init() {}
 }

@@ -56,7 +56,7 @@ final class VKService {
             Constants.UrlStatements.apiKey +
             Constants.UrlStatements.versionName +
             Constants.UrlStatements.version
-        AF.request(url).responseJSON { repsonse in
+        AF.request(url).responseDecodable { repsonse in
             print(repsonse.value ?? "")
         }
     }
@@ -71,7 +71,7 @@ final class VKService {
             Constants.UrlStatements.apiKey +
             Constants.UrlStatements.versionName +
             Constants.UrlStatements.version
-        AF.request(url).responseJSON { repsonse in
+        AF.request(url).responseDecodable { repsonse in
             print(repsonse.value ?? "")
         }
     }
@@ -88,7 +88,7 @@ final class VKService {
             Constants.UrlStatements.apiKey +
             Constants.UrlStatements.versionName +
             Constants.UrlStatements.version
-        AF.request(url).responseJSON { repsonse in
+        AF.request(url).responseDecodable { repsonse in
             print(repsonse.value ?? "")
         }
     }
@@ -105,7 +105,7 @@ final class VKService {
             Constants.UrlStatements.apiKey +
             Constants.UrlStatements.versionName +
             Constants.UrlStatements.version
-        AF.request(url).responseJSON { repsonse in
+        AF.request(url).responseDecodable { repsonse in
             print(repsonse.value ?? "")
         }
     }
