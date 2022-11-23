@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0405F783292E40D4003BC435 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405F782292E40D4003BC435 /* Request.swift */; };
 		04066DCE291D9F6C001EF6D6 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DCD291D9F6C001EF6D6 /* PushAnimator.swift */; };
 		04066DD0291DA08E001EF6D6 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DCF291DA08E001EF6D6 /* PopAnimator.swift */; };
 		04066DD2291DA14B001EF6D6 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DD1291DA14B001EF6D6 /* InteractiveTransition.swift */; };
@@ -16,6 +17,7 @@
 		0432A99929149DCC00F5083F /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432A99829149DCC00F5083F /* LikeControl.swift */; };
 		044DB4E62911AAA800E4D595 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */; };
 		044DB4E82912C8E100E4D595 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */; };
+		046376DE292BA28800469FC7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046376DD292BA28800469FC7 /* Session.swift */; };
 		046DC32A291443A600EE7E86 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046DC329291443A600EE7E86 /* Group.swift */; };
 		046DC32E2914452A00EE7E86 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046DC32D2914452A00EE7E86 /* GroupTableViewController.swift */; };
 		046DC33029144B5000EE7E86 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046DC32F29144B5000EE7E86 /* GroupTableViewCell.swift */; };
@@ -27,6 +29,8 @@
 		047DBCBA291AFF8900C9E9FA /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DBCB9291AFF8900C9E9FA /* GradientView.swift */; };
 		047DBCBE291C45AA00C9E9FA /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DBCBD291C45AA00C9E9FA /* PhotoViewController.swift */; };
 		047DBCC0291C4AE700C9E9FA /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DBCBF291C4AE700C9E9FA /* PhotoView.swift */; };
+		0484BF19292D3F4800CB270C /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484BF18292D3F4800CB270C /* AuthorizationViewController.swift */; };
+		0484BF1B292D407B00CB270C /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484BF1A292D407B00CB270C /* VKService.swift */; };
 		048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */; };
 		048E33442913125E00BB1B47 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E33432913125E00BB1B47 /* FriendsTableViewController.swift */; };
 		048E3346291315C400BB1B47 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3345291315C400BB1B47 /* User.swift */; };
@@ -38,9 +42,11 @@
 		04DAD11D29104BB100450FF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11B29104BB100450FF0 /* Main.storyboard */; };
 		04DAD11F29104BB400450FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11E29104BB400450FF0 /* Assets.xcassets */; };
 		04DAD12229104BB400450FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */; };
+		7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0405F782292E40D4003BC435 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		04066DCD291D9F6C001EF6D6 /* PushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
 		04066DCF291DA08E001EF6D6 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		04066DD1291DA14B001EF6D6 /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
@@ -50,6 +56,7 @@
 		0432A99829149DCC00F5083F /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		046376DD292BA28800469FC7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		046DC329291443A600EE7E86 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		046DC32D2914452A00EE7E86 /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		046DC32F29144B5000EE7E86 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -61,6 +68,8 @@
 		047DBCB9291AFF8900C9E9FA /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		047DBCBD291C45AA00C9E9FA /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		047DBCBF291C4AE700C9E9FA /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		0484BF18292D3F4800CB270C /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		0484BF1A292D407B00CB270C /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		048E33432913125E00BB1B47 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		048E3345291315C400BB1B47 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -74,6 +83,9 @@
 		04DAD11E29104BB400450FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DAD12129104BB400450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DAD12329104BB400450FF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadMap_VK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.debug.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.debug.xcconfig"; sourceTree = "<group>"; };
+		F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.release.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +133,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		046376DF292BA2E800469FC7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				046376DD292BA28800469FC7 /* Session.swift */,
+				0484BF1A292D407B00CB270C /* VKService.swift */,
+				0405F782292E40D4003BC435 /* Request.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		046DC32B291443D800EE7E86 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +153,7 @@
 				048E334729132AB100BB1B47 /* FriendPhotosCollectionViewController.swift */,
 				046DC32D2914452A00EE7E86 /* GroupTableViewController.swift */,
 				0432A98E2914598100F5083F /* AvailableGroupTableViewController.swift */,
+				0484BF18292D3F4800CB270C /* AuthorizationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -160,6 +184,8 @@
 			children = (
 				04DAD11429104BB100450FF0 /* RoadMap_VK */,
 				04DAD11329104BB100450FF0 /* Products */,
+				23AE4FB9EDBE0FA10DCE94EE /* Pods */,
+				84BD438DC84A69BDAA38C8C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,8 +212,26 @@
 				046DC32B291443D800EE7E86 /* Controllers */,
 				046DC32C291443E500EE7E86 /* Cells */,
 				044DB4E92912CB1A00E4D595 /* Extensions */,
+				046376DF292BA2E800469FC7 /* Network */,
 			);
 			path = RoadMap_VK;
+			sourceTree = "<group>";
+		};
+		23AE4FB9EDBE0FA10DCE94EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */,
+				F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		84BD438DC84A69BDAA38C8C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,11 +241,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04DAD12629104BB400450FF0 /* Build configuration list for PBXNativeTarget "RoadMap_VK" */;
 			buildPhases = (
+				172DB36CDF20AC68454ED4C7 /* [CP] Check Pods Manifest.lock */,
 				04DAD10E29104BB100450FF0 /* Sources */,
 				04DAD10F29104BB100450FF0 /* Frameworks */,
 				04DAD11029104BB100450FF0 /* Resources */,
 				04DAD12A29104CAE00450FF0 /* SwiftFormatter */,
 				04DAD12929104C5A00450FF0 /* SwiftLint */,
+				0F5BA44CC7CCF5ADE82CAEFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -295,6 +341,45 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
+		0F5BA44CC7CCF5ADE82CAEFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		172DB36CDF20AC68454ED4C7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoadMap_VK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -303,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				047DBCB6291AE08200C9E9FA /* PostLikeControl.swift in Sources */,
+				046376DE292BA28800469FC7 /* Session.swift in Sources */,
 				047DBCBA291AFF8900C9E9FA /* GradientView.swift in Sources */,
 				04066DD2291DA14B001EF6D6 /* InteractiveTransition.swift in Sources */,
 				047DBCBE291C45AA00C9E9FA /* PhotoViewController.swift in Sources */,
@@ -312,6 +398,7 @@
 				047DBCB42919C5EC00C9E9FA /* NewsTableViewCell.swift in Sources */,
 				048E334A29132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */,
+				0484BF1B292D407B00CB270C /* VKService.swift in Sources */,
 				04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */,
 				04066DD0291DA08E001EF6D6 /* PopAnimator.swift in Sources */,
 				046DC32E2914452A00EE7E86 /* GroupTableViewController.swift in Sources */,
@@ -319,9 +406,11 @@
 				048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */,
 				04066DD4291DA9E4001EF6D6 /* CustomViewController.swift in Sources */,
 				044DB4E82912C8E100E4D595 /* UIViewController+Extension.swift in Sources */,
+				0484BF19292D3F4800CB270C /* AuthorizationViewController.swift in Sources */,
 				048E33442913125E00BB1B47 /* FriendsTableViewController.swift in Sources */,
 				0432A99929149DCC00F5083F /* LikeControl.swift in Sources */,
 				047DBCC0291C4AE700C9E9FA /* PhotoView.swift in Sources */,
+				0405F783292E40D4003BC435 /* Request.swift in Sources */,
 				04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */,
 				048E334829132AB100BB1B47 /* FriendPhotosCollectionViewController.swift in Sources */,
 				046DC33029144B5000EE7E86 /* GroupTableViewCell.swift in Sources */,
@@ -471,6 +560,7 @@
 		};
 		04DAD12729104BB400450FF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -484,7 +574,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,6 +590,7 @@
 		};
 		04DAD12829104BB400450FF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -513,7 +604,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

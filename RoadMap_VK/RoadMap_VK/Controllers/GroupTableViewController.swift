@@ -30,6 +30,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
+    private lazy var service = VKService()
     private var groups: [Group] = [
         Group(
             name: Constants.GroupNames.hearedVologda,
