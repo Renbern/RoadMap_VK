@@ -18,13 +18,13 @@ final class VKService {
             var urlString: String {
                 switch self {
                 case .friends:
-                    return "\(Method.friends)\(Url.acessToken)\(Url.friendsFields)"
+                    return "\(Method.friends)\(VkUrl.acessToken)\(VkUrl.friendsFields)"
                 case .groups:
-                    return "\(Method.groups)\(Url.userId)\(Url.extended)\(Url.acessToken)"
+                    return "\(Method.groups)\(VkUrl.userId)\(VkUrl.extended)\(VkUrl.acessToken)"
                 case let .photos(id):
-                    return "\(Method.photos)\(Url.acessToken)\(Url.extended)&owner_id=\(-id)"
+                    return "\(Method.photos)\(VkUrl.acessToken)\(VkUrl.extended)&owner_id=\(-id)"
                 case let .searchGroups(searchQuery):
-                    return "\(Method.groupsSearch)\(Url.acessToken)&q=\(searchQuery)"
+                    return "\(Method.groupsSearch)\(VkUrl.acessToken)&q=\(searchQuery)"
                 }
             }
         }
@@ -48,7 +48,7 @@ final class VKService {
     // MARK: - Public methods
 
     func sendRequest(urlString: String) {
-        AF.request("\(Url.baseUrl)\(urlString)\(Url.version)").responseJSON { response in
+        AF.request("\(VkUrl.baseUrl)\(urlString)\(VkUrl.version)").responseJSON { response in
             guard let value = response.value else { return }
             print(value)
         }

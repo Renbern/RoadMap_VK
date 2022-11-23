@@ -114,7 +114,6 @@ extension AuthorizationViewController: WKNavigationDelegate {
         Session.shared.token = token
         Session.shared.userId = userId
         decisionHandler(.cancel)
-        print(Thread.isMainThread)
         let storyBoard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
         guard let vc = storyBoard
             .instantiateViewController(withIdentifier: Constants.signInViewControllerName) as? SignInViewController
