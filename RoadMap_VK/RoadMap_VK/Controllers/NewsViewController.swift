@@ -12,6 +12,7 @@ final class NewsViewController: UIViewController {
         static let author = "Nicolas Cage"
         static let postText = "Test post"
         static let postImageName = "space"
+        static let searchQuery = "Music"
     }
 
     // MARK: - Private IBOutlets
@@ -42,8 +43,13 @@ final class NewsViewController: UIViewController {
 
     private func setupTableView() {
         tableView.dataSource = self
-        service.getFriends()
-        service.getPhotos()
+        fetchData()
+    }
+
+    private func fetchData() {
+        service.sendRequest(urlString: RequestType.groups.urlString)
+        service.sendRequest(urlString: RequestType.friends.urlString)
+        service.sendRequest(urlString: RequestType.photos(id: 1).urlString)
     }
 }
 

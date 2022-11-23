@@ -7,9 +7,9 @@ import Foundation
 final class Session {
     // MARK: - Public properties
 
+    static let shared = Session()
     var userId = ""
     var token = ""
-    static let shared = Session()
 
     // MARK: - Init
 

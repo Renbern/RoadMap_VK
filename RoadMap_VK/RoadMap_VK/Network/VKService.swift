@@ -9,104 +9,48 @@ final class VKService {
     // MARK: - Constants
 
     private enum Constants {
-        enum UrlStatements {
-            static let baseUrl = "https://api.vk.com"
-            static let accessTokenName = "&access_token="
-            static let apiKey = Session.shared.token
-            static let methodName = "/method"
-            static let userIdsName = "?user_ids="
-            static let fieldsName = "&fields="
-            static let userIds = Session.shared.userId
-            static let versionName = "&v="
-            static let version = "5.131"
+        enum RequestType {
+            case friends
+            case groups
+            case photos(id: Int)
+            case searchGroups(searchQuery: String)
+
+            var urlString: String {
+                switch self {
+                case .friends:
+                    return "\(Method.friends)\(Url.acessToken)\(Url.friendsFields)"
+                case .groups:
+                    return "\(Method.groups)\(Url.userId)\(Url.extended)\(Url.acessToken)"
+                case let .photos(id):
+                    return "\(Method.photos)\(Url.acessToken)\(Url.extended)&owner_id=\(-id)"
+                case let .searchGroups(searchQuery):
+                    return "\(Method.groupsSearch)\(Url.acessToken)&q=\(searchQuery)"
+                }
+            }
         }
 
         enum GetFriends {
-            static let getFriendsMethod = "/friends.get"
             static let nickname = "nickname"
         }
 
-        enum GetPhotos {
-            static let getPhotosMethod = "/photos.getAll"
-        }
+        enum GetPhotos {}
 
         enum GetCurrentUserGroups {
-            static let getCurrentUserGroupsMethod = "/groups.get?"
             static let extendedName = "&extended="
             static let extendedValue = "1"
         }
 
         enum GetSearchedGroups {
-            static let getCSearchedGroupsMethod = "/groups.search?"
             static let searchedGroupName = "&q="
         }
     }
 
     // MARK: - Public methods
 
-    func getFriends() {
-        let url = Constants.UrlStatements.baseUrl +
-            Constants.UrlStatements.methodName +
-            Constants.GetFriends.getFriendsMethod +
-            Constants.UrlStatements.userIdsName +
-            Constants.UrlStatements.userIds +
-            Constants.UrlStatements.fieldsName +
-            Constants.GetFriends.nickname +
-            Constants.UrlStatements.accessTokenName +
-            Constants.UrlStatements.apiKey +
-            Constants.UrlStatements.versionName +
-            Constants.UrlStatements.version
-        AF.request(url).responseDecodable { repsonse in
-            print(repsonse.value ?? "")
-        }
-    }
-
-    func getPhotos() {
-        let url = Constants.UrlStatements.baseUrl +
-            Constants.UrlStatements.methodName +
-            Constants.GetPhotos.getPhotosMethod +
-            Constants.UrlStatements.userIdsName +
-            Constants.UrlStatements.userIds +
-            Constants.UrlStatements.accessTokenName +
-            Constants.UrlStatements.apiKey +
-            Constants.UrlStatements.versionName +
-            Constants.UrlStatements.version
-        AF.request(url).responseDecodable { repsonse in
-            print(repsonse.value ?? "")
-        }
-    }
-
-    func getCurrentUserGroups() {
-        let url = Constants.UrlStatements.baseUrl +
-            Constants.UrlStatements.methodName +
-            Constants.GetCurrentUserGroups.getCurrentUserGroupsMethod +
-            Constants.UrlStatements.userIdsName +
-            Constants.UrlStatements.userIds +
-            Constants.GetCurrentUserGroups.extendedName +
-            Constants.GetCurrentUserGroups.extendedValue +
-            Constants.UrlStatements.accessTokenName +
-            Constants.UrlStatements.apiKey +
-            Constants.UrlStatements.versionName +
-            Constants.UrlStatements.version
-        AF.request(url).responseDecodable { repsonse in
-            print(repsonse.value ?? "")
-        }
-    }
-
-    func getSearchedGroups(group: String) {
-        let url = Constants.UrlStatements.baseUrl +
-            Constants.UrlStatements.methodName +
-            Constants.GetSearchedGroups.getCSearchedGroupsMethod +
-            Constants.UrlStatements.userIdsName +
-            Constants.UrlStatements.userIds +
-            Constants.GetSearchedGroups.searchedGroupName +
-            group +
-            Constants.UrlStatements.accessTokenName +
-            Constants.UrlStatements.apiKey +
-            Constants.UrlStatements.versionName +
-            Constants.UrlStatements.version
-        AF.request(url).responseDecodable { repsonse in
-            print(repsonse.value ?? "")
+    func sendRequest(urlString: String) {
+        AF.request("\(Url.baseUrl)\(urlString)\(Url.version)").responseJSON { response in
+            guard let value = response.value else { return }
+            print(value)
         }
     }
 }

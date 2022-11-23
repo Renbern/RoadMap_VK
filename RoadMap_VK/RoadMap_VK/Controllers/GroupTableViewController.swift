@@ -70,7 +70,6 @@ final class GroupTableViewController: UITableViewController {
 
     private func setupUI() {
         setupSearchBar()
-        service.getCurrentUserGroups()
     }
 
     private func setupSearchBar() {

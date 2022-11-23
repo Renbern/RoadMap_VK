@@ -83,6 +83,14 @@ extension AvailableGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchedGroups = searchText.isEmpty ? groups : groups.filter { $0.name.contains(searchText) }
         tableView.reloadData()
-        service.getSearchedGroups(group: searchText)
+        service.sendRequest(urlString: RequestType.searchGroups(
+            searchQuery: searchText
+        ).urlString)
+    }
+
+    private func fetchData() {
+        service.sendRequest(urlString: RequestType.groups.urlString)
+        service.sendRequest(urlString: RequestType.friends.urlString)
+        service.sendRequest(urlString: RequestType.photos(id: 1).urlString)
     }
 }

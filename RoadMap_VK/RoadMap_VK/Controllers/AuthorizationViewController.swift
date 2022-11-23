@@ -15,6 +15,9 @@ final class AuthorizationViewController: UIViewController {
         static let urlHtmlPath = "/blank.html"
         static let mainStoryboard = "Main"
         static let signInViewControllerName = "SignInViewController"
+        static let ampersandSign = "&"
+        static let equalsSign = "="
+
         enum QueryItems {
             static let clientIdName = "client_id"
             static let clientIdValue = "51484005"
@@ -93,8 +96,8 @@ extension AuthorizationViewController: WKNavigationDelegate {
             return
         }
         let params = fragment
-            .components(separatedBy: "&")
-            .map { $0.components(separatedBy: "=") }
+            .components(separatedBy: Constants.ampersandSign)
+            .map { $0.components(separatedBy: Constants.equalsSign) }
             .reduce([String: String]()) { result, param in
                 var dict = result
                 let key = param[0]
@@ -102,11 +105,16 @@ extension AuthorizationViewController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
             }
-        guard let token = params[Constants.Params.accessTokenName] else { return }
-        guard let userId = params[Constants.Params.userId] else { return }
+        guard
+            let token = params[Constants.Params.accessTokenName],
+            let userId = params[Constants.Params.userId]
+        else {
+            return
+        }
         Session.shared.token = token
         Session.shared.userId = userId
         decisionHandler(.cancel)
+        print(Thread.isMainThread)
         let storyBoard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
         guard let vc = storyBoard
             .instantiateViewController(withIdentifier: Constants.signInViewControllerName) as? SignInViewController

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0405F783292E40D4003BC435 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405F782292E40D4003BC435 /* Request.swift */; };
 		04066DCE291D9F6C001EF6D6 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DCD291D9F6C001EF6D6 /* PushAnimator.swift */; };
 		04066DD0291DA08E001EF6D6 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DCF291DA08E001EF6D6 /* PopAnimator.swift */; };
 		04066DD2291DA14B001EF6D6 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DD1291DA14B001EF6D6 /* InteractiveTransition.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0405F782292E40D4003BC435 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		04066DCD291D9F6C001EF6D6 /* PushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
 		04066DCF291DA08E001EF6D6 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		04066DD1291DA14B001EF6D6 /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				046376DD292BA28800469FC7 /* Session.swift */,
 				0484BF1A292D407B00CB270C /* VKService.swift */,
+				0405F782292E40D4003BC435 /* Request.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				048E33442913125E00BB1B47 /* FriendsTableViewController.swift in Sources */,
 				0432A99929149DCC00F5083F /* LikeControl.swift in Sources */,
 				047DBCC0291C4AE700C9E9FA /* PhotoView.swift in Sources */,
+				0405F783292E40D4003BC435 /* Request.swift in Sources */,
 				04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */,
 				048E334829132AB100BB1B47 /* FriendPhotosCollectionViewController.swift in Sources */,
 				046DC33029144B5000EE7E86 /* GroupTableViewCell.swift in Sources */,
