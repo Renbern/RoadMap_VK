@@ -22,14 +22,14 @@ final class NewsViewController: UIViewController {
     // MARK: - Private properties
 
     private lazy var service = VKService()
-    private var posts: [Post] = [
-        Post(
-            postAuthor: Constants.author,
-            postText: Constants.postText,
-            postImageName: Constants.postImageName,
-            likeCount: 346,
-            viewCount: 12
-        )
+    private var posts: [Photo] = [
+        //        Photo(
+//            postAuthor: Constants.author,
+//            postText: Constants.postText,
+//            postImageName: Constants.postImageName,
+//            likeCount: 346,
+//            viewCount: 12
+//        )
     ]
 
     // MARK: - Lifecycle
@@ -47,9 +47,8 @@ final class NewsViewController: UIViewController {
     }
 
     private func fetchData() {
-        service.sendRequest(urlString: RequestType.groups.urlString)
-        service.sendRequest(urlString: RequestType.friends.urlString)
-        service.sendRequest(urlString: RequestType.photos(id: 1).urlString)
+//        service.sendRequest(urlString: RequestType.groups.urlString)
+//        service.sendRequest(urlString: RequestType.photos(id: 1).urlString)
     }
 }
 
@@ -68,7 +67,7 @@ extension NewsViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.configure(posts[indexPath.row])
+//        cell.configure(posts[indexPath.row])
         return cell
     }
 }

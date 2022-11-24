@@ -15,7 +15,7 @@ enum VkUrl {
     static let acessToken = "?&access_token=\(Session.shared.token)"
     static let userId = "user_id=\(Session.shared.userId)"
     static let version = "&v=5.131"
-    static let friendsFields = "&fields=nickname"
+    static let friendsFields = "&fields=photo_100"
     static let extended = "&extended=1"
 }
 
@@ -23,19 +23,20 @@ enum VkUrl {
 enum RequestType {
     case friends
     case groups
-    case photos(id: Int)
-    case searchGroups(searchQuery: String)
+    case photos
+    case searchGroups
 
     var urlString: String {
         switch self {
         case .friends:
-            return "\(Method.friends)\(VkUrl.acessToken)\(VkUrl.friendsFields)"
+//            return "\(Method.friends)\(VkUrl.acessToken)\(VkUrl.friendsFields)"
+            return "\(Method.friends)"
         case .groups:
             return "\(Method.groups)\(VkUrl.userId)\(VkUrl.extended)\(VkUrl.acessToken)"
-        case let .photos(id):
-            return "\(Method.photos)\(VkUrl.acessToken)\(VkUrl.extended)&owner_id=\(-id)"
-        case let .searchGroups(searchQuery):
-            return "\(Method.groupsSearch)\(VkUrl.acessToken)&q=\(searchQuery)"
+        case let .photos:
+            return "\(Method.photos)\(VkUrl.acessToken)"
+        case .searchGroups:
+            return "\(Method.groupsSearch)\(VkUrl.acessToken)"
         }
     }
 }

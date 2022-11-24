@@ -11,7 +11,8 @@ final class FriendPhotoCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public methods
 
-    func refreshPhoto(_ imageName: String?) {
-        friendPhotoImageView.image = UIImage(named: imageName ?? "")
+    func refreshPhoto(_ model: Photo) {
+        guard let url = model.photo.first?.url else { return }
+        friendPhotoImageView.load(url: url)
     }
 }

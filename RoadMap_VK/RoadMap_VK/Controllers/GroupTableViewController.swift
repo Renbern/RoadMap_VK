@@ -31,18 +31,9 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private lazy var service = VKService()
-    private var groups: [Group] = [
-        Group(
-            name: Constants.GroupNames.hearedVologda,
-            groupImageName: Constants.GroupsImageNames.hearedVologdaImageName
-        ),
-        Group(
-            name: Constants.GroupNames.iOSDevelopersVologda,
-            groupImageName: Constants.GroupsImageNames.iOSDevelopersVologdaImageName
-        )
-    ]
+    private var groups: [ItemGroup] = []
 
-    private var searchedGroups: [Group] = []
+    private var searchedGroups: [ItemGroup] = []
 
     // MARK: - Lifecycle
 
@@ -60,8 +51,8 @@ final class GroupTableViewController: UITableViewController {
             let indexPath = userGroupsController.tableView.indexPathForSelectedRow
         else { return }
         let group = userGroupsController.searchedGroups[indexPath.row]
-        if searchedGroups.contains(where: { $0.name == searchedGroups[indexPath.row].name }) {
-            searchedGroups.append(group)
+        if searchedGroups.contains(where: { $0.groupName == searchedGroups[indexPath.row].groupName }) {
+            searchedGroups = groups
             tableView.reloadData()
         }
     }
@@ -69,12 +60,14 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private methods
 
     private func setupUI() {
-        setupSearchBar()
-    }
-
-    private func setupSearchBar() {
         searchBar.delegate = self
-        searchedGroups = groups
+        service.sendGroupRequest(urlString: RequestType.groups.urlString) { [weak self] groups in
+            self?.searchedGroups = groups
+            self?.groups = groups
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -91,7 +84,7 @@ extension GroupTableViewController {
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
         let group = searchedGroups[indexPath.row]
-        cell.configure(group)
+        cell.configureGroup(group)
         return cell
     }
 
@@ -111,7 +104,8 @@ extension GroupTableViewController {
 
 extension GroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedGroups = searchText.isEmpty ? groups : groups.filter { $0.name.contains(searchText) }
+        searchedGroups = searchText.isEmpty ? groups : searchedGroups
+            .filter { $0.groupName.contains(searchText) }
         tableView.reloadData()
     }
 }

@@ -12,12 +12,4 @@ final class NewsTableViewCell: UITableViewCell {
     @IBOutlet private var postImageView: UIImageView!
     @IBOutlet private var commentButton: UIButton!
     @IBOutlet private var viewCountLabel: UILabel!
-
-    // MARK: - Public methods
-
-    func configure(_ post: Post) {
-        postImageView.image = UIImage(named: post.postImageName)
-        postTextLabel.text = post.postText
-        postAuthorLabel.text = post.postAuthor
-    }
 }

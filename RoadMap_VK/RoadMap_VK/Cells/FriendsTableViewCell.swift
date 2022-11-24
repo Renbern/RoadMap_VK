@@ -13,7 +13,7 @@ final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Public properties
 
     var friendPhotoImageName: String?
-    var friendPhotosNames: [String] = []
+    var friendPhotosNames: [Photo] = []
 
     // MARK: - Lifecycle
 
@@ -24,11 +24,10 @@ final class FriendsTableViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
-    func refreshPhoto(_ model: User) {
-        friendPhotoImageView.image = UIImage(named: model.friendPhotoImageName)
-        friendNameLabel.text = model.name
-        friendPhotoImageName = model.friendPhotoImageName
-        friendPhotosNames = model.photoNames
+    func refreshFriends(_ model: FriendsItem) {
+        guard let url = model.friendPhotoImageName else { return }
+        friendPhotoImageView.load(url: url)
+        friendNameLabel.text = "\(model.firstName) \(model.lastName)"
     }
 
     // MARK: - Private methods

@@ -10,10 +10,6 @@ final class FriendPhotosCollectionViewController: UICollectionViewController {
     private enum Constants {
         static let reuseIdentifier = "friendPhotoCell"
     }
-
-    // MARK: - Public properties
-
-    var friendImageName: String?
 }
 
 // MARK: - UICollectionViewDataSource
@@ -34,8 +30,6 @@ extension FriendPhotosCollectionViewController {
         else {
             return UICollectionViewCell()
         }
-        cell.refreshPhoto(friendImageName)
-
         return cell
     }
 }
