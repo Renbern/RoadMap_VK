@@ -26,7 +26,6 @@ final class PhotoViewController: UIViewController {
     // MARK: - Private methods
 
     private func fetchPhotos(userId: Int) {
-        print(userId)
         networkService.getPhotos(for: userId) { [weak self] result in
             // guard let self = self else { return }
             switch result {

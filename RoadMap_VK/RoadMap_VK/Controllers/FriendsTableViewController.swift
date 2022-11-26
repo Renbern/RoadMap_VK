@@ -43,7 +43,6 @@ final class FriendsTableViewController: UITableViewController {
               let destination = segue.destination as? PhotoViewController else { return }
         destination.photos = cell.photos
         destination.userId = getOneUser(indexPath: indexPath)?.userId ?? 1
-        print(destination.userId)
     }
 
     // MARK: - Private methods

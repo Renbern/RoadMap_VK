@@ -100,8 +100,6 @@ final class VKService {
         let methodParameters = method.parameters
         let url = "\(VkUrl.baseUrl)\(method.urlString)"
         AF.request(url, parameters: methodParameters).responseData { response in
-            print(url)
-            print(methodParameters)
             guard let data = response.data else { return }
             completion(data)
         }
