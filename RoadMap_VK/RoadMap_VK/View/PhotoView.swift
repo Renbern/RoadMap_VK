@@ -22,7 +22,7 @@ final class PhotoView: UIView {
 
     // MARK: - Public properties
 
-    var photoImages: [Photo] = []
+    var photos: [Url] = []
     var navController: UINavigationController?
 
     // MARK: - Private properties
@@ -34,7 +34,6 @@ final class PhotoView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.startAnimating()
-        print(photoImages)
     }
 
     // MARK: - Public methods
@@ -45,7 +44,7 @@ final class PhotoView: UIView {
 
     func updatePhoto(count: Int) {
         currentNumberLabel.text = "1 / \(count)"
-        guard let url = photoImages.last?.photo.last?.url else { return }
+        guard let url = photos.last?.url else { return }
         friendImageView.load(url: url)
     }
 
@@ -80,7 +79,7 @@ final class PhotoView: UIView {
 
     private func swipe(translationX: Int, increaseIndex: Int) {
         index += increaseIndex
-        guard index < photoImages.count, index >= 0 else {
+        guard index < photos.count, index >= 0 else {
             index -= increaseIndex
             return
         }
@@ -97,9 +96,9 @@ final class PhotoView: UIView {
             }, completion: { _ in
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
-                guard let urlPhoto = self.photoImages[self.index].photo.last?.url else { return }
+                let urlPhoto = self.photos[self.index].url
                 self.friendImageView.load(url: urlPhoto)
-                self.currentNumberLabel.text = "\(self.index + 1) / \(self.photoImages.count)"
+                self.currentNumberLabel.text = "\(self.index + 1) / \(self.photos.count)"
             }
         )
     }

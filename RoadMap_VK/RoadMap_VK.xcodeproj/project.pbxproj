@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0405F783292E40D4003BC435 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405F782292E40D4003BC435 /* Request.swift */; };
-		0405F789292F5D9A003BC435 /* UIImageView+Extemsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405F788292F5D9A003BC435 /* UIImageView+Extemsion.swift */; };
 		04066DCE291D9F6C001EF6D6 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DCD291D9F6C001EF6D6 /* PushAnimator.swift */; };
 		04066DD0291DA08E001EF6D6 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DCF291DA08E001EF6D6 /* PopAnimator.swift */; };
 		04066DD2291DA14B001EF6D6 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04066DD1291DA14B001EF6D6 /* InteractiveTransition.swift */; };
@@ -32,6 +31,7 @@
 		047DBCC0291C4AE700C9E9FA /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DBCBF291C4AE700C9E9FA /* PhotoView.swift */; };
 		0484BF19292D3F4800CB270C /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484BF18292D3F4800CB270C /* AuthorizationViewController.swift */; };
 		0484BF1B292D407B00CB270C /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484BF1A292D407B00CB270C /* VKService.swift */; };
+		048624C72930F09300EDA239 /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048624C62930F09300EDA239 /* VKResponse.swift */; };
 		048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */; };
 		048E33442913125E00BB1B47 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E33432913125E00BB1B47 /* FriendsTableViewController.swift */; };
 		048E3346291315C400BB1B47 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3345291315C400BB1B47 /* User.swift */; };
@@ -43,12 +43,12 @@
 		04DAD11D29104BB100450FF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11B29104BB100450FF0 /* Main.storyboard */; };
 		04DAD11F29104BB400450FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11E29104BB400450FF0 /* Assets.xcassets */; };
 		04DAD12229104BB400450FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */; };
+		04EC884C2932140600D7687E /* PhotoUrlPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC884B2932140600D7687E /* PhotoUrlPaths.swift */; };
 		7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0405F782292E40D4003BC435 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		0405F788292F5D9A003BC435 /* UIImageView+Extemsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extemsion.swift"; sourceTree = "<group>"; };
 		04066DCD291D9F6C001EF6D6 /* PushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
 		04066DCF291DA08E001EF6D6 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		04066DD1291DA14B001EF6D6 /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
@@ -72,6 +72,7 @@
 		047DBCBF291C4AE700C9E9FA /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		0484BF18292D3F4800CB270C /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		0484BF1A292D407B00CB270C /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
+		048624C62930F09300EDA239 /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
 		048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		048E33432913125E00BB1B47 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		048E3345291315C400BB1B47 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		04DAD11E29104BB400450FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DAD12129104BB400450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DAD12329104BB400450FF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EC884B2932140600D7687E /* PhotoUrlPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrlPaths.swift; sourceTree = "<group>"; };
 		3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadMap_VK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.debug.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.debug.xcconfig"; sourceTree = "<group>"; };
 		F3F824980CDE7AB71F72D6DD /* Pods-RoadMap_VK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.release.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,7 +133,6 @@
 			children = (
 				044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */,
 				044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */,
-				0405F788292F5D9A003BC435 /* UIImageView+Extemsion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -176,8 +177,10 @@
 			isa = PBXGroup;
 			children = (
 				048E3345291315C400BB1B47 /* User.swift */,
-				047DBCAF2919BEE400C9E9FA /* Photo.swift */,
 				046DC329291443A600EE7E86 /* Group.swift */,
+				047DBCAF2919BEE400C9E9FA /* Photo.swift */,
+				04EC884B2932140600D7687E /* PhotoUrlPaths.swift */,
+				048624C62930F09300EDA239 /* VKResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -390,7 +393,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0405F789292F5D9A003BC435 /* UIImageView+Extemsion.swift in Sources */,
 				047DBCB6291AE08200C9E9FA /* PostLikeControl.swift in Sources */,
 				046376DE292BA28800469FC7 /* Session.swift in Sources */,
 				047DBCBA291AFF8900C9E9FA /* GradientView.swift in Sources */,
@@ -400,6 +402,7 @@
 				04066DCE291D9F6C001EF6D6 /* PushAnimator.swift in Sources */,
 				044DB4E62911AAA800E4D595 /* UITextField+Extension.swift in Sources */,
 				047DBCB42919C5EC00C9E9FA /* NewsTableViewCell.swift in Sources */,
+				04EC884C2932140600D7687E /* PhotoUrlPaths.swift in Sources */,
 				048E334A29132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */,
 				0484BF1B292D407B00CB270C /* VKService.swift in Sources */,
@@ -421,6 +424,7 @@
 				047DBCB8291AE40E00C9E9FA /* LoadingDotsView.swift in Sources */,
 				048E3346291315C400BB1B47 /* User.swift in Sources */,
 				047DBCB02919BEE400C9E9FA /* Photo.swift in Sources */,
+				048624C72930F09300EDA239 /* VKResponse.swift in Sources */,
 				0432A9972914919C00F5083F /* FriendView.swift in Sources */,
 				0432A98F2914598100F5083F /* AvailableGroupTableViewController.swift in Sources */,
 			);

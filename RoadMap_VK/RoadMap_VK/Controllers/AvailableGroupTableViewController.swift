@@ -27,7 +27,7 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var service = VKService()
+    private lazy var networkService = VKService()
     private var groups: [ItemGroup] = [
     ]
 
@@ -73,10 +73,16 @@ extension AvailableGroupTableViewController {
 
 extension AvailableGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        service
-            .sendSearchGroupRequest(urlString: searchText) { groups in
-                self.searchedGroups = groups
-                self.tableView.reloadData()
-            }
+        networkService
+            .getGroups(searchQuery: searchText, completion: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case let .success(groups):
+                    self.searchedGroups = groups
+                    self.tableView.reloadData()
+                case let .failure(error):
+                    print(error)
+                }
+            })
     }
 }

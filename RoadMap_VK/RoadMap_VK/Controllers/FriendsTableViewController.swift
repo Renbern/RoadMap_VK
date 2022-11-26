@@ -18,7 +18,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var service = VKService()
+    private lazy var networkService = VKService()
 
     private var propertyAnimator: UIViewPropertyAnimator?
     private var friends: [FriendsItem] = []
@@ -41,8 +41,9 @@ final class FriendsTableViewController: UITableViewController {
               let cell = sender as? FriendsTableViewCell,
               let indexPath = tableView.indexPathForSelectedRow,
               let destination = segue.destination as? PhotoViewController else { return }
-        destination.photoNames = cell.friendPhotosNames
+        destination.photos = cell.photos
         destination.userId = getOneUser(indexPath: indexPath)?.userId ?? 1
+        print(destination.userId)
     }
 
     // MARK: - Private methods
@@ -55,10 +56,15 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        service.sendRequest(urlString: RequestType.friends.urlString) { [weak self] users in
-            self?.friends = users
-            self?.setupSections()
-            self?.tableView.reloadData()
+        networkService.getFriends { [weak self] result in
+            switch result {
+            case let .success(friends):
+                self?.friends = friends
+                self?.setupSections()
+                self?.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
         }
     }
 

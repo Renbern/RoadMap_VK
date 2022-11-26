@@ -20,78 +20,159 @@ final class VKService {
         static let ownerIdText = "owner_id"
     }
 
+    /// Типы пути запросов
+    enum Method {
+        static let friends = "friends.get?"
+        static let groups = "groups.get?"
+        static let photos = "photos.getAll?"
+        static let groupsSearch = "groups.search?"
+    }
+
+    /// Составные части URL
+    enum VkUrl {
+        static let baseUrl = "https://api.vk.com/method/"
+        static let acessToken = "?&access_token=\(Session.shared.token)"
+        static let userId = "user_id=\(Session.shared.userId)"
+        static let version = "&v=5.131"
+        static let friendsFields = "&fields=photo_100"
+        static let extended = "&extended=1"
+    }
+
+    /// Tипы запросов
+    enum RequestType {
+        case friends
+        case groups
+        case photos(id: Int)
+        case searchGroups(query: String)
+
+        var urlString: String {
+            switch self {
+            case .friends:
+                return "\(Method.friends)"
+            case .groups:
+                return "\(Method.groups)"
+            case .photos:
+                return "\(Method.photos)"
+            case .searchGroups:
+                return "\(Method.groupsSearch)"
+            }
+        }
+
+        var parameters: Parameters {
+            switch self {
+            case .friends:
+                return [
+                    Constants.tokenText: Session.shared.token,
+                    Constants.fieldsText: Constants.fieldsValue,
+                    Constants.versionText: Constants.versionValue
+                ]
+            case let .photos(id):
+                return [
+                    Constants.tokenText: Session.shared.token,
+                    Constants.extendedText: Constants.extendedValue,
+                    Constants.ownerIdText: id,
+                    Constants.versionText: Constants.versionValue
+                ]
+            case .groups:
+                return [
+                    Constants.tokenText: Session.shared.token,
+                    Constants.extendedText: Constants.extendedValue,
+                    Constants.versionText: Constants.versionValue
+                ]
+            case let .searchGroups(query):
+                return [
+                    Constants.tokenText: Session.shared.token,
+                    Constants.queryText: query,
+                    Constants.versionText: Constants.versionValue
+                ]
+            }
+        }
+    }
+
+    // MARK: - Private properties
+
+    private let decoder = JSONDecoder()
+    private let session = Session.shared
+
     // MARK: - Public methods
 
-    func sendRequest(urlString: String, completion: @escaping ([FriendsItem]) -> Void) {
-        let url = VkUrl.baseUrl + RequestType.friends.urlString
-        let friendRequestParameters: Parameters = [
-            Constants.tokenText: Session.shared.token,
-            Constants.fieldsText: Constants.fieldsValue,
-            Constants.versionText: Constants.versionValue
-        ]
-        AF.request(url, parameters: friendRequestParameters).responseData { response in
-            guard let data = response.value else { return }
-            do {
-                let items = try JSONDecoder().decode(FriendResponse.self, from: data)
-                completion(items.response.friends)
-            } catch {
-                print(error)
-                completion([])
-            }
-        }
-    }
-
-    func sendGroupRequest(urlString: String, completion: @escaping ([ItemGroup]) -> Void) {
-        let url = VkUrl.baseUrl + RequestType.groups.urlString
-        let groupRequestParameters: Parameters = [
-            Constants.tokenText: Session.shared.token,
-            Constants.extendedText: Constants.extendedValue,
-            Constants.versionText: Constants.versionValue
-        ]
-        AF.request(url, parameters: groupRequestParameters).responseData { response in
-            guard let data = response.value else { return }
-            do {
-                let items = try JSONDecoder().decode(Group.self, from: data)
-                completion(items.response.groups)
-            } catch {
-                print(error)
-                completion([])
-            }
-        }
-    }
-
-    func sendSearchGroupRequest(urlString: String, completion: @escaping ([ItemGroup]) -> Void) {
-        let url = VkUrl.baseUrl + RequestType.searchGroups.urlString
-        let searchedGroupRequestParameters: Parameters = [
-            Constants.queryText: urlString,
-            Constants.versionText: Constants.versionValue
-        ]
-        AF.request(url, parameters: searchedGroupRequestParameters).responseData { response in
-            guard let data = response.value else { return }
-            do {
-                let items = try JSONDecoder().decode(Group.self, from: data)
-                completion(items.response.groups)
-            } catch {
-                print(error)
-                completion([])
-            }
-        }
-    }
-
-    func sendPhotoRequest(urlString: String, completion: @escaping (UserPhoto) -> Void) {
-        let url = VkUrl.baseUrl + RequestType.photos.urlString
-        let friendPhotoRequestParameters: Parameters = [
-            Constants.ownerIdText: urlString,
-            Constants.versionText: Constants.versionValue
-        ]
-        AF.request(url, parameters: friendPhotoRequestParameters).responseData { response in
+    private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
+        let methodParameters = method.parameters
+        let url = "\(VkUrl.baseUrl)\(method.urlString)"
+        AF.request(url, parameters: methodParameters).responseData { response in
             print(url)
-            guard let data = response.value else { return }
-            do {
-                let users = try JSONDecoder().decode(UserPhoto.self, from: data)
-                completion(users)
-            } catch {
-                print(error)
+            print(methodParameters)
+            guard let data = response.data else { return }
+            completion(data)
+        }
+    }
+
+    func getFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
+        request(.friends) { [weak self] data in
+            guard
+                let self = self,
+                let data = data,
+                let response = try? self.decoder.decode(VKResponse<FriendsItem>.self, from: data)
+            else {
+                return
+            }
+            completion(.success(response.items))
+        }
+    }
+
+    func getGroups(completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
+        request(.groups) { [weak self] data in
+            guard
+                let self = self,
+                let data = data,
+                let response = try? self.decoder.decode(VKResponse<ItemGroup>.self, from: data)
+            else {
+                return
+            }
+            completion(.success(response.items))
+        }
+    }
+
+    func getGroups(searchQuery: String, completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
+        request(.searchGroups(query: searchQuery)) { [weak self] data in
+            guard
+                let self = self,
+                let data = data,
+                let response = try? self.decoder.decode(VKResponse<ItemGroup>.self, from: data)
+            else {
+                return
+            }
+            completion(.success(response.items))
+        }
+    }
+
+    func getPhotos(for userId: Int, completion: @escaping (Result<[Url], Error>) -> Void) {
+        request(.photos(id: userId)) { [weak self] data in
+            guard
+                let self = self,
+                let data = data,
+                let result = try? self.decoder.decode(VKResponse<PhotoUrlPaths>.self, from: data)
+            else {
+                return
+            }
+            let imagePaths = result.items.compactMap(\.photos.last)
+            completion(.success(imagePaths))
+        }
+    }
+}
+
+/// Расширение для получения фото
+extension UIImageView {
+    func load(url: String) {
+        guard let url = URL(string: url) else { return }
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url),
+                  let image = UIImage(data: data)
+            else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.image = image
             }
         }
     }

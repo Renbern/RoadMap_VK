@@ -30,7 +30,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var service = VKService()
+    private lazy var networkService = VKService()
     private var groups: [ItemGroup] = []
 
     private var searchedGroups: [ItemGroup] = []
@@ -61,11 +61,15 @@ final class GroupTableViewController: UITableViewController {
 
     private func setupUI() {
         searchBar.delegate = self
-        service.sendGroupRequest(urlString: RequestType.groups.urlString) { [weak self] groups in
-            self?.searchedGroups = groups
-            self?.groups = groups
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        networkService.getGroups { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(groups):
+                self.searchedGroups = groups
+                self.groups = groups
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
             }
         }
     }

@@ -4,23 +4,7 @@
 import Foundation
 import RealmSwift
 
-/// Ответ
-struct FriendResponse: Codable {
-    let response: Friends
-}
-
-/// Список друзей
-struct Friends: Codable {
-    let friendsCount: Int
-    let friends: [FriendsItem]
-
-    private enum CodingKeys: String, CodingKey {
-        case friendsCount = "count"
-        case friends = "items"
-    }
-}
-
-/// Информация о друге
+/// Хранение данных о пользователе
 final class FriendsItem: Object, Codable {
     @objc dynamic var userId: Int
     @objc dynamic var firstName: String
