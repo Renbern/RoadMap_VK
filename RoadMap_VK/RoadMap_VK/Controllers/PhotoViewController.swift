@@ -8,36 +8,50 @@ final class PhotoViewController: UIViewController {
     // MARK: - Private visual components
 
     private lazy var contentView = self.view as? PhotoView
+    private lazy var networkService = VKService()
 
     // MARK: - Public properties
 
-    var photoNames: [String] = []
+    var photos: [String] = []
+    var userId = 0
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchPhotos(userId: userId)
         setupView()
     }
 
     // MARK: - Private methods
+
+    private func fetchPhotos(userId: Int) {
+        networkService.getPhotos(for: userId) { [weak self] result in
+            // guard let self = self else { return }
+            switch result {
+            case let .success(photoPaths):
+                guard let contentView = self?.contentView else { return }
+                self?.photos = photoPaths.map(\.url)
+                self?.updatePhoto(view: contentView, photoNames: photoPaths)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 
     private func setupView() {
         guard let contentView = contentView else { return }
         contentView.stopActivityIndicator()
         contentView.createSwipeGestureRecognizer()
         contentView.navController = navigationController
-        updatePhoto(view: contentView, photoNames: photoNames)
     }
 
-    private func updatePhoto(view contentView: PhotoView, photoNames: [String]) {
-        contentView.photoImages = []
-        for photoName in photoNames {
-            guard let userPhotoImage = UIImage(named: photoName) else {
-                return
-            }
-            contentView.photoImages.append(userPhotoImage)
-            let photoCount = contentView.photoImages.count
+    private func updatePhoto(view contentView: PhotoView, photoNames: [Url]) {
+        contentView.photos = []
+        for _ in photoNames {
+            let userPhotoImage = photoNames
+            contentView.photos = userPhotoImage
+            let photoCount = contentView.photos.count
             contentView.updatePhoto(count: photoCount)
         }
     }

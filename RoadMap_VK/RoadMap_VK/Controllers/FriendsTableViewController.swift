@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Экран друзей
@@ -8,33 +9,6 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Constants
 
     private enum Constants {
-        enum FriendsNames {
-            static let joeName = "Joe"
-            static let chendlerName = "Chendler"
-            static let monicaName = "Monica"
-            static let phibieName = "Phibie"
-            static let rachelName = "Rachel"
-            static let rossName = "Ross"
-        }
-
-        enum FriendsImageNames {
-            static let joeImageName = "Joe"
-            static let chendlerImageName = "Chendler"
-            static let monicaImageName = "Monica"
-            static let phibieImageName = "Phibie"
-            static let rachelImageName = "Rachel"
-            static let rossImageName = "Ross"
-        }
-
-        enum Photos {
-            static let goblinPhotoName = "goblin"
-            static let ironOnePhotoName = "iron1"
-            static let ironTwoPhotoName = "iron2"
-            static let ironThreePhotoName = "iron3"
-            static let ironFourPhotoName = "iron4"
-            static let tonyPhotoName = "tony"
-        }
-
         enum Identifiers {
             static let friendsIdentifier = "friendsCell"
             static let friendSegueID = "friendSegue"
@@ -44,72 +18,19 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private var propertyAnimator: UIViewPropertyAnimator?
-    private var users: [User] = [
-        User(
-            name: Constants.FriendsNames.joeName,
-            friendPhotoImageName: Constants.FriendsImageNames.joeImageName,
-            photoNames: [
-                Constants.Photos.ironOnePhotoName,
-                Constants.Photos.ironFourPhotoName,
-                Constants.Photos.tonyPhotoName
-            ]
-        ),
-        User(
-            name: Constants.FriendsNames.chendlerName,
-            friendPhotoImageName: Constants.FriendsImageNames.chendlerImageName,
-            photoNames: [
-                Constants.Photos.ironTwoPhotoName,
-                Constants.Photos.ironThreePhotoName,
-                Constants.Photos.goblinPhotoName
-            ]
-        ),
-        User(
-            name: Constants.FriendsNames.monicaName,
-            friendPhotoImageName: Constants.FriendsImageNames.monicaImageName,
-            photoNames: [
-                Constants.Photos.ironThreePhotoName,
-                Constants.Photos.ironFourPhotoName,
-                Constants.Photos.ironOnePhotoName
-            ]
-        ),
-        User(
-            name: Constants.FriendsNames.phibieName,
-            friendPhotoImageName: Constants.FriendsImageNames.phibieImageName,
-            photoNames: [
-                Constants.Photos.goblinPhotoName,
-                Constants.Photos.ironTwoPhotoName,
-                Constants.Photos.ironOnePhotoName
-            ]
-        ),
-        User(
-            name: Constants.FriendsNames.rachelName,
-            friendPhotoImageName: Constants.FriendsImageNames.rachelImageName,
-            photoNames: [
-                Constants.Photos.ironThreePhotoName,
-                Constants.Photos.ironTwoPhotoName,
-                Constants.Photos.tonyPhotoName
-            ]
-        ),
-        User(
-            name: Constants.FriendsNames.rossName,
-            friendPhotoImageName: Constants.FriendsImageNames.rossImageName,
-            photoNames: [
-                Constants.Photos.tonyPhotoName,
-                Constants.Photos.ironOnePhotoName,
-                Constants.Photos.ironThreePhotoName
-            ]
-        )
-    ]
+    private lazy var networkService = VKService()
 
-    private var sectionsMap: [Character: [User]] = [:]
+    private var propertyAnimator: UIViewPropertyAnimator?
+    private var friends: [FriendsItem] = []
+
+    private var sectionsMap: [Character: [FriendsItem]] = [:]
     private var sectionTitles: [Character] = []
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSections()
+        fetchFriends()
     }
 
     // MARK: - Public methods
@@ -118,15 +39,37 @@ final class FriendsTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         guard segue.identifier == Constants.Identifiers.photoSegueID,
               let cell = sender as? FriendsTableViewCell,
+              let indexPath = tableView.indexPathForSelectedRow,
               let destination = segue.destination as? PhotoViewController else { return }
-        destination.photoNames = cell.friendPhotosNames
+        destination.photos = cell.photos
+        destination.userId = getOneUser(indexPath: indexPath)?.userId ?? 1
     }
 
     // MARK: - Private methods
 
+    private func getOneUser(indexPath: IndexPath) -> FriendsItem? {
+        let firstChar = sectionsMap.keys.sorted()[indexPath.section]
+        guard let users = sectionsMap[firstChar] else { return nil }
+        let user = users[indexPath.row]
+        return user
+    }
+
+    private func fetchFriends() {
+        networkService.getFriends { [weak self] result in
+            switch result {
+            case let .success(friends):
+                self?.friends = friends
+                self?.setupSections()
+                self?.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     private func setupSections() {
-        for friend in users {
-            guard let firstLetter = friend.name.first else { return }
+        for friend in friends {
+            guard let firstLetter = friend.firstName.first else { return }
             if sectionsMap[firstLetter] != nil {
                 sectionsMap[firstLetter]?.append(friend)
             } else {
@@ -153,7 +96,7 @@ extension FriendsTableViewController {
         else {
             return UITableViewCell()
         }
-        cell.refreshPhoto(friend)
+        cell.refreshFriends(friend)
         return cell
     }
 

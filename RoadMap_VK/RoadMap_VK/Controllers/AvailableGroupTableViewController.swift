@@ -27,19 +27,11 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var service = VKService()
-    private var groups: [Group] = [
-        Group(
-            name: Constants.GroupNames.sport,
-            groupImageName: Constants.GroupsImageNames.sportImageName
-        ),
-        Group(
-            name: Constants.GroupNames.pikabu,
-            groupImageName: Constants.GroupsImageNames.pikabuImageName
-        )
+    private lazy var networkService = VKService()
+    private var groups: [ItemGroup] = [
     ]
 
-    private(set) var searchedGroups: [Group] = []
+    private(set) var searchedGroups: [ItemGroup] = []
 
     // MARK: - Lifecycle
 
@@ -72,7 +64,7 @@ extension AvailableGroupTableViewController {
             withIdentifier: Constants.availableGroupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.configure(searchedGroups[indexPath.row])
+        cell.configureGroup(searchedGroups[indexPath.row])
         return cell
     }
 }
@@ -81,16 +73,16 @@ extension AvailableGroupTableViewController {
 
 extension AvailableGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedGroups = searchText.isEmpty ? groups : groups.filter { $0.name.contains(searchText) }
-        tableView.reloadData()
-        service.sendRequest(urlString: RequestType.searchGroups(
-            searchQuery: searchText
-        ).urlString)
-    }
-
-    private func fetchData() {
-        service.sendRequest(urlString: RequestType.groups.urlString)
-        service.sendRequest(urlString: RequestType.friends.urlString)
-        service.sendRequest(urlString: RequestType.photos(id: 1).urlString)
+        networkService
+            .getGroups(searchQuery: searchText, completion: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case let .success(groups):
+                    self.searchedGroups = groups
+                    self.tableView.reloadData()
+                case let .failure(error):
+                    print(error)
+                }
+            })
     }
 }

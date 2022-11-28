@@ -21,10 +21,10 @@ final class GroupTableViewCell: UITableViewCell {
         setupUI()
     }
 
-    func configure(_ group: Group) {
-        groupPhotoImageView.image = UIImage(named: group.groupImageName)
-        groupNameLabel.text = group.name
-        groupPhotoImageName = group.groupImageName
+    func configureGroup(_ group: ItemGroup) {
+        guard let url = group.groupPhotoImageName else { return }
+        groupPhotoImageView.load(url: url)
+        groupNameLabel.text = group.groupName
     }
 
     // MARK: - Private methods

@@ -2,9 +2,15 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import RealmSwift
 
-/// Группа
-struct Group {
-    let name: String
-    let groupImageName: String
+/// Хранение данных о группе
+final class ItemGroup: Codable {
+    @objc dynamic var groupName: String
+    @objc dynamic var groupPhotoImageName: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case groupName = "name"
+        case groupPhotoImageName = "photo_100"
+    }
 }
