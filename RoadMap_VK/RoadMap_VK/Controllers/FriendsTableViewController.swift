@@ -100,7 +100,8 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func addFriendNotificationToken(result: Results<FriendsItem>) {
-        friendToken = result.observe { change in
+        friendToken = result.observe { [weak self] change in
+            guard let self = self else { return }
             switch change {
             case .initial:
                 break

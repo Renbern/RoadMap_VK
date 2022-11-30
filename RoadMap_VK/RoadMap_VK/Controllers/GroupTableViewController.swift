@@ -91,7 +91,8 @@ final class GroupTableViewController: UITableViewController {
     }
 
     private func addGroupNotificationToken(result: Results<ItemGroup>) {
-        groupToken = result.observe { change in
+        groupToken = result.observe { [weak self] change in
+            guard let self = self else { return }
             switch change {
             case .initial:
                 break
