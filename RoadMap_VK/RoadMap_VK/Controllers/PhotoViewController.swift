@@ -29,12 +29,13 @@ final class PhotoViewController: UIViewController {
 
     private func fetchPhotos(userId: Int) {
         networkService.getPhotos(for: userId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .success(photoPaths):
-                guard let contentView = self?.contentView else { return }
-                self?.photos = photoPaths.compactMap(\.photos.last?.url)
-                self?.realmService.saveInRealm(photoPaths)
-                self?.updatePhoto(view: contentView, photoNames: self?.photos ?? [])
+                guard let contentView = self.contentView else { return }
+                self.photos = photoPaths.compactMap(\.photos.last?.url)
+                self.realmService.saveInRealm(photoPaths)
+                self.updatePhoto(view: contentView, photoNames: self.photos)
             case let .failure(error):
                 print(error.localizedDescription)
             }
