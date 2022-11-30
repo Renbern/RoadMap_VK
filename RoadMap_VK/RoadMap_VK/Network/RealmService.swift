@@ -1,9 +1,9 @@
 // RealmService.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
+/// Класс работы с базой данных
 final class RealmService {
     func saveInRealm<T: Object>(_ data: [T]) {
         do {
