@@ -5,15 +5,13 @@ import RealmSwift
 
 /// Хранение данных о группе
 final class ItemGroup: Object, Codable {
-    @Persisted var groupName: String = ""
-    @Persisted var groupPhotoImageName: String? = ""
-
+    // MARK: - Constants
     private enum CodingKeys: String, CodingKey {
         case groupName = "name"
         case groupPhotoImageName = "photo_100"
     }
-
-    override static func primaryKey() -> String? {
-        "groupName"
-    }
+    
+    // MARK: - Public properties
+    @Persisted(primaryKey: true) var groupName: String = ""
+    @Persisted var groupPhotoImageName: String? = ""
 }

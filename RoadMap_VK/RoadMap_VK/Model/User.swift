@@ -5,10 +5,7 @@ import RealmSwift
 
 /// Хранение данных о пользователе
 final class FriendsItem: Object, Codable {
-    @Persisted var userId = 0
-    @Persisted var firstName = ""
-    @Persisted var lastName = ""
-    @Persisted var friendPhotoImageName = ""
+    // MARK: - Constants
 
     private enum CodingKeys: String, CodingKey {
         case userId = "id"
@@ -17,7 +14,10 @@ final class FriendsItem: Object, Codable {
         case friendPhotoImageName = "photo_100"
     }
 
-    override static func primaryKey() -> String? {
-        "userId"
-    }
+    // MARK: - Public properties
+
+    @Persisted(primaryKey: true) var userId = 0
+    @Persisted var firstName = ""
+    @Persisted var lastName = ""
+    @Persisted var friendPhotoImageName = ""
 }

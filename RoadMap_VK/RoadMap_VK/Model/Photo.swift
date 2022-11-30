@@ -5,5 +5,6 @@ import RealmSwift
 
 /// Url фотографии
 final class Url: Object, Decodable {
+    // MARK: - Public properties
     @Persisted var url: String
 }
