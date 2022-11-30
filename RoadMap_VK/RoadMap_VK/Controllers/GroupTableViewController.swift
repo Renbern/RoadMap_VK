@@ -31,10 +31,9 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var networkService = VKService()
-    private lazy var realmService = RealmService()
+    private var vkAPIService = VKAPIService()
+    private var realmService = RealmService()
     private var groupToken: NotificationToken?
-
     private var groups: Results<ItemGroup>?
 
     private var searchedGroups: Results<ItemGroup>?
@@ -64,11 +63,11 @@ final class GroupTableViewController: UITableViewController {
     }
 
     private func fetchGroups() {
-        networkService.getGroups { [weak self] result in
+        vkAPIService.getGroups { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(groups):
-                self.realmService.saveInRealm(groups)
+                RealmService.save(items: groups)
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -76,17 +75,12 @@ final class GroupTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        do {
-            let realm = try Realm()
-            let groupsInRealm = realm.objects(ItemGroup.self)
-            addGroupNotificationToken(result: groupsInRealm)
-            if !groupsInRealm.isEmpty {
-                searchedGroups = groupsInRealm
-            } else {
-                fetchGroups()
-            }
-        } catch {
-            print(error)
+        guard let groups = RealmService.get(ItemGroup.self) else { return }
+        addGroupNotificationToken(result: groups)
+        if !groups.isEmpty {
+            searchedGroups = groups
+        } else {
+            fetchGroups()
         }
     }
 

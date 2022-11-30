@@ -9,7 +9,7 @@ final class PhotoViewController: UIViewController {
     // MARK: - Private visual components
 
     private lazy var contentView = self.view as? PhotoView
-    private lazy var networkService = VKService()
+    private lazy var vkAPIService = VKAPIService()
     private lazy var realmService = RealmService()
 
     // MARK: - Public properties
@@ -28,13 +28,13 @@ final class PhotoViewController: UIViewController {
     // MARK: - Private methods
 
     private func fetchPhotos(userId: Int) {
-        networkService.getPhotos(for: userId) { [weak self] result in
+        vkAPIService.getPhotos(for: userId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(photoPaths):
                 guard let contentView = self.contentView else { return }
                 self.photos = photoPaths.compactMap(\.photos.last?.url)
-                self.realmService.saveInRealm(photoPaths)
+                RealmService.save(items: photoPaths)
                 self.updatePhoto(view: contentView, photoNames: self.photos)
             case let .failure(error):
                 print(error.localizedDescription)
@@ -50,28 +50,29 @@ final class PhotoViewController: UIViewController {
     }
 
     private func updatePhoto(view contentView: PhotoView, photoNames: [String]) {
-        contentView.photos = []
-        contentView.photos = photoNames
-        let photoCount = contentView.photos.count
+        contentView.photoNames = []
+        contentView.photoNames = photoNames
+        let photoCount = contentView.photoNames.count
         contentView.updatePhoto(count: photoCount)
     }
 
-    private func loadData(userId: Int) {
-        do {
-            let realm = try Realm()
-            guard let contentView = contentView else { return }
-            var photosInRealm = Array(realm.objects(PhotoUrlPaths.self))
-            let identifiers = photosInRealm.map(\.userId)
-            if identifiers.contains(where: { tempId in userId == tempId }) {
-                photosInRealm = photosInRealm.filter { $0.userId == userId }
-                let photosMap = photosInRealm.compactMap(\.photos.last)
-                photos = photosMap.map(\.url)
-                updatePhoto(view: contentView, photoNames: photos)
-            } else {
-                fetchPhotos(userId: userId)
-            }
-        } catch {
-            print(error)
-        }
-    }
+//    private func loadData(userId: Int) {
+//        do {
+//            let realm = try Realm()
+//            guard let contentView = contentView,
+//                  let photosInRealm = RealmService.get(PhotoUrlPaths.self)
+//            else { return }
+//            let identifiers = photosInRealm.map(\.userId)
+//            if identifiers.contains(where: { tempId in userId == tempId }) {
+//                let userPhoto = photosInRealm.filter { $0.userId == userId }
+//                let photosMap = userPhoto.compactMap(\.photos.last)
+//                photos = photosMap.map(\.url)
+//                updatePhoto(view: contentView, photoNames: photos)
+//            } else {
+//                fetchPhotos(userId: userId)
+//            }
+//        } catch {
+//            print(error)
+//        }
+//    }
 }

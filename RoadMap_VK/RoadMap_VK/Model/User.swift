@@ -3,7 +3,7 @@
 
 import RealmSwift
 
-/// Хранение данных о пользователе
+/// Информация о пользователе
 final class FriendsItem: Object, Codable {
     // MARK: - Constants
 
@@ -17,7 +17,7 @@ final class FriendsItem: Object, Codable {
     // MARK: - Public properties
 
     @Persisted(primaryKey: true) var userId = 0
-    @Persisted var firstName = ""
-    @Persisted var lastName = ""
-    @Persisted var friendPhotoImageName = ""
+    @Persisted var firstName: String
+    @Persisted var lastName: String
+    @Persisted var friendPhotoImageName: String
 }

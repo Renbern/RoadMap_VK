@@ -27,7 +27,7 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var networkService = VKService()
+    private lazy var networkService = VKAPIService()
     private var groups: [ItemGroup] = [
     ]
 

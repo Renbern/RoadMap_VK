@@ -1,12 +1,11 @@
-// VKService.swift
+// VKAPIService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
-import Realm
 import RealmSwift
 
 /// Сетевой слой
-final class VKService {
+final class VKAPIService {
     // MARK: - Private Constants
 
     private enum Constants {
@@ -97,7 +96,7 @@ final class VKService {
 
     // MARK: - Public methods
 
-    func getFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
+    func fetchFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
         request(.friends) { [weak self] data in
             guard
                 let self = self,

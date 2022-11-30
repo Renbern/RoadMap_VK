@@ -49,7 +49,7 @@ final class AuthorizationViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private let vkService = VKService()
+    private let vkService = VKAPIService()
     private var urlComponents = URLComponents()
 
     // MARK: - Lifecycle
