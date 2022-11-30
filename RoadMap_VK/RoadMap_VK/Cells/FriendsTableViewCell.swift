@@ -25,7 +25,7 @@ final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Public methods
 
     func refreshFriends(_ friend: FriendsItem) {
-        guard let url = friend.friendPhotoImageName else { return }
+        let url = friend.friendPhotoImageName
         friendPhotoImageView.load(url: url)
         friendNameLabel.text = "\(friend.firstName) \(friend.lastName)"
     }

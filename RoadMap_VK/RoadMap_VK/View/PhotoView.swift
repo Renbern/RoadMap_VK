@@ -22,7 +22,7 @@ final class PhotoView: UIView {
 
     // MARK: - Public properties
 
-    var photos: [Url] = []
+    var photos: [String] = []
     var navController: UINavigationController?
 
     // MARK: - Private properties
@@ -44,7 +44,7 @@ final class PhotoView: UIView {
 
     func updatePhoto(count: Int) {
         currentNumberLabel.text = "1 / \(count)"
-        guard let url = photos.last?.url else { return }
+        guard let url = photos.last else { return }
         friendImageView.load(url: url)
     }
 
@@ -96,7 +96,7 @@ final class PhotoView: UIView {
             }, completion: { _ in
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
-                let urlPhoto = self.photos[self.index].url
+                let urlPhoto = self.photos[self.index]
                 self.friendImageView.load(url: urlPhoto)
                 self.currentNumberLabel.text = "\(self.index + 1) / \(self.photos.count)"
             }

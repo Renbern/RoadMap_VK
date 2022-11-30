@@ -1,8 +1,6 @@
 // VKResponse.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
-
 /// Модель получения данных для парсинга
 struct VKResponse<T: Decodable>: Decodable {
     var items: [T]

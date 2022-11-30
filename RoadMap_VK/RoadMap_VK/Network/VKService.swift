@@ -3,6 +3,8 @@
 
 import Alamofire
 import Foundation
+import Realm
+import RealmSwift
 
 /// Сетевой слой
 final class VKService {
@@ -96,15 +98,6 @@ final class VKService {
 
     // MARK: - Public methods
 
-    private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
-        let methodParameters = method.parameters
-        let url = "\(VkUrl.baseUrl)\(method.urlString)"
-        AF.request(url, parameters: methodParameters).responseData { response in
-            guard let data = response.data else { return }
-            completion(data)
-        }
-    }
-
     func getFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
         request(.friends) { [weak self] data in
             guard
@@ -144,7 +137,7 @@ final class VKService {
         }
     }
 
-    func getPhotos(for userId: Int, completion: @escaping (Result<[Url], Error>) -> Void) {
+    func getPhotos(for userId: Int, completion: @escaping (Result<[PhotoUrlPaths], Error>) -> Void) {
         request(.photos(id: userId)) { [weak self] data in
             guard
                 let self = self,
@@ -153,8 +146,18 @@ final class VKService {
             else {
                 return
             }
-            let imagePaths = result.items.compactMap(\.photos.last)
-            completion(.success(imagePaths))
+            completion(.success(result.items))
+        }
+    }
+
+    // MARK: - Private methods
+
+    private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
+        let methodParameters = method.parameters
+        let url = "\(VkUrl.baseUrl)\(method.urlString)"
+        AF.request(url, parameters: methodParameters).responseData { response in
+            guard let data = response.data else { return }
+            completion(data)
         }
     }
 }

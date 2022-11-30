@@ -2,6 +2,8 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import Realm
+import RealmSwift
 import UIKit
 
 /// Экран друзей
@@ -19,9 +21,11 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private lazy var networkService = VKService()
+    private lazy var realmService = RealmService()
+    private var friendToken: NotificationToken?
 
     private var propertyAnimator: UIViewPropertyAnimator?
-    private var friends: [FriendsItem] = []
+    private var friends: Results<FriendsItem>?
 
     private var sectionsMap: [Character: [FriendsItem]] = [:]
     private var sectionTitles: [Character] = []
@@ -30,7 +34,7 @@ final class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFriends()
+        loadData()
     }
 
     // MARK: - Public methods
@@ -56,11 +60,10 @@ final class FriendsTableViewController: UITableViewController {
 
     private func fetchFriends() {
         networkService.getFriends { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .success(friends):
-                self?.friends = friends
-                self?.setupSections()
-                self?.tableView.reloadData()
+                self.realmService.saveInRealm(friends)
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -68,6 +71,7 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func setupSections() {
+        guard let friends = friends else { return }
         for friend in friends {
             guard let firstLetter = friend.firstName.first else { return }
             if sectionsMap[firstLetter] != nil {
@@ -77,6 +81,37 @@ final class FriendsTableViewController: UITableViewController {
             }
         }
         sectionTitles = Array(sectionsMap.keys).sorted()
+    }
+
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            let friendsInRealm = realm.objects(FriendsItem.self)
+            addFriendNotificationToken(result: friendsInRealm)
+            if !friendsInRealm.isEmpty {
+                friends = friendsInRealm
+                setupSections()
+            } else {
+                fetchFriends()
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    private func addFriendNotificationToken(result: Results<FriendsItem>) {
+        friendToken = result.observe { change in
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.friends = result
+                self.setupSections()
+                self.tableView.reloadData()
+            case let .error(error):
+                fatalError("\(error)")
+            }
+        }
     }
 }
 

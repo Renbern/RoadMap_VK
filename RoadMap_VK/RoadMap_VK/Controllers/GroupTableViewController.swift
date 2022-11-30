@@ -1,6 +1,7 @@
 // GroupTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Экран групп пользователя
@@ -31,9 +32,12 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private lazy var networkService = VKService()
-    private var groups: [ItemGroup] = []
+    private lazy var realmService = RealmService()
+    private var groupToken: NotificationToken?
 
-    private var searchedGroups: [ItemGroup] = []
+    private var groups: Results<ItemGroup>?
+
+    private var searchedGroups: Results<ItemGroup>?
 
     // MARK: - Lifecycle
 
@@ -51,25 +55,51 @@ final class GroupTableViewController: UITableViewController {
             let indexPath = userGroupsController.tableView.indexPathForSelectedRow
         else { return }
         let group = userGroupsController.searchedGroups[indexPath.row]
-        if searchedGroups.contains(where: { $0.groupName == searchedGroups[indexPath.row].groupName }) {
-            searchedGroups = groups
-            tableView.reloadData()
-        }
     }
 
     // MARK: - Private methods
 
     private func setupUI() {
-        searchBar.delegate = self
+        loadData()
+    }
+
+    private func fetchGroups() {
         networkService.getGroups { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(groups):
-                self.searchedGroups = groups
-                self.groups = groups
-                self.tableView.reloadData()
+                self.realmService.saveInRealm(groups)
             case let .failure(error):
                 print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            let groupsInRealm = realm.objects(ItemGroup.self)
+            addGroupNotificationToken(result: groupsInRealm)
+            if !groupsInRealm.isEmpty {
+                searchedGroups = groupsInRealm
+            } else {
+                fetchGroups()
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    private func addGroupNotificationToken(result: Results<ItemGroup>) {
+        groupToken = result.observe { change in
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.searchedGroups = result
+                self.tableView.reloadData()
+            case let .error(error):
+                fatalError("\(error)")
             }
         }
     }
@@ -79,15 +109,16 @@ final class GroupTableViewController: UITableViewController {
 
 extension GroupTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchedGroups.count
+        searchedGroups?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.Identifiers.addGroupSegueId,
             for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        let group = searchedGroups[indexPath.row]
+        ) as? GroupTableViewCell,
+            let group = searchedGroups?[indexPath.row]
+        else { return UITableViewCell() }
         cell.configureGroup(group)
         return cell
     }
@@ -98,18 +129,7 @@ extension GroupTableViewController {
         forRowAt indexPath: IndexPath
     ) {
         if editingStyle == .delete {
-            searchedGroups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
         }
-    }
-}
-
-// MARK: - UISearchBarDelegate
-
-extension GroupTableViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedGroups = searchText.isEmpty ? groups : searchedGroups
-            .filter { $0.groupName.contains(searchText) }
-        tableView.reloadData()
     }
 }
