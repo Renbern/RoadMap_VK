@@ -109,7 +109,7 @@ final class VKAPIService {
         }
     }
 
-    func getGroups(completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
+    func fetchGroups(completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
         request(.groups) { [weak self] data in
             guard
                 let self = self,
@@ -122,7 +122,7 @@ final class VKAPIService {
         }
     }
 
-    func getGroups(searchQuery: String, completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
+    func fetchGroups(searchQuery: String, completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
         request(.searchGroups(query: searchQuery)) { [weak self] data in
             guard
                 let self = self,
@@ -135,7 +135,7 @@ final class VKAPIService {
         }
     }
 
-    func getPhotos(for userId: Int, completion: @escaping (Result<[PhotoUrlPaths], Error>) -> Void) {
+    func fetchPhotos(for userId: Int, completion: @escaping (Result<[PhotoUrlPaths], Error>) -> Void) {
         request(.photos(id: userId)) { [weak self] data in
             guard
                 let self = self,

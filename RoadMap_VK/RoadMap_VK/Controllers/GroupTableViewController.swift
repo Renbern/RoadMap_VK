@@ -31,8 +31,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private var vkAPIService = VKAPIService()
-    private var realmService = RealmService()
+    private let vkAPIService = VKAPIService()
     private var groupToken: NotificationToken?
     private var groups: Results<ItemGroup>?
 
@@ -63,8 +62,7 @@ final class GroupTableViewController: UITableViewController {
     }
 
     private func fetchGroups() {
-        vkAPIService.getGroups { [weak self] result in
-            guard let self = self else { return }
+        vkAPIService.fetchGroups { result in
             switch result {
             case let .success(groups):
                 RealmService.save(items: groups)

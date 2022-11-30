@@ -74,7 +74,7 @@ extension AvailableGroupTableViewController {
 extension AvailableGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         networkService
-            .getGroups(searchQuery: searchText, completion: { [weak self] result in
+            .fetchGroups(searchQuery: searchText, completion: { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case let .success(groups):

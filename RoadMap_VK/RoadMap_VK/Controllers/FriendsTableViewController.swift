@@ -19,8 +19,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private var vkAPIService = VKAPIService()
-    private var realmService = RealmService()
+    private let vkAPIService = VKAPIService()
     private var friendToken: NotificationToken?
 
     private var propertyAnimator: UIViewPropertyAnimator?
@@ -58,8 +57,7 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        vkAPIService.fetchFriends { [weak self] result in
-            guard let self = self else { return }
+        vkAPIService.fetchFriends { result in
             switch result {
             case let .success(friends):
                 RealmService.save(items: friends)
