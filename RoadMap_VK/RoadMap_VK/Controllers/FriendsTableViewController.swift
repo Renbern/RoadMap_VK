@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import RealmSwift
 import UIKit
 
 /// Экран друзей
@@ -18,19 +19,20 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private lazy var networkService = VKService()
+    private let vkAPIService = VKAPIService()
+    private var friendToken: NotificationToken?
 
     private var propertyAnimator: UIViewPropertyAnimator?
-    private var friends: [FriendsItem] = []
+    private var friends: Results<FriendsItem>?
 
-    private var sectionsMap: [Character: [FriendsItem]] = [:]
-    private var sectionTitles: [Character] = []
+    private var frendsMap: [Character: [FriendsItem]] = [:]
+    private var sectionCharacter: [Character] = []
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFriends()
+        loadData()
     }
 
     // MARK: - Public methods
@@ -48,19 +50,17 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private methods
 
     private func getOneUser(indexPath: IndexPath) -> FriendsItem? {
-        let firstChar = sectionsMap.keys.sorted()[indexPath.section]
-        guard let users = sectionsMap[firstChar] else { return nil }
+        let firstChar = frendsMap.keys.sorted()[indexPath.section]
+        guard let users = frendsMap[firstChar] else { return nil }
         let user = users[indexPath.row]
         return user
     }
 
     private func fetchFriends() {
-        networkService.getFriends { [weak self] result in
+        vkAPIService.fetchFriends { result in
             switch result {
             case let .success(friends):
-                self?.friends = friends
-                self?.setupSections()
-                self?.tableView.reloadData()
+                RealmService.save(items: friends)
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -68,15 +68,43 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func setupSections() {
+        guard let friends = friends else { return }
         for friend in friends {
             guard let firstLetter = friend.firstName.first else { return }
-            if sectionsMap[firstLetter] != nil {
-                sectionsMap[firstLetter]?.append(friend)
+            if frendsMap[firstLetter] != nil {
+                frendsMap[firstLetter]?.append(friend)
             } else {
-                sectionsMap[firstLetter] = [friend]
+                frendsMap[firstLetter] = [friend]
             }
         }
-        sectionTitles = Array(sectionsMap.keys).sorted()
+        sectionCharacter = Array(frendsMap.keys).sorted()
+    }
+
+    private func loadData() {
+        guard let friends = RealmService.get(FriendsItem.self) else { return }
+        addFriendNotificationToken(result: friends)
+        if !friends.isEmpty {
+            self.friends = friends
+            setupSections()
+        } else {
+            fetchFriends()
+        }
+    }
+
+    private func addFriendNotificationToken(result: Results<FriendsItem>) {
+        friendToken = result.observe { [weak self] change in
+            guard let self = self else { return }
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.friends = result
+                self.setupSections()
+                self.tableView.reloadData()
+            case let .error(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -84,7 +112,7 @@ final class FriendsTableViewController: UITableViewController {
 
 extension FriendsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sectionsMap[sectionTitles[section]]?.count ?? 0
+        frendsMap[sectionCharacter[section]]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,16 +120,16 @@ extension FriendsTableViewController {
             withIdentifier: Constants.Identifiers.friendsIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
+            let friend = frendsMap[sectionCharacter[indexPath.section]]?[indexPath.row]
         else {
             return UITableViewCell()
         }
-        cell.refreshFriends(friend)
+        cell.configure(friend)
         return cell
     }
 
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        sectionTitles.compactMap { String($0) }
+        sectionCharacter.compactMap { String($0) }
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -110,10 +138,10 @@ extension FriendsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        String(sectionTitles[section])
+        String(sectionCharacter[section])
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sectionsMap.count
+        frendsMap.count
     }
 }

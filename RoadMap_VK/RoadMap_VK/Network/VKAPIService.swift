@@ -1,11 +1,11 @@
-// VKService.swift
+// VKAPIService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
-import Foundation
+import RealmSwift
 
 /// Сетевой слой
-final class VKService {
+final class VKAPIService {
     // MARK: - Private Constants
 
     private enum Constants {
@@ -96,16 +96,7 @@ final class VKService {
 
     // MARK: - Public methods
 
-    private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
-        let methodParameters = method.parameters
-        let url = "\(VkUrl.baseUrl)\(method.urlString)"
-        AF.request(url, parameters: methodParameters).responseData { response in
-            guard let data = response.data else { return }
-            completion(data)
-        }
-    }
-
-    func getFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
+    func fetchFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
         request(.friends) { [weak self] data in
             guard
                 let self = self,
@@ -118,7 +109,7 @@ final class VKService {
         }
     }
 
-    func getGroups(completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
+    func fetchGroups(completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
         request(.groups) { [weak self] data in
             guard
                 let self = self,
@@ -131,7 +122,7 @@ final class VKService {
         }
     }
 
-    func getGroups(searchQuery: String, completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
+    func fetchGroups(searchQuery: String, completion: @escaping (Result<[ItemGroup], Error>) -> Void) {
         request(.searchGroups(query: searchQuery)) { [weak self] data in
             guard
                 let self = self,
@@ -144,7 +135,7 @@ final class VKService {
         }
     }
 
-    func getPhotos(for userId: Int, completion: @escaping (Result<[Url], Error>) -> Void) {
+    func fetchPhotos(for userId: Int, completion: @escaping (Result<[PhotoUrlPaths], Error>) -> Void) {
         request(.photos(id: userId)) { [weak self] data in
             guard
                 let self = self,
@@ -153,8 +144,18 @@ final class VKService {
             else {
                 return
             }
-            let imagePaths = result.items.compactMap(\.photos.last)
-            completion(.success(imagePaths))
+            completion(.success(result.items))
+        }
+    }
+
+    // MARK: - Private methods
+
+    private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
+        let methodParameters = method.parameters
+        let url = "\(VkUrl.baseUrl)\(method.urlString)"
+        AF.request(url, parameters: methodParameters).responseData { response in
+            guard let data = response.data else { return }
+            completion(data)
         }
     }
 }

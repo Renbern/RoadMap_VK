@@ -1,15 +1,11 @@
 // User.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
-/// Хранение данных о пользователе
+/// Информация о пользователе
 final class FriendsItem: Object, Codable {
-    @objc dynamic var userId: Int
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
-    @objc dynamic var friendPhotoImageName: String?
+    // MARK: - Constants
 
     private enum CodingKeys: String, CodingKey {
         case userId = "id"
@@ -17,4 +13,11 @@ final class FriendsItem: Object, Codable {
         case lastName = "last_name"
         case friendPhotoImageName = "photo_100"
     }
+
+    // MARK: - Public properties
+
+    @Persisted(primaryKey: true) var userId = 0
+    @Persisted var firstName: String
+    @Persisted var lastName: String
+    @Persisted var friendPhotoImageName: String
 }

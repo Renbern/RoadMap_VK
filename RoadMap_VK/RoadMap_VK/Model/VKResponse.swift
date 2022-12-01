@@ -1,15 +1,20 @@
 // VKResponse.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
-
 /// Модель получения данных для парсинга
 struct VKResponse<T: Decodable>: Decodable {
-    var items: [T]
+    // MARK: - Constants
+
     enum CodingKeys: String, CodingKey {
         case response
         case items
     }
+
+    // MARK: - Public property
+
+    var items: [T]
+
+    // MARK: - Init
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

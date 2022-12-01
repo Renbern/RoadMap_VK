@@ -21,7 +21,7 @@ final class NewsViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private lazy var service = VKService()
+    private lazy var service = VKAPIService()
     private var posts: [Url] = []
 
     // MARK: - Lifecycle
