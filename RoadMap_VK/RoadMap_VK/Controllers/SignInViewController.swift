@@ -49,8 +49,9 @@ final class SignInViewController: UIViewController {
     // MARK: - Public methods
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard identifier == Constants.segueIdentifier,
-              checkLoginInfo()
+        guard identifier == Constants.segueIdentifier
+        // ,
+        // checkLoginInfo()
         else {
             showLoginErrorAlertController()
             return false
