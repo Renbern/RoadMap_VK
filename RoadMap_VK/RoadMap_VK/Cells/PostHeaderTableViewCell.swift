@@ -13,9 +13,21 @@ final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(item: PostItem) {
-        authorImageView.image = UIImage(named: item.photo ?? "")
-        postAuthorLabel.text = item.author
-        postDateLabel.text = item.postDate
+    func configure(item: NewsFeed) {
+        authorImageView.load(url: item.avatarPath ?? "")
+        postAuthorLabel.text = item.authorName
+        postDateLabel.text = changeDateFormat(date: item.date)
+    }
+
+    // MARK: - Private methods
+
+    private func changeDateFormat(date: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(date))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeZone = .current
+        let localDate = dateFormatter.string(from: date)
+        return localDate
     }
 }

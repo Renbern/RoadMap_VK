@@ -5,5 +5,11 @@ import UIKit
 
 /// Ячейка футера секции поста
 final class PostFooterTableViewCell: UITableViewCell, PostConfigurable {
-    func configure(item: PostItem) {}
+    // MARK: - Private visual elements
+    @IBOutlet var postLikeControl: PostLikeControl!
+
+    // MARK: - Public methods
+    func configure(item: NewsFeed) {
+        postLikeControl.configure(item: item)
+    }
 }

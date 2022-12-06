@@ -4,7 +4,7 @@
 import UIKit
 
 /// Контрол лайков
-final class PostLikeControl: UIControl {
+final class PostLikeControl: UIControl, PostConfigurable {
     // MARK: - Constants
 
     private enum Constants {
@@ -17,7 +17,8 @@ final class PostLikeControl: UIControl {
     // MARK: - Private IBOutlets
 
     @IBOutlet private var likeButton: UIButton!
-    @IBOutlet private var likeNumberLabel: UILabel!
+    @IBOutlet private var likeCountLabel: UILabel!
+    @IBOutlet private var viewCountLabel: UILabel!
 
     // MARK: - Private properties
 
@@ -29,15 +30,14 @@ final class PostLikeControl: UIControl {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupUI()
     }
 
     // MARK: - Private IBActions
 
     @IBAction private func likeAction() {
         isSelected = !isSelected
-        likeCount = isSelected ? +1 : +0
-        likeNumberLabel.text = String(likeCount)
+        likeCount = isSelected ? likeCount + 1 : likeCount - 1
+        likeCountLabel.text = String(likeCount)
         likeControlImageName = isSelected ? Constants.filledHeart : Constants.heart
         likeButton.setImage(UIImage(systemName: likeControlImageName), for: .normal)
         likeControlButtonTitle = isSelected ? Constants.unlikeText : Constants.likeText
@@ -45,15 +45,19 @@ final class PostLikeControl: UIControl {
         setupLikeAnimation()
     }
 
-    // MARK: - Private methods
+    // MARK: - Public methods
 
-    private func setupUI() {
-        likeNumberLabel.text = String(likeCount)
+    func configure(item: NewsFeed) {
+        likeCountLabel?.text = "\(item.likes.count)"
+        likeCount = item.likes.count
+        viewCountLabel.text = "\(item.views.count)"
     }
+
+    // MARK: - Private methods
 
     private func setupLikeAnimation() {
         UIView.transition(
-            with: likeNumberLabel,
+            with: likeCountLabel,
             duration: 1.0,
             options: .transitionFlipFromRight,
             animations: nil

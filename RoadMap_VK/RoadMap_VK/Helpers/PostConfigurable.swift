@@ -2,9 +2,9 @@
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
-
+/// Конфигурация ячейки
 typealias PostCell = UITableViewCell & PostConfigurable
 
 protocol PostConfigurable {
-    func configure(item: PostItem)
+    func configure(item: NewsFeed)
 }

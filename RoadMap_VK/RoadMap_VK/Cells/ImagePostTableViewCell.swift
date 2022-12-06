@@ -11,7 +11,5 @@ final class ImagePostTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(item: PostItem) {
-        postImageView.image = UIImage(named: String(Int.random(in: 1 ... 5)))
-    }
+    func configure(item: NewsFeed) {}
 }

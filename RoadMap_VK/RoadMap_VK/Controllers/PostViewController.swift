@@ -1,6 +1,8 @@
 // PostViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
+import RealmSwift
 import UIKit
 
 /// Экран нвостей
@@ -25,7 +27,9 @@ final class PostViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private let posts = PostItem.fake
+    private let vkAPIService = VKAPIService()
+    private let likeControl = PostLikeControl()
+    private var news: [NewsFeed] = []
 
     // MARK: - Lifecycle
 
@@ -38,6 +42,41 @@ final class PostViewController: UIViewController {
 
     private func setupTableView() {
         tableView.dataSource = self
+        fetchNews()
+    }
+
+    private func fetchNews() {
+        vkAPIService.fetchNews { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                self.newsFilter(response: data)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func newsFilter(response: NewsFeedResponse) {
+        response.news.forEach { news in
+            guard let group = response.groups.filter({ group in
+                group.id == news.sourceId * -1
+            }).first,
+                  let user = response.friends.filter({ user in
+                      user.userId == news.sourceId
+                  }).first else { return }
+            if news.sourceId < 0 {
+                news.authorName = group.groupName
+                news.avatarPath = group.groupPhotoImageName
+            } else {
+                news.authorName = "\(user.firstName) \(user.lastName)"
+                news.avatarPath = user.friendPhotoImageName
+            }
+        }
+        DispatchQueue.main.async {
+            self.news = response.news
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -45,7 +84,7 @@ final class PostViewController: UIViewController {
 
 extension PostViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        posts.count
+        news.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,20 +92,14 @@ extension PostViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = posts[indexPath.section]
+        let item = news[indexPath.section]
         let cellType = Constants.PostCellType(rawValue: indexPath.row) ?? .content
         var cellIdentifier = ""
         switch cellType {
         case .header:
             cellIdentifier = Constants.headerCellId
         case .content:
-            switch item.type {
-            case .text:
-                cellIdentifier = Constants.textPostCellId
-            case .image:
-                cellIdentifier = Constants.imagePostCellId
-            }
-
+            cellIdentifier = Constants.textPostCellId
         case .footer:
             cellIdentifier = Constants.footerCellId
         }

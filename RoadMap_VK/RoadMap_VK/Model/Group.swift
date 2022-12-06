@@ -8,6 +8,7 @@ final class ItemGroup: Object, Codable {
     // MARK: - Constants
 
     private enum CodingKeys: String, CodingKey {
+        case id
         case groupName = "name"
         case groupPhotoImageName = "photo_100"
     }
@@ -16,4 +17,5 @@ final class ItemGroup: Object, Codable {
 
     @Persisted(primaryKey: true) var groupName: String
     @Persisted var groupPhotoImageName: String?
+    @Persisted var id: Int
 }

@@ -255,7 +255,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Tby-eC-enk">
                                                     <rect key="frame" x="10" y="10" width="370" height="142.66666666666666"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WWa-8b-FL8">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWa-8b-FL8">
                                                             <rect key="frame" x="0.0" y="0.0" width="370" height="142.66666666666666"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
@@ -346,7 +346,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="amQ-tS-Ymf" firstAttribute="leading" secondItem="vZG-fw-bSi" secondAttribute="trailing" constant="174.66666666666666" id="Bag-Kx-NKh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3Lz-D4-cJ8" secondAttribute="trailing" constant="15" id="CMj-8B-G7i"/>
                                                         <constraint firstItem="3Lz-D4-cJ8" firstAttribute="centerY" secondItem="amQ-tS-Ymf" secondAttribute="centerY" id="M29-l0-nk7"/>
                                                         <constraint firstItem="vZG-fw-bSi" firstAttribute="centerY" secondItem="cf0-MG-RUD" secondAttribute="centerY" id="YRb-sd-nuR"/>
                                                         <constraint firstItem="cf0-MG-RUD" firstAttribute="leading" secondItem="i0L-y0-o4F" secondAttribute="leading" constant="14.999999999999998" id="beN-1Z-G4j"/>
@@ -358,7 +358,8 @@
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="likeButton" destination="vZG-fw-bSi" id="L1S-0k-g0a"/>
-                                                        <outlet property="likeNumberLabel" destination="cf0-MG-RUD" id="TgK-Am-494"/>
+                                                        <outlet property="likeCountLabel" destination="cf0-MG-RUD" id="TgK-Am-494"/>
+                                                        <outlet property="viewCountLabel" destination="amQ-tS-Ymf" id="CgG-Zs-Hsk"/>
                                                     </connections>
                                                 </view>
                                             </subviews>
@@ -369,6 +370,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="i0L-y0-o4F" secondAttribute="trailing" id="RuS-Uh-WbA"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postLikeControl" destination="i0L-y0-o4F" id="q6O-tc-DqI"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
