@@ -1,12 +1,12 @@
-// NewsFeedResponse.swift
+// PostResponse.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
-/// Запросы 
-struct NewsFeedResponse: Decodable {
+/// Запросы
+struct PostResponse: Decodable {
     /// Новости
-    let news: [NewsFeed]
+    let news: [Post]
     /// Группы
     let groups: [ItemGroup]
     /// Друзья

@@ -28,8 +28,7 @@ final class PostViewController: UIViewController {
     // MARK: - Private properties
 
     private let vkAPIService = VKAPIService()
-    private let likeControl = PostLikeControl()
-    private var news: [NewsFeed] = []
+    private var news: [Post] = []
 
     // MARK: - Lifecycle
 
@@ -50,21 +49,21 @@ final class PostViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                self.newsFilter(response: data)
+                self.newsFilter(newsFeedResponse: data)
             case let .failure(error):
                 print(error.localizedDescription)
             }
         }
     }
 
-    private func newsFilter(response: NewsFeedResponse) {
-        response.news.forEach { news in
-            guard let group = response.groups.filter({ group in
+    private func newsFilter(newsFeedResponse: PostResponse) {
+        newsFeedResponse.news.forEach { news in
+            guard let group = newsFeedResponse.groups.filter({ group in
                 group.id == news.sourceId * -1
             }).first,
-                  let user = response.friends.filter({ user in
-                      user.userId == news.sourceId
-                  }).first else { return }
+                let user = newsFeedResponse.friends.filter({ user in
+                    user.userId == news.sourceId
+                }).first else { return }
             if news.sourceId < 0 {
                 news.authorName = group.groupName
                 news.avatarPath = group.groupPhotoImageName
@@ -74,7 +73,7 @@ final class PostViewController: UIViewController {
             }
         }
         DispatchQueue.main.async {
-            self.news = response.news
+            self.news = newsFeedResponse.news
             self.tableView.reloadData()
         }
     }
@@ -92,7 +91,7 @@ extension PostViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = news[indexPath.section]
+        let news = news[indexPath.section]
         let cellType = Constants.PostCellType(rawValue: indexPath.row) ?? .content
         var cellIdentifier = ""
         switch cellType {
@@ -107,7 +106,7 @@ extension PostViewController: UITableViewDataSource {
             withIdentifier: cellIdentifier,
             for: indexPath
         ) as? PostCell else { return UITableViewCell() }
-        cell.configure(item: item)
+        cell.configure(post: news)
         return cell
     }
 }

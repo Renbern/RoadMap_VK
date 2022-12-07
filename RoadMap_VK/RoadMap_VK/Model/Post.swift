@@ -2,7 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 /// Публикации
-final class NewsFeed: Decodable {
+final class Post: Decodable {
     /// Идентификатор
     var id: Int
     /// Идентификатор публикации
@@ -20,7 +20,6 @@ final class NewsFeed: Decodable {
     /// Дата публикации
     var date: Int
 
-    
     enum CodingKeys: String, CodingKey {
         case id
         case sourceId = "source_id"

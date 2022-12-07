@@ -11,5 +11,5 @@ final class ImagePostTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(item: NewsFeed) {}
+    func configure(post: Post) {}
 }

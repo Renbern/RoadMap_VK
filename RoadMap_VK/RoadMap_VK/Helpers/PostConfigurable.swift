@@ -6,5 +6,5 @@ import UIKit
 typealias PostCell = UITableViewCell & PostConfigurable
 
 protocol PostConfigurable {
-    func configure(item: NewsFeed)
+    func configure(post: Post)
 }

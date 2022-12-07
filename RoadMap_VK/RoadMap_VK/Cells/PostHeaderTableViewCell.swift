@@ -13,10 +13,10 @@ final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(item: NewsFeed) {
-        authorImageView.load(url: item.avatarPath ?? "")
-        postAuthorLabel.text = item.authorName
-        postDateLabel.text = changeDateFormat(date: item.date)
+    func configure(post: Post) {
+        authorImageView.load(url: post.avatarPath ?? "")
+        postAuthorLabel.text = post.authorName
+        postDateLabel.text = changeDateFormat(date: post.date)
     }
 
     // MARK: - Private methods

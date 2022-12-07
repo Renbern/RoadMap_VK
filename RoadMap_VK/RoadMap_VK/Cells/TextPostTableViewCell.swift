@@ -11,7 +11,7 @@ final class TextPostTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(item: NewsFeed) {
-        postTextView.text = item.text
+    func configure(post: Post) {
+        postTextView.text = post.text
     }
 }

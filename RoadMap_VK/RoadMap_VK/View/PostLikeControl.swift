@@ -4,7 +4,7 @@
 import UIKit
 
 /// Контрол лайков
-final class PostLikeControl: UIControl, PostConfigurable {
+final class PostLikeControl: UIControl {
     // MARK: - Constants
 
     private enum Constants {
@@ -45,14 +45,6 @@ final class PostLikeControl: UIControl, PostConfigurable {
         setupLikeAnimation()
     }
 
-    // MARK: - Public methods
-
-    func configure(item: NewsFeed) {
-        likeCountLabel?.text = "\(item.likes.count)"
-        likeCount = item.likes.count
-        viewCountLabel.text = "\(item.views.count)"
-    }
-
     // MARK: - Private methods
 
     private func setupLikeAnimation() {
@@ -62,5 +54,15 @@ final class PostLikeControl: UIControl, PostConfigurable {
             options: .transitionFlipFromRight,
             animations: nil
         )
+    }
+}
+
+// MARK: - PostConfigurable
+
+extension PostLikeControl: PostConfigurable {
+    func configure(post: Post) {
+        likeCountLabel?.text = "\(post.likes.count)"
+        likeCount = post.likes.count
+        viewCountLabel.text = "\(post.views.count)"
     }
 }

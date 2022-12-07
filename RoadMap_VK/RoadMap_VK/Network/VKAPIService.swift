@@ -108,7 +108,7 @@ final class VKAPIService {
 
     // MARK: - Public methods
 
-    func fetchNews(completion: @escaping (Result<NewsFeedResponse, Error>) -> Void) {
+    func fetchNews(completion: @escaping (Result<PostResponse, Error>) -> Void) {
         request(.news) { [weak self] data in
             guard
                 let self = self,
