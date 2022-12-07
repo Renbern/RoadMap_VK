@@ -8,8 +8,11 @@ final class PhotoUrlPaths: Object, Decodable {
     // MARK: - Constants
 
     enum CodingKeys: String, CodingKey {
+        /// Идентификатор
         case id
+        /// Идентификатор пользователя
         case userId = "owner_id"
+        /// Фотографии пользователя
         case photos = "sizes"
     }
 

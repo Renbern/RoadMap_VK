@@ -8,9 +8,13 @@ final class FriendsItem: Object, Codable {
     // MARK: - Constants
 
     private enum CodingKeys: String, CodingKey {
+        /// Идентификатор пользователя
         case userId = "id"
+        /// Имя
         case firstName = "first_name"
+        /// Фамилия
         case lastName = "last_name"
+        /// Фото
         case friendPhotoImageName = "photo_100"
     }
 

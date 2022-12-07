@@ -5,5 +5,6 @@ import Foundation
 
 /// Просмотры
 struct Views: Decodable {
+    /// Количество просмотров
     var count: Int
 }

@@ -6,7 +6,9 @@ struct VKResponse<T: Decodable>: Decodable {
     // MARK: - Constants
 
     enum CodingKeys: String, CodingKey {
+        /// Ответ
         case response
+        /// Объекты
         case items
     }
 

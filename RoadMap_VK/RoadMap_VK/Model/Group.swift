@@ -8,8 +8,11 @@ final class ItemGroup: Object, Codable {
     // MARK: - Constants
 
     private enum CodingKeys: String, CodingKey {
+        /// Идентификатор группы
         case id
+        /// Название группы
         case groupName = "name"
+        /// Аватар группы
         case groupPhotoImageName = "photo_100"
     }
 

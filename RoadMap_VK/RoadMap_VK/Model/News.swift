@@ -5,5 +5,6 @@ import Foundation
 
 /// News
 struct News: Decodable {
+    /// Ответ
     var response: NewsFeedResponse
 }

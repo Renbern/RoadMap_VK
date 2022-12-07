@@ -5,8 +5,11 @@ import Foundation
 
 /// Запросы 
 struct NewsFeedResponse: Decodable {
+    /// Новости
     let news: [NewsFeed]
+    /// Группы
     let groups: [ItemGroup]
+    /// Друзья
     let friends: [FriendsItem]
 
     enum CodingKeys: String, CodingKey {
