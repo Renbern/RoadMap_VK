@@ -8,7 +8,11 @@ final class ItemGroup: Object, Codable {
     // MARK: - Constants
 
     private enum CodingKeys: String, CodingKey {
+        /// Идентификатор группы
+        case id
+        /// Название группы
         case groupName = "name"
+        /// Аватар группы
         case groupPhotoImageName = "photo_100"
     }
 
@@ -16,4 +20,5 @@ final class ItemGroup: Object, Codable {
 
     @Persisted(primaryKey: true) var groupName: String
     @Persisted var groupPhotoImageName: String?
+    @Persisted var id: Int
 }

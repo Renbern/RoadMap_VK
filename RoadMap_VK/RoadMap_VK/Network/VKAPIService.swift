@@ -18,6 +18,8 @@ final class VKAPIService {
         static let extendedValue = "1"
         static let queryText = "q"
         static let ownerIdText = "owner_id"
+        static let filtersText = "filters"
+        static let filters = "post"
     }
 
     /// Типы пути запросов
@@ -26,6 +28,7 @@ final class VKAPIService {
         static let groups = "groups.get?"
         static let photos = "photos.getAll?"
         static let groupsSearch = "groups.search?"
+        static let news = "newsfeed.get?"
     }
 
     /// Составные части URL
@@ -44,6 +47,7 @@ final class VKAPIService {
         case groups
         case photos(id: Int)
         case searchGroups(query: String)
+        case news
 
         var urlString: String {
             switch self {
@@ -55,6 +59,8 @@ final class VKAPIService {
                 return "\(Method.photos)"
             case .searchGroups:
                 return "\(Method.groupsSearch)"
+            case .news:
+                return "\(Method.news)"
             }
         }
 
@@ -85,6 +91,12 @@ final class VKAPIService {
                     Constants.queryText: query,
                     Constants.versionText: Constants.versionValue
                 ]
+            case .news:
+                return [
+                    Constants.tokenText: Session.shared.token,
+                    Constants.filtersText: Constants.filters,
+                    Constants.versionText: Constants.versionValue
+                ]
             }
         }
     }
@@ -95,6 +107,19 @@ final class VKAPIService {
     private let session = Session.shared
 
     // MARK: - Public methods
+
+    func fetchNews(completion: @escaping (Result<PostResponse, Error>) -> Void) {
+        request(.news) { [weak self] data in
+            guard
+                let self = self,
+                let data = data,
+                let response = try? self.decoder.decode(News.self, from: data)
+            else {
+                return
+            }
+            completion(.success(response.response))
+        }
+    }
 
     func fetchFriends(completion: @escaping (Result<[FriendsItem], Error>) -> Void) {
         request(.friends) { [weak self] data in

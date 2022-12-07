@@ -26,7 +26,7 @@ final class AuthorizationViewController: UIViewController {
             static let redirectUriName = "redirect_uri"
             static let redirectUriValue = "https://oauth.vk.com/blank.html"
             static let scopeName = "scope"
-            static let scopeValue = "262150"
+            static let scopeValue = "8198"
             static let responceTypeName = "response_type"
             static let responceTypeValue = "token"
             static let versionName = "v"

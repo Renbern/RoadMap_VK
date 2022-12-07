@@ -17,7 +17,8 @@ final class PostLikeControl: UIControl {
     // MARK: - Private IBOutlets
 
     @IBOutlet private var likeButton: UIButton!
-    @IBOutlet private var likeNumberLabel: UILabel!
+    @IBOutlet private var likeCountLabel: UILabel!
+    @IBOutlet private var viewCountLabel: UILabel!
 
     // MARK: - Private properties
 
@@ -29,15 +30,14 @@ final class PostLikeControl: UIControl {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupUI()
     }
 
     // MARK: - Private IBActions
 
     @IBAction private func likeAction() {
         isSelected = !isSelected
-        likeCount = isSelected ? +1 : +0
-        likeNumberLabel.text = String(likeCount)
+        likeCount = isSelected ? likeCount + 1 : likeCount - 1
+        likeCountLabel.text = String(likeCount)
         likeControlImageName = isSelected ? Constants.filledHeart : Constants.heart
         likeButton.setImage(UIImage(systemName: likeControlImageName), for: .normal)
         likeControlButtonTitle = isSelected ? Constants.unlikeText : Constants.likeText
@@ -47,16 +47,22 @@ final class PostLikeControl: UIControl {
 
     // MARK: - Private methods
 
-    private func setupUI() {
-        likeNumberLabel.text = String(likeCount)
-    }
-
     private func setupLikeAnimation() {
         UIView.transition(
-            with: likeNumberLabel,
+            with: likeCountLabel,
             duration: 1.0,
             options: .transitionFlipFromRight,
             animations: nil
         )
+    }
+}
+
+// MARK: - PostConfigurable
+
+extension PostLikeControl: PostConfigurable {
+    func configure(post: Post) {
+        likeCountLabel?.text = "\(post.likes.count)"
+        likeCount = post.likes.count
+        viewCountLabel.text = "\(post.views.count)"
     }
 }
