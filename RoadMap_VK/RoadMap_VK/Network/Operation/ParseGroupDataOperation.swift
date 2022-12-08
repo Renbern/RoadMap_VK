@@ -2,7 +2,6 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
-import SwiftyJSON
 
 /// Парсинг данных
 final class ParseGroupDataOperation: Operation {
@@ -20,7 +19,6 @@ final class ParseGroupDataOperation: Operation {
             let responses = try decoder.decode(VKResponse<ItemGroup>.self, from: data)
             let newItem = responses
             outputData = newItem.items
-            print(newItem)
         } catch {
             print(error)
         }

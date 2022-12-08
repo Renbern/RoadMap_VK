@@ -176,13 +176,13 @@ final class VKAPIService {
     }
 
     func getGroup() {
-        let opq = OperationQueue()
+        let operationQueue = OperationQueue()
         let request = getGroupRequest(.groups)
         let getDataOperation = GetDataOperation(request: request)
-        opq.addOperation(getDataOperation)
+        operationQueue.addOperation(getDataOperation)
         let parseData = ParseGroupDataOperation()
         parseData.addDependency(getDataOperation)
-        opq.addOperation(parseData)
+        operationQueue.addOperation(parseData)
         let saveToRealm = SaveRealmOperation()
         saveToRealm.addDependency(parseData)
         OperationQueue.main.addOperation(saveToRealm)

@@ -82,7 +82,6 @@ final class FriendsTableViewController: UITableViewController {
 
     private func loadData() {
         guard let friends = RealmService.get(FriendsItem.self) else { return }
-        let realm = try? Realm()
         addFriendNotificationToken(result: friends)
         if !friends.isEmpty {
             self.friends = friends
