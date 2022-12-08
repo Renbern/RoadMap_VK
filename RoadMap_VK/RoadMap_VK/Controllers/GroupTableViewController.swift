@@ -34,7 +34,6 @@ final class GroupTableViewController: UITableViewController {
     private let vkAPIService = VKAPIService()
     private var groupToken: NotificationToken?
     private var groups: Results<ItemGroup>?
-
     private var searchedGroups: Results<ItemGroup>?
 
     // MARK: - Lifecycle
@@ -58,28 +57,14 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private methods
 
     private func setupUI() {
+        vkAPIService.getGroup()
         loadData()
-    }
-
-    private func fetchGroups() {
-        vkAPIService.fetchGroups { result in
-            switch result {
-            case let .success(groups):
-                RealmService.save(items: groups)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
     }
 
     private func loadData() {
         guard let groups = RealmService.get(ItemGroup.self) else { return }
         addGroupNotificationToken(result: groups)
-        if !groups.isEmpty {
-            searchedGroups = groups
-        } else {
-            fetchGroups()
-        }
+        searchedGroups = groups
     }
 
     private func addGroupNotificationToken(result: Results<ItemGroup>) {

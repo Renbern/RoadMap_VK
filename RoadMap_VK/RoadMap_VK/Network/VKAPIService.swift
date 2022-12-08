@@ -105,6 +105,8 @@ final class VKAPIService {
 
     private let decoder = JSONDecoder()
     private let session = Session.shared
+    private let parseGroupDataOperation = ParseGroupDataOperation()
+    private let reloadTableViewControllerOperation = SaveRealmOperation()
 
     // MARK: - Public methods
 
@@ -173,6 +175,19 @@ final class VKAPIService {
         }
     }
 
+    func getGroup() {
+        let opq = OperationQueue()
+        let request = getGroupRequest(.groups)
+        let getDataOperation = GetDataOperation(request: request)
+        opq.addOperation(getDataOperation)
+        let parseData = ParseGroupDataOperation()
+        parseData.addDependency(getDataOperation)
+        opq.addOperation(parseData)
+        let saveToRealm = SaveRealmOperation()
+        saveToRealm.addDependency(parseData)
+        OperationQueue.main.addOperation(saveToRealm)
+    }
+
     // MARK: - Private methods
 
     private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
@@ -182,6 +197,13 @@ final class VKAPIService {
             guard let data = response.data else { return }
             completion(data)
         }
+    }
+
+    private func getGroupRequest(_ method: RequestType) -> DataRequest {
+        let methodParameters = method.parameters
+        let url = "\(VkUrl.baseUrl)\(method.urlString)"
+        let request = AF.request(url, parameters: methodParameters)
+        return request
     }
 }
 
