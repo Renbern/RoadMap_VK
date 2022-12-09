@@ -2,7 +2,6 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
-import Foundation
 
 /// Операция получения данных из сети
 final class GetDataOperation: AsyncOperation {

@@ -5,7 +5,7 @@ import Foundation
 
 /// Парсинг данных
 final class ParseGroupDataOperation: Operation {
-    // MARK: - Private properties
+    // MARK: - Public properties
 
     var outputData: [ItemGroup] = []
 

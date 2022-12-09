@@ -105,8 +105,6 @@ final class VKAPIService {
 
     private let decoder = JSONDecoder()
     private let session = Session.shared
-    private let parseGroupDataOperation = ParseGroupDataOperation()
-    private let reloadTableViewControllerOperation = SaveRealmOperation()
 
     // MARK: - Public methods
 

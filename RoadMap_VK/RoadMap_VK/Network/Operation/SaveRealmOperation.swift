@@ -1,7 +1,6 @@
 // SaveRealmOperation.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
 final class SaveRealmOperation: Operation {
