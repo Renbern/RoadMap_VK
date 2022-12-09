@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -19,7 +20,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private let vkAPIService = VKAPIService()
+    private let promiseVkAPIService = PromiseVKAPIService()
     private var friendToken: NotificationToken?
 
     private var propertyAnimator: UIViewPropertyAnimator?
@@ -57,13 +58,12 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        vkAPIService.fetchFriends { result in
-            switch result {
-            case let .success(friends):
-                RealmService.save(items: friends)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
+        firstly {
+            promiseVkAPIService.fetchFriends(.friends)
+        }.done { friends in
+            RealmService.save(items: friends)
+        }.catch { error in
+            print(error.localizedDescription)
         }
     }
 

@@ -60,14 +60,14 @@ final class PostViewController: UIViewController {
         newsFeedResponse.news.forEach { news in
             guard let group = newsFeedResponse.groups.filter({ group in
                 group.id == news.sourceId * -1
-            }).first,
-                let user = newsFeedResponse.friends.filter({ user in
-                    user.userId == news.sourceId
-                }).first else { return }
+            }).first else { return }
             if news.sourceId < 0 {
                 news.authorName = group.groupName
                 news.avatarPath = group.groupPhotoImageName
             } else {
+                guard let user = newsFeedResponse.friends.filter({ user in
+                    user.userId == news.sourceId
+                }).first else { return }
                 news.authorName = "\(user.firstName) \(user.lastName)"
                 news.avatarPath = user.friendPhotoImageName
             }

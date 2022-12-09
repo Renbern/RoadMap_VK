@@ -173,6 +173,19 @@ final class VKAPIService {
         }
     }
 
+    func getGroup() {
+        let operationQueue = OperationQueue()
+        let request = getGroupRequest(.groups)
+        let getDataOperation = GetDataOperation(request: request)
+        operationQueue.addOperation(getDataOperation)
+        let parseData = ParseGroupDataOperation()
+        parseData.addDependency(getDataOperation)
+        operationQueue.addOperation(parseData)
+        let saveToRealm = SaveRealmOperation()
+        saveToRealm.addDependency(parseData)
+        OperationQueue.main.addOperation(saveToRealm)
+    }
+
     // MARK: - Private methods
 
     private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
@@ -182,6 +195,13 @@ final class VKAPIService {
             guard let data = response.data else { return }
             completion(data)
         }
+    }
+
+    private func getGroupRequest(_ method: RequestType) -> DataRequest {
+        let methodParameters = method.parameters
+        let url = "\(VkUrl.baseUrl)\(method.urlString)"
+        let request = AF.request(url, parameters: methodParameters)
+        return request
     }
 }
 
