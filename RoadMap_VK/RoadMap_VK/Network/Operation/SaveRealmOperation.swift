@@ -3,12 +3,13 @@
 
 import RealmSwift
 
+/// Сохранение данных в реалм
 final class SaveRealmOperation: Operation {
     // MARK: - Public methods
 
     override func main() {
         guard let getParseData = dependencies.first as? ParseGroupDataOperation else { return }
-        let parseData = getParseData.outputData
+        let parseData = getParseData.itemGroups
         do {
             let realm = try Realm()
             let oldData = realm.objects(ItemGroup.self)

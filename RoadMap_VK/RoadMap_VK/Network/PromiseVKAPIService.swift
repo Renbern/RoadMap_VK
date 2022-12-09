@@ -5,7 +5,7 @@ import Alamofire
 import PromiseKit
 import RealmSwift
 
-/// Сетевой слой
+/// Сетевой сервис с промисом
 final class PromiseVKAPIService {
     // MARK: - Private Constants
 
