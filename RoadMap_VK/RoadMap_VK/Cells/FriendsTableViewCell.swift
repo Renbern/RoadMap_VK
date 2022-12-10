@@ -24,9 +24,8 @@ final class FriendsTableViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
-    func configure(_ friend: FriendsItem) {
-        let url = friend.friendPhotoImageName
-        friendPhotoImageView.load(url: url)
+    func configure(_ friend: FriendsItem, image: UIImage?) {
+        friendPhotoImageView.image = image
         friendNameLabel.text = "\(friend.firstName) \(friend.lastName)"
     }
 

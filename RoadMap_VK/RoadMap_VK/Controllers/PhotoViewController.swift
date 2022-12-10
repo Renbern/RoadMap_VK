@@ -59,22 +59,17 @@ final class PhotoViewController: UIViewController {
     }
 
     private func loadData(userId: Int) {
-        do {
-            let realm = try Realm()
-            guard let contentView = contentView,
-                  let photosInRealm = RealmService.get(PhotoUrlPaths.self)
-            else { return }
-            let identifiers = photosInRealm.map(\.userId)
-            if identifiers.contains(where: { tempId in userId == tempId }) {
-                let userPhoto = photosInRealm.filter { $0.userId == userId }
-                let photosMap = userPhoto.compactMap(\.photos.last)
-                photos = photosMap.map(\.url)
-                updatePhoto(view: contentView, photoNames: photos)
-            } else {
-                fetchPhotos(userId: userId)
-            }
-        } catch {
-            print(error)
+        guard let contentView = contentView,
+              let photosInRealm = RealmService.get(PhotoUrlPaths.self)
+        else { return }
+        let identifiers = photosInRealm.map(\.userId)
+        if identifiers.contains(where: { tempId in userId == tempId }) {
+            let userPhoto = photosInRealm.filter { $0.userId == userId }
+            let photosMap = userPhoto.compactMap(\.photos.last)
+            photos = photosMap.map(\.url)
+            updatePhoto(view: contentView, photoNames: photos)
+        } else {
+            fetchPhotos(userId: userId)
         }
     }
 }

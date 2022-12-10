@@ -35,6 +35,7 @@ final class GroupTableViewController: UITableViewController {
     private var groupToken: NotificationToken?
     private var groups: Results<ItemGroup>?
     private var searchedGroups: Results<ItemGroup>?
+    private lazy var photoCacheService = PhotoCacheService(container: self)
 
     // MARK: - Lifecycle
 
@@ -97,7 +98,13 @@ extension GroupTableViewController {
         ) as? GroupTableViewCell,
             let group = searchedGroups?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configureGroup(group)
+        cell.configureGroup(
+            group,
+            image: photoCacheService.photo(
+                atIndexpath: indexPath,
+                byUrl: group.groupPhotoImageName ?? ""
+            )
+        )
         return cell
     }
 

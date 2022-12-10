@@ -21,9 +21,8 @@ final class GroupTableViewCell: UITableViewCell {
         setupUI()
     }
 
-    func configureGroup(_ group: ItemGroup) {
-        guard let url = group.groupPhotoImageName else { return }
-        groupPhotoImageView.load(url: url)
+    func configureGroup(_ group: ItemGroup, image: UIImage?) {
+        groupPhotoImageView.image = image
         groupNameLabel.text = group.groupName
     }
 

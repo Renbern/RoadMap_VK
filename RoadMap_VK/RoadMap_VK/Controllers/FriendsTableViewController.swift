@@ -28,6 +28,7 @@ final class FriendsTableViewController: UITableViewController {
 
     private var frendsMap: [Character: [FriendsItem]] = [:]
     private var sectionCharacter: [Character] = []
+    private lazy var photoCacheService = PhotoCacheService(container: self)
 
     // MARK: - Lifecycle
 
@@ -81,6 +82,7 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func loadData() {
+        // print(FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first)
         guard let friends = RealmService.get(FriendsItem.self) else { return }
         addFriendNotificationToken(result: friends)
         if !friends.isEmpty {
@@ -120,11 +122,17 @@ extension FriendsTableViewController {
             withIdentifier: Constants.Identifiers.friendsIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = frendsMap[sectionCharacter[indexPath.section]]?[indexPath.row]
+            let friend = frendsMap[sectionCharacter[indexPath.section]]
         else {
             return UITableViewCell()
         }
-        cell.configure(friend)
+        cell.configure(
+            friend[indexPath.row],
+            image: photoCacheService.photo(
+                atIndexpath: indexPath,
+                byUrl: friend[indexPath.row].friendPhotoImageName
+            )
+        )
         return cell
     }
 
