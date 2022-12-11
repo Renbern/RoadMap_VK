@@ -29,7 +29,7 @@ final class PostViewController: UIViewController {
 
     private let vkAPIService = VKAPIService()
     private var news: [Post] = []
-    private var photoCacheService: PhotoCacheService?
+    private var photoCacheService = PhotoCacheService()
 
     // MARK: - Lifecycle
 
@@ -41,7 +41,6 @@ final class PostViewController: UIViewController {
     // MARK: - Private methods
 
     private func setupTableView() {
-        photoCacheService = PhotoCacheService(container: tableView)
         tableView.dataSource = self
         fetchNews()
     }
@@ -112,7 +111,7 @@ extension PostViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.configure(post: news, image: photoCacheService?.photo(atIndexpath: indexPath, byUrl: url))
+        cell.configure(post: news, image: photoCacheService.photo(byUrl: url))
         return cell
     }
 }

@@ -28,6 +28,7 @@ final class PhotoView: UIView {
     // MARK: - Private properties
 
     private var index = Int()
+    private var photoCacheService = PhotoCacheService()
 
     // MARK: - Initializers
 
@@ -44,8 +45,10 @@ final class PhotoView: UIView {
 
     func updatePhoto(count: Int) {
         currentNumberLabel.text = "1 / \(count)"
-        guard let url = photoNames.last else { return }
-        friendImageView.load(url: url)
+        guard let url = photoNames.last,
+              let image = photoCacheService.photo(byUrl: url)
+        else { return }
+        friendImageView.image = image
     }
 
     func createSwipeGestureRecognizer() {
@@ -97,7 +100,7 @@ final class PhotoView: UIView {
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
                 let urlPhoto = self.photoNames[self.index]
-                self.friendImageView.load(url: urlPhoto)
+                self.friendImageView.image = self.photoCacheService.photo(byUrl: urlPhoto)
                 self.currentNumberLabel.text = "\(self.index + 1) / \(self.photoNames.count)"
             }
         )

@@ -43,18 +43,7 @@ class PhotoCacheService {
     }()
 
     private let cacheLifeTime: TimeInterval = Constants.cacheLifeTime
-    private let container: DataReloadable
     private var images = [String: UIImage]()
-
-    // MARK: - Initializers
-
-    init(container: UITableViewController) {
-        self.container = TableViewController(table: container)
-    }
-
-    init(container: UITableView) {
-        self.container = Table(table: container)
-    }
 
     // MARK: - Private methods
 
@@ -67,7 +56,7 @@ class PhotoCacheService {
         }
         let hashName = url.split(separator: Constants.urlSeparator).last ?? Constants.defaultFileName
         return cachesDirectory.appendingPathComponent(
-            PhotoCacheService.pathName + String(Constants.urlSeparator) + hashName
+            "\(PhotoCacheService.pathName)\(String(Constants.urlSeparator))\(hashName).png"
         ).path
     }
 
@@ -100,28 +89,26 @@ class PhotoCacheService {
         return image
     }
 
-    func loadPhoto(atIndexpath indexPath: IndexPath, byUrl url: String) {
+    func loadPhoto(byUrl url: String) {
         AF.request(url).responseData(queue: DispatchQueue.global()) { [weak self] response in
             guard let data = response.data,
                   let self = self,
                   let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async { self.images[url] = image
+            DispatchQueue.main.async {
+                self.images[url] = image
             }
             self.saveImageToCache(url: url, image: image)
-            DispatchQueue.main.async {
-                self.container.reloadRow(at: indexPath)
-            }
         }
     }
 
-    func photo(atIndexpath indexPath: IndexPath, byUrl url: String) -> UIImage? {
+    func photo(byUrl url: String) -> UIImage? {
         var image: UIImage?
         if let photo = images[url] {
             image = photo
         } else if let photo = getImageFromCache(url: url) {
             image = photo
         } else {
-            loadPhoto(atIndexpath: indexPath, byUrl: url)
+            loadPhoto(byUrl: url)
         }
         return image
     }
