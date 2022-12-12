@@ -207,14 +207,11 @@ final class VKAPIService {
 
 /// Расширение для получения фото
 extension UIImageView {
-    func load(url: String) {
-        guard let url = URL(string: url) else { return }
+    func load(url: String?) {
+        let photoCacheService = PhotoCacheService()
+        guard let url = url else { return }
         DispatchQueue.global().async {
-            guard let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data)
-            else {
-                return
-            }
+            let image = photoCacheService.photo(byUrl: url)
             DispatchQueue.main.async {
                 self.image = image
             }

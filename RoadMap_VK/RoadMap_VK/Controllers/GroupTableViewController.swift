@@ -32,6 +32,8 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let vkAPIService = VKAPIService()
+    private let photoCacheService = PhotoCacheService()
+
     private var groupToken: NotificationToken?
     private var groups: Results<ItemGroup>?
     private var searchedGroups: Results<ItemGroup>?
@@ -97,7 +99,10 @@ extension GroupTableViewController {
         ) as? GroupTableViewCell,
             let group = searchedGroups?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configureGroup(group)
+        cell.configureGroup(
+            group: group,
+            photoCacheService: photoCacheService
+        )
         return cell
     }
 

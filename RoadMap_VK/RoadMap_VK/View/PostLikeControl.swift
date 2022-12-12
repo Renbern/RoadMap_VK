@@ -60,7 +60,7 @@ final class PostLikeControl: UIControl {
 // MARK: - PostConfigurable
 
 extension PostLikeControl: PostConfigurable {
-    func configure(post: Post) {
+    func configure(post: Post, photoCacheService: PhotoCacheService) {
         likeCountLabel?.text = "\(post.likes.count)"
         likeCount = post.likes.count
         viewCountLabel.text = "\(post.views.count)"

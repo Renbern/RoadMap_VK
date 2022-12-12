@@ -27,9 +27,10 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
+    private let photoCacheService = PhotoCacheService()
+
     private lazy var networkService = VKAPIService()
-    private var groups: [ItemGroup] = [
-    ]
+    private var groups: [ItemGroup] = []
 
     private(set) var searchedGroups: [ItemGroup] = []
 
@@ -64,7 +65,10 @@ extension AvailableGroupTableViewController {
             withIdentifier: Constants.availableGroupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.configureGroup(searchedGroups[indexPath.row])
+        cell.configureGroup(
+            group: searchedGroups[indexPath.row],
+            photoCacheService: photoCacheService
+        )
         return cell
     }
 }

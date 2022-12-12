@@ -11,7 +11,7 @@ final class TextPostTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(post: Post) {
+    func configure(post: Post, photoCacheService: PhotoCacheService) {
         postTextView.text = post.text
     }
 }

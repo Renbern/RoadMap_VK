@@ -13,8 +13,8 @@ final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(post: Post) {
-        authorImageView.load(url: post.avatarPath ?? "")
+    func configure(post: Post, photoCacheService: PhotoCacheService) {
+        authorImageView.image = photoCacheService.photo(byUrl: post.avatarPath ?? "")
         postAuthorLabel.text = post.authorName
         postDateLabel.text = changeDateFormat(date: post.date)
     }

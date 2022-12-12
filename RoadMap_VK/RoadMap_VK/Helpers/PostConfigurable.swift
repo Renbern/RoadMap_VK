@@ -6,5 +6,5 @@ import UIKit
 typealias PostCell = UITableViewCell & PostConfigurable
 
 protocol PostConfigurable {
-    func configure(post: Post)
+    func configure(post: Post, photoCacheService: PhotoCacheService)
 }

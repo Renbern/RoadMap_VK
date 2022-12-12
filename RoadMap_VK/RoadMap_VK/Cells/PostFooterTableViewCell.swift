@@ -11,7 +11,7 @@ final class PostFooterTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(post: Post) {
-        postLikeControl.configure(post: post)
+    func configure(post: Post, photoCacheService: PhotoCacheService) {
+        postLikeControl.configure(post: post, photoCacheService: photoCacheService)
     }
 }

@@ -21,11 +21,11 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let promiseVkAPIService = PromiseVKAPIService()
-    private var friendToken: NotificationToken?
+    private let photoCacheService = PhotoCacheService()
 
+    private var friendToken: NotificationToken?
     private var propertyAnimator: UIViewPropertyAnimator?
     private var friends: Results<FriendsItem>?
-
     private var frendsMap: [Character: [FriendsItem]] = [:]
     private var sectionCharacter: [Character] = []
 
@@ -120,11 +120,14 @@ extension FriendsTableViewController {
             withIdentifier: Constants.Identifiers.friendsIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = frendsMap[sectionCharacter[indexPath.section]]?[indexPath.row]
+            let friend = frendsMap[sectionCharacter[indexPath.section]]
         else {
             return UITableViewCell()
         }
-        cell.configure(friend)
+        cell.configure(
+            friend: friend[indexPath.row],
+            photoCacheService: photoCacheService
+        )
         return cell
     }
 
