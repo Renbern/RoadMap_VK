@@ -5,7 +5,7 @@ import Alamofire
 import Foundation
 
 /// Cервис кэширования изображений
-class PhotoCacheService {
+final class PhotoCacheService {
     // MARK: - Constants
 
     private enum Constants {
@@ -45,9 +45,23 @@ class PhotoCacheService {
     private let cacheLifeTime: TimeInterval = Constants.cacheLifeTime
     private var images = [String: UIImage]()
 
+    // MARK: - Public properties
+
+    func photo(byUrl url: String) -> UIImage? {
+        var image: UIImage?
+        if let photo = images[url] {
+            image = photo
+        } else if let photo = getImageFromCache(url: url) {
+            image = photo
+        } else {
+            loadPhoto(byUrl: url)
+        }
+        return image
+    }
+
     // MARK: - Private methods
 
-    func getFilePath(url: String) -> String? {
+    private func getFilePath(url: String) -> String? {
         guard let cachesDirectory = FileManager.default.urls(
             for: .cachesDirectory,
             in: .userDomainMask
@@ -60,7 +74,7 @@ class PhotoCacheService {
         ).path
     }
 
-    func saveImageToCache(url: String, image: UIImage) {
+    private func saveImageToCache(url: String, image: UIImage) {
         guard let fileName = getFilePath(url: url),
               let data = image.pngData() else { return }
         FileManager.default.createFile(
@@ -70,7 +84,7 @@ class PhotoCacheService {
         )
     }
 
-    func getImageFromCache(url: String) -> UIImage? {
+    private func getImageFromCache(url: String) -> UIImage? {
         guard let fileName = getFilePath(url: url),
               let info = try? FileManager.default.attributesOfItem(atPath: fileName),
               let modificationDate = info[FileAttributeKey.modificationDate] as? Date
@@ -89,7 +103,7 @@ class PhotoCacheService {
         return image
     }
 
-    func loadPhoto(byUrl url: String) {
+    private func loadPhoto(byUrl url: String) {
         AF.request(url).responseData(queue: DispatchQueue.global()) { [weak self] response in
             guard let data = response.data,
                   let self = self,
@@ -99,17 +113,5 @@ class PhotoCacheService {
             }
             self.saveImageToCache(url: url, image: image)
         }
-    }
-
-    func photo(byUrl url: String) -> UIImage? {
-        var image: UIImage?
-        if let photo = images[url] {
-            image = photo
-        } else if let photo = getImageFromCache(url: url) {
-            image = photo
-        } else {
-            loadPhoto(byUrl: url)
-        }
-        return image
     }
 }

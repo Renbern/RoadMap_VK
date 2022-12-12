@@ -29,8 +29,7 @@ final class AvailableGroupTableViewController: UITableViewController {
 
     private lazy var networkService = VKAPIService()
     private lazy var photoCacheService = PhotoCacheService()
-    private var groups: [ItemGroup] = [
-    ]
+    private var groups: [ItemGroup] = []
 
     private(set) var searchedGroups: [ItemGroup] = []
 

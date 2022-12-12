@@ -46,7 +46,6 @@
 		048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */; };
 		048E33442913125E00BB1B47 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E33432913125E00BB1B47 /* FriendsTableViewController.swift */; };
 		048E3346291315C400BB1B47 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3345291315C400BB1B47 /* User.swift */; };
-		048E334A29132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E334929132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift */; };
 		04B4CB79293E670100B92526 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4CB78293E670100B92526 /* Post.swift */; };
 		04B4CB7B293E72A400B92526 /* PostHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4CB7A293E72A400B92526 /* PostHeaderTableViewCell.swift */; };
 		04B4CB7D293E72BB00B92526 /* PostFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4CB7C293E72BB00B92526 /* PostFooterTableViewCell.swift */; };
@@ -103,7 +102,6 @@
 		048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		048E33432913125E00BB1B47 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		048E3345291315C400BB1B47 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		048E334929132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		04B4CB78293E670100B92526 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		04B4CB7A293E72A400B92526 /* PostHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		04B4CB7C293E72BB00B92526 /* PostFooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFooterTableViewCell.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */,
-				048E334929132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift */,
 				046DC32F29144B5000EE7E86 /* GroupTableViewCell.swift */,
 				04B4CB7A293E72A400B92526 /* PostHeaderTableViewCell.swift */,
 				04B4CB7E293E72CF00B92526 /* TextPostTableViewCell.swift */,
@@ -473,7 +470,6 @@
 				04B4CB7D293E72BB00B92526 /* PostFooterTableViewCell.swift in Sources */,
 				04EC884C2932140600D7687E /* PhotoUrlPaths.swift in Sources */,
 				04326D012942749A0095AEDD /* PromiseVKAPIService.swift in Sources */,
-				048E334A29132B2600BB1B47 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */,
 				0484BF1B292D407B00CB270C /* VKAPIService.swift in Sources */,
 				04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */,
