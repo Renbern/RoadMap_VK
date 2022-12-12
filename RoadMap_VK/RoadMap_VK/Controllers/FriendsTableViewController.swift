@@ -21,12 +21,11 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let promiseVkAPIService = PromiseVKAPIService()
-    private var friendToken: NotificationToken?
+    private let photoCacheService = PhotoCacheService()
 
+    private var friendToken: NotificationToken?
     private var propertyAnimator: UIViewPropertyAnimator?
     private var friends: Results<FriendsItem>?
-    private var photoCacheService = PhotoCacheService()
-
     private var frendsMap: [Character: [FriendsItem]] = [:]
     private var sectionCharacter: [Character] = []
 
@@ -126,10 +125,8 @@ extension FriendsTableViewController {
             return UITableViewCell()
         }
         cell.configure(
-            friend[indexPath.row],
-            image: photoCacheService.photo(
-                byUrl: friend[indexPath.row].friendPhotoImageName
-            )
+            friend: friend[indexPath.row],
+            photoCacheService: photoCacheService
         )
         return cell
     }

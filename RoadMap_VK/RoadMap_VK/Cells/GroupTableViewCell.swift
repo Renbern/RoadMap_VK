@@ -21,8 +21,8 @@ final class GroupTableViewCell: UITableViewCell {
         setupUI()
     }
 
-    func configureGroup(_ group: ItemGroup, image: UIImage?) {
-        groupPhotoImageView.image = image
+    func configureGroup(group: ItemGroup, photoCacheService: PhotoCacheService) {
+        groupPhotoImageView.image = photoCacheService.photo(byUrl: group.groupPhotoImageName ?? "")
         groupNameLabel.text = group.groupName
     }
 

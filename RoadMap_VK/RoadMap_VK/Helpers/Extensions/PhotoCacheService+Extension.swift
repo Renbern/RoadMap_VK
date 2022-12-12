@@ -4,18 +4,21 @@
 import Foundation
 import UIKit
 
-///  Обновление рядов
+///  Расширешие для хранения ссылок на таблицу/коллекцию и обновление ее элементов
 extension PhotoCacheService {
     class TableViewController: DataReloadable {
         // MARK: - Public properties
+
         let table: UITableViewController
 
         // MARK: - Initializers
+
         init(table: UITableViewController) {
             self.table = table
         }
 
         // MARK: - Public methods
+
         func reloadRow(at indexPath: IndexPath) {
             table.tableView.reloadRows(at: [indexPath], with: .none)
         }

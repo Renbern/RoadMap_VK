@@ -28,8 +28,8 @@ final class PostViewController: UIViewController {
     // MARK: - Private properties
 
     private let vkAPIService = VKAPIService()
+    private let photoCacheService = PhotoCacheService()
     private var news: [Post] = []
-    private var photoCacheService = PhotoCacheService()
 
     // MARK: - Lifecycle
 
@@ -111,7 +111,7 @@ extension PostViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.configure(post: news, image: photoCacheService.photo(byUrl: url))
+        cell.configure(post: news, photoCacheService: photoCacheService)
         return cell
     }
 }

@@ -11,5 +11,5 @@ final class ImagePostTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(post: Post, image: UIImage?) {}
+    func configure(post: Post, photoCacheService: PhotoCacheService) {}
 }
