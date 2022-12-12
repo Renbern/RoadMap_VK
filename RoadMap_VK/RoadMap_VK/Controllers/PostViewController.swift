@@ -106,8 +106,7 @@ extension PostViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? PostCell,
-            let url = news.avatarPath
+        ) as? PostCell
         else {
             return UITableViewCell()
         }

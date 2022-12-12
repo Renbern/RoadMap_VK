@@ -99,7 +99,7 @@ extension GroupTableViewController {
         ) as? GroupTableViewCell,
             let group = searchedGroups?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configureGroup(
+        cell.configure(
             group: group,
             photoCacheService: photoCacheService
         )

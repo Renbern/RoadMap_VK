@@ -11,23 +11,15 @@ final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
     @IBOutlet private var authorImageView: UIImageView!
     @IBOutlet private var postDateLabel: UILabel!
 
+    // MARK: - Private properties
+
+    private let dateFormat = DateFormatter()
+
     // MARK: - Public methods
 
     func configure(post: Post, photoCacheService: PhotoCacheService) {
         authorImageView.image = photoCacheService.photo(byUrl: post.avatarPath ?? "")
         postAuthorLabel.text = post.authorName
-        postDateLabel.text = changeDateFormat(date: post.date)
-    }
-
-    // MARK: - Private methods
-
-    private func changeDateFormat(date: Int) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(date))
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.medium
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        dateFormatter.timeZone = .current
-        let localDate = dateFormatter.string(from: date)
-        return localDate
+        postDateLabel.text = dateFormat.changeDateFormat(date: post.date)
     }
 }
