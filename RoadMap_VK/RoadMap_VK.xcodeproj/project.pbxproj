@@ -60,6 +60,7 @@
 		04DAD11D29104BB100450FF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11B29104BB100450FF0 /* Main.storyboard */; };
 		04DAD11F29104BB400450FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11E29104BB400450FF0 /* Assets.xcassets */; };
 		04DAD12229104BB400450FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */; };
+		04EC52182949101F009D8B15 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC52172949101F009D8B15 /* Attachment.swift */; };
 		04EC884C2932140600D7687E /* PhotoUrlPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC884B2932140600D7687E /* PhotoUrlPaths.swift */; };
 		7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		04DAD11E29104BB400450FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DAD12129104BB400450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DAD12329104BB400450FF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EC52172949101F009D8B15 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		04EC884B2932140600D7687E /* PhotoUrlPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrlPaths.swift; sourceTree = "<group>"; };
 		3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadMap_VK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.debug.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				047DBCAF2919BEE400C9E9FA /* Photo.swift */,
 				04EC884B2932140600D7687E /* PhotoUrlPaths.swift */,
 				048624C62930F09300EDA239 /* VKResponse.swift */,
+				04EC52172949101F009D8B15 /* Attachment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				04B4CB7B293E72A400B92526 /* PostHeaderTableViewCell.swift in Sources */,
 				048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */,
 				04066DD4291DA9E4001EF6D6 /* CustomViewController.swift in Sources */,
+				04EC52182949101F009D8B15 /* Attachment.swift in Sources */,
 				044DB4E82912C8E100E4D595 /* UIViewController+Extension.swift in Sources */,
 				0484BF19292D3F4800CB270C /* AuthorizationViewController.swift in Sources */,
 				04B4CB84293E93FA00B92526 /* PostConfigurable.swift in Sources */,

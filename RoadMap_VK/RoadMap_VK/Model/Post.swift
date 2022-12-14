@@ -14,11 +14,15 @@ final class Post: Decodable {
     /// Аватар автора публикации
     var avatarPath: String?
     /// Лайки
-    var likes: Likes
+    var likes: Likes?
     /// Просмотры
-    var views: Views
+    var views: Views?
     /// Дата публикации
-    var date: Int
+    var date: Double
+    /// Вложения
+    var attachments: [Attachment]?
+    /// Тип публикации
+    var type: PostType?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,5 +31,11 @@ final class Post: Decodable {
         case likes
         case views
         case date
+        case attachments
+    }
+
+    enum PostType {
+        case text
+        case image
     }
 }

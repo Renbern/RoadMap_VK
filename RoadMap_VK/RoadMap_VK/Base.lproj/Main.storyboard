@@ -247,34 +247,29 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextPostTableViewCell" id="Fp5-cf-2Dp" customClass="TextPostTableViewCell" customModule="RoadMap_VK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="129" width="390" height="162.66667175292969"/>
+                                        <rect key="frame" x="0.0" y="129" width="390" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fp5-cf-2Dp" id="BPs-fA-2jf">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="162.66667175292969"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Tby-eC-enk">
-                                                    <rect key="frame" x="10" y="10" width="370" height="142.66666666666666"/>
-                                                    <subviews>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWa-8b-FL8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="370" height="142.66666666666666"/>
-                                                            <color key="backgroundColor" name="VKWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="142.66999999999999" id="6Qg-b5-xzt"/>
-                                                            </constraints>
-                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                            <color key="textColor" systemColor="labelColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
-                                                    </subviews>
-                                                </stackView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWa-8b-FL8">
+                                                    <rect key="frame" x="10" y="10" width="370" height="40"/>
+                                                    <color key="backgroundColor" name="VKWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="NOI-cN-s23"/>
+                                                    </constraints>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Tby-eC-enk" firstAttribute="leading" secondItem="BPs-fA-2jf" secondAttribute="leading" constant="10" id="7Ok-gw-aEW"/>
-                                                <constraint firstItem="Tby-eC-enk" firstAttribute="top" secondItem="BPs-fA-2jf" secondAttribute="top" constant="10" id="RgL-Ih-NSE"/>
-                                                <constraint firstAttribute="bottom" secondItem="Tby-eC-enk" secondAttribute="bottom" constant="10" id="qaR-BI-2lZ"/>
-                                                <constraint firstAttribute="trailing" secondItem="Tby-eC-enk" secondAttribute="trailing" constant="10" id="tss-2H-XMz"/>
+                                                <constraint firstItem="WWa-8b-FL8" firstAttribute="top" secondItem="BPs-fA-2jf" secondAttribute="top" constant="10" id="1Qt-uC-YWt"/>
+                                                <constraint firstAttribute="bottom" secondItem="WWa-8b-FL8" secondAttribute="bottom" constant="10" id="RMR-ng-Rta"/>
+                                                <constraint firstAttribute="trailing" secondItem="WWa-8b-FL8" secondAttribute="trailing" constant="10" id="YHX-YZ-KCo"/>
+                                                <constraint firstItem="WWa-8b-FL8" firstAttribute="leading" secondItem="BPs-fA-2jf" secondAttribute="leading" constant="10" id="cLD-2D-3Aa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -282,25 +277,24 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ImagePostTableViewCell" id="vtF-PI-i4c" customClass="ImagePostTableViewCell" customModule="RoadMap_VK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="291.66667175292969" width="390" height="300"/>
+                                        <rect key="frame" x="0.0" y="189" width="390" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vtF-PI-i4c" id="EbI-Kd-YQi">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="322"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j2T-Dm-ApD">
-                                                    <rect key="frame" x="35" y="21" width="320" height="258"/>
+                                                    <rect key="frame" x="20" y="11" width="350" height="300"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="258" id="fQF-qn-Zax"/>
-                                                        <constraint firstAttribute="width" constant="320" id="tVd-WF-Hjb"/>
+                                                        <constraint firstAttribute="height" constant="300" id="Nzi-1O-oCs"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="j2T-Dm-ApD" secondAttribute="bottom" constant="10" id="EUq-PU-0O8"/>
-                                                <constraint firstItem="j2T-Dm-ApD" firstAttribute="top" secondItem="EbI-Kd-YQi" secondAttribute="topMargin" constant="10" id="aez-jc-SQs"/>
-                                                <constraint firstItem="j2T-Dm-ApD" firstAttribute="leading" secondItem="EbI-Kd-YQi" secondAttribute="leadingMargin" constant="15" id="gHX-Pf-oQg"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="j2T-Dm-ApD" secondAttribute="trailing" constant="15" id="zxN-vw-EAu"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="j2T-Dm-ApD" secondAttribute="bottom" id="EUq-PU-0O8"/>
+                                                <constraint firstItem="j2T-Dm-ApD" firstAttribute="top" secondItem="EbI-Kd-YQi" secondAttribute="topMargin" id="aez-jc-SQs"/>
+                                                <constraint firstItem="j2T-Dm-ApD" firstAttribute="leading" secondItem="EbI-Kd-YQi" secondAttribute="leadingMargin" id="gHX-Pf-oQg"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="j2T-Dm-ApD" secondAttribute="trailing" id="zxN-vw-EAu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -308,7 +302,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostFooterTableViewCell" id="5Yy-Io-ZCU" customClass="PostFooterTableViewCell" customModule="RoadMap_VK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="591.66667175292969" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="511" width="390" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Yy-Io-ZCU" id="blk-xJ-wQP">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
@@ -617,7 +611,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="41Z-U5-WHg">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="85o-sd-Btz" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="85o-sd-Btz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4Sk-Dh-UDj"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ooF-YN-isT">

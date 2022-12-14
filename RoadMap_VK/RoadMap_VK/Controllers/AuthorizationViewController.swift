@@ -14,7 +14,7 @@ final class AuthorizationViewController: UIViewController {
         static let urlPath = "/authorize"
         static let urlHtmlPath = "/blank.html"
         static let mainStoryboard = "Main"
-        static let firstViewControllerName = "SignInViewController"
+        static let firstViewControllerName = "TabBarController"
         static let ampersandSign = "&"
         static let equalsSign = "="
 
@@ -115,9 +115,8 @@ extension AuthorizationViewController: WKNavigationDelegate {
         Session.shared.userId = userId
         decisionHandler(.cancel)
         let storyBoard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
-        guard let vc = storyBoard
-            .instantiateViewController(withIdentifier: Constants.firstViewControllerName) as? SignInViewController
-        else { return }
+        let vc = storyBoard
+            .instantiateViewController(withIdentifier: Constants.firstViewControllerName)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

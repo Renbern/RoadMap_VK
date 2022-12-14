@@ -20,6 +20,6 @@ final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
     func configure(post: Post, photoCacheService: PhotoCacheService) {
         authorImageView.image = photoCacheService.photo(byUrl: post.avatarPath ?? "")
         postAuthorLabel.text = post.authorName
-        postDateLabel.text = dateFormat.convert(date: post.date)
+        postDateLabel.text = dateFormat.convert(date: Int(post.date))
     }
 }
