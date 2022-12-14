@@ -11,12 +11,16 @@ final class PostViewController: UIViewController {
 
     private enum Constants {
         static let headerCellId = "PostHeaderTableViewCell"
-        static let textPostCellId = "TextPostTableViewCell"
-        static let imagePostCellId = "ImagePostTableViewCell"
+        static let textContentCellId = "TextPostTableViewCell"
+        static let imageContentCellId = "ImagePostTableViewCell"
         static let footerCellId = "PostFooterTableViewCell"
+        static let VKBlueColor = "VKBlue"
+        static let refreshControlText = "Загружаем хорошие новости..."
+        static let emptyString = ""
         enum PostCellType: Int, CaseIterable {
             case header
-            case content
+            case textContent
+            case imageContent
             case footer
         }
     }
@@ -29,7 +33,12 @@ final class PostViewController: UIViewController {
 
     private let vkAPIService = VKAPIService()
     private let photoCacheService = PhotoCacheService()
+    private let textViewContent = TextPostTableViewCell()
+
+    private var nextFrom = Constants.emptyString
+    private var isLoading = false
     private var news: [Post] = []
+    private var mostFreshDate: Int?
 
     // MARK: - Lifecycle
 
@@ -40,21 +49,29 @@ final class PostViewController: UIViewController {
 
     // MARK: - Private methods
 
-    private func setupTableView() {
-        tableView.dataSource = self
+    @objc private func refreshNewsAction() {
         fetchNews()
     }
 
-    private func fetchNews() {
-        vkAPIService.fetchNews { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(data):
-                self.newsFilter(newsFeedResponse: data)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.prefetchDataSource = self
+        tableView.delegate = self
+        fetchNews()
+        setupRefreshControl()
+    }
+
+    private func setupRefreshControl() {
+        guard let colorTitle = UIColor(named: Constants.VKBlueColor) else { return }
+        let refreshControlAttributes: [NSAttributedString.Key: UIColor] =
+            [.foregroundColor: colorTitle]
+        textViewContent.refreshControl.attributedTitle = NSAttributedString(
+            string: Constants.refreshControlText,
+            attributes: refreshControlAttributes
+        )
+        textViewContent.refreshControl.tintColor = colorTitle
+        textViewContent.refreshControl.addTarget(self, action: #selector(refreshNewsAction), for: .valueChanged)
+        tableView.addSubview(textViewContent.refreshControl)
     }
 
     private func newsFilter(newsFeedResponse: PostResponse) {
@@ -74,7 +91,7 @@ final class PostViewController: UIViewController {
             }
         }
         DispatchQueue.main.async {
-            self.news = newsFeedResponse.news
+            self.news = newsFeedResponse.news + self.news
             self.tableView.reloadData()
         }
     }
@@ -93,25 +110,94 @@ extension PostViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let news = news[indexPath.section]
-        let cellType = Constants.PostCellType(rawValue: indexPath.row) ?? .content
-        var cellIdentifier = ""
+        let cellType = Constants.PostCellType(rawValue: indexPath.row) ?? .textContent
+        var cellIdentifier = Constants.emptyString
         switch cellType {
         case .header:
             cellIdentifier = Constants.headerCellId
-        case .content:
-            cellIdentifier = Constants.textPostCellId
+        case .textContent:
+            cellIdentifier = Constants.textContentCellId
+        case .imageContent:
+            cellIdentifier = Constants.imageContentCellId
         case .footer:
             cellIdentifier = Constants.footerCellId
         }
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? PostCell,
-            let url = news.avatarPath
+        ) as? PostCell
         else {
             return UITableViewCell()
         }
         cell.configure(post: news, photoCacheService: photoCacheService)
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension PostViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            let tableWidth = tableView.bounds.width
+            guard let news = news[indexPath.section].attachments?.last?.photo?.photos.first?.aspectRatio
+            else { return CGFloat() }
+            let cellHeight = tableWidth * news
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+}
+
+// MARK: - UITableViewDataSourcePrefetching
+
+extension PostViewController: UITableViewDataSourcePrefetching {
+    func tableView(
+        _ tableView: UITableView,
+        prefetchRowsAt indexPaths:
+        [IndexPath]
+    ) {
+        guard let maxSection = indexPaths.map(\.section).max(),
+              maxSection > news.count - 3,
+              !isLoading
+        else { return }
+        isLoading = true
+        vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                let indexSet = IndexSet(
+                    integersIn: self.news.count ..<
+                        self.news.count + data.news.count
+                )
+                self.news.append(contentsOf: self.news)
+                self.tableView.insertSections(indexSet, with: .automatic)
+                self.isLoading = false
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+// MARK: - Fetch news method
+extension PostViewController {
+    private func fetchNews() {
+        if let firstItem = news.first {
+            mostFreshDate = Int(firstItem.date) + 1
+        }
+        vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] result in
+            guard let self = self else { return }
+            self.textViewContent.refreshControl.endRefreshing()
+            switch result {
+            case let .success(data):
+                self.newsFilter(newsFeedResponse: data)
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

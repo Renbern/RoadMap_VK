@@ -65,7 +65,7 @@ extension AvailableGroupTableViewController {
             withIdentifier: Constants.availableGroupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.configureGroup(
+        cell.configure(
             group: searchedGroups[indexPath.row],
             photoCacheService: photoCacheService
         )

@@ -46,6 +46,8 @@
 		048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */; };
 		048E33442913125E00BB1B47 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E33432913125E00BB1B47 /* FriendsTableViewController.swift */; };
 		048E3346291315C400BB1B47 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E3345291315C400BB1B47 /* User.swift */; };
+		049411C72947A69D00906B25 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049411C62947A69D00906B25 /* SignInView.swift */; };
+		049411C92947BEC200906B25 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049411C82947BEC200906B25 /* DateFormatter+Extension.swift */; };
 		04B4CB79293E670100B92526 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4CB78293E670100B92526 /* Post.swift */; };
 		04B4CB7B293E72A400B92526 /* PostHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4CB7A293E72A400B92526 /* PostHeaderTableViewCell.swift */; };
 		04B4CB7D293E72BB00B92526 /* PostFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4CB7C293E72BB00B92526 /* PostFooterTableViewCell.swift */; };
@@ -58,6 +60,7 @@
 		04DAD11D29104BB100450FF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11B29104BB100450FF0 /* Main.storyboard */; };
 		04DAD11F29104BB400450FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD11E29104BB400450FF0 /* Assets.xcassets */; };
 		04DAD12229104BB400450FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DAD12029104BB400450FF0 /* LaunchScreen.storyboard */; };
+		04EC52182949101F009D8B15 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC52172949101F009D8B15 /* Attachment.swift */; };
 		04EC884C2932140600D7687E /* PhotoUrlPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC884B2932140600D7687E /* PhotoUrlPaths.swift */; };
 		7DB0390A60E516AB028679EC /* Pods_RoadMap_VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +105,8 @@
 		048E3341291311C400BB1B47 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		048E33432913125E00BB1B47 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		048E3345291315C400BB1B47 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		049411C62947A69D00906B25 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		049411C82947BEC200906B25 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		04B4CB78293E670100B92526 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		04B4CB7A293E72A400B92526 /* PostHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		04B4CB7C293E72BB00B92526 /* PostFooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFooterTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +121,7 @@
 		04DAD11E29104BB400450FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04DAD12129104BB400450FF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DAD12329104BB400450FF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EC52172949101F009D8B15 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		04EC884B2932140600D7687E /* PhotoUrlPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrlPaths.swift; sourceTree = "<group>"; };
 		3C389FE9A6ABE594519B507F /* Pods_RoadMap_VK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadMap_VK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A5EDA75C2225354C7178D7 /* Pods-RoadMap_VK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadMap_VK.debug.xcconfig"; path = "Target Support Files/Pods-RoadMap_VK/Pods-RoadMap_VK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				047DBCB7291AE40E00C9E9FA /* LoadingDotsView.swift */,
 				047DBCB9291AFF8900C9E9FA /* GradientView.swift */,
 				047DBCBF291C4AE700C9E9FA /* PhotoView.swift */,
+				049411C62947A69D00906B25 /* SignInView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,6 +182,7 @@
 				044DB4E72912C8E100E4D595 /* UIViewController+Extension.swift */,
 				044DB4E52911AAA800E4D595 /* UITextField+Extension.swift */,
 				04326D0A294364CA0095AEDD /* PhotoCacheService+Extension.swift */,
+				049411C82947BEC200906B25 /* DateFormatter+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				047DBCAF2919BEE400C9E9FA /* Photo.swift */,
 				04EC884B2932140600D7687E /* PhotoUrlPaths.swift */,
 				048624C62930F09300EDA239 /* VKResponse.swift */,
+				04EC52172949101F009D8B15 /* Attachment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -471,6 +480,7 @@
 				04EC884C2932140600D7687E /* PhotoUrlPaths.swift in Sources */,
 				04326D012942749A0095AEDD /* PromiseVKAPIService.swift in Sources */,
 				04DAD11A29104BB100450FF0 /* SignInViewController.swift in Sources */,
+				049411C92947BEC200906B25 /* DateFormatter+Extension.swift in Sources */,
 				0484BF1B292D407B00CB270C /* VKAPIService.swift in Sources */,
 				04DAD11629104BB100450FF0 /* AppDelegate.swift in Sources */,
 				04066DD0291DA08E001EF6D6 /* PopAnimator.swift in Sources */,
@@ -481,6 +491,7 @@
 				04B4CB7B293E72A400B92526 /* PostHeaderTableViewCell.swift in Sources */,
 				048E3342291311C400BB1B47 /* FriendsTableViewCell.swift in Sources */,
 				04066DD4291DA9E4001EF6D6 /* CustomViewController.swift in Sources */,
+				04EC52182949101F009D8B15 /* Attachment.swift in Sources */,
 				044DB4E82912C8E100E4D595 /* UIViewController+Extension.swift in Sources */,
 				0484BF19292D3F4800CB270C /* AuthorizationViewController.swift in Sources */,
 				04B4CB84293E93FA00B92526 /* PostConfigurable.swift in Sources */,
@@ -488,6 +499,7 @@
 				04326D0B294364CA0095AEDD /* PhotoCacheService+Extension.swift in Sources */,
 				0432A99929149DCC00F5083F /* LikeControl.swift in Sources */,
 				047DBCC0291C4AE700C9E9FA /* PhotoView.swift in Sources */,
+				049411C72947A69D00906B25 /* SignInView.swift in Sources */,
 				04326D032943515D0095AEDD /* PhotoCacheService.swift in Sources */,
 				04DAD11829104BB100450FF0 /* SceneDelegate.swift in Sources */,
 				046DC33029144B5000EE7E86 /* GroupTableViewCell.swift in Sources */,

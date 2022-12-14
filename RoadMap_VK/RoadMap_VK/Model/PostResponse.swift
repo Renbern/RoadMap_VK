@@ -11,10 +11,13 @@ struct PostResponse: Decodable {
     let groups: [ItemGroup]
     /// Друзья
     let friends: [FriendsItem]
+    /// Следующая страница
+    let nextPage: String?
 
     enum CodingKeys: String, CodingKey {
         case news = "items"
         case friends = "profiles"
         case groups
+        case nextPage = "next_from"
     }
 }

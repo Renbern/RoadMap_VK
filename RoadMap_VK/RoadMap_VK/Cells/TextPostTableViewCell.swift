@@ -7,11 +7,16 @@ import UIKit
 final class TextPostTableViewCell: UITableViewCell, PostConfigurable {
     // MARK: - Private visual elements
 
-    @IBOutlet private var postTextView: UITextView!
+    @IBOutlet private var postTextLabel: UILabel!
+
+    // MARK: - Public properties
+
+    let refreshControl = UIRefreshControl()
 
     // MARK: - Public methods
 
     func configure(post: Post, photoCacheService: PhotoCacheService) {
-        postTextView.text = post.text
+        postTextLabel.text = post.text
+        postTextLabel.numberOfLines = 5
     }
 }

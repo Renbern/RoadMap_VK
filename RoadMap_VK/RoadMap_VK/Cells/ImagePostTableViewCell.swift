@@ -11,5 +11,8 @@ final class ImagePostTableViewCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods
 
-    func configure(post: Post, photoCacheService: PhotoCacheService) {}
+    func configure(post: Post, photoCacheService: PhotoCacheService) {
+        guard let imageName = post.attachments?.first?.photo?.photos.last?.url else { return }
+        postImageView.image = photoCacheService.photo(byUrl: imageName)
+    }
 }

@@ -20,6 +20,8 @@ final class VKAPIService {
         static let ownerIdText = "owner_id"
         static let filtersText = "filters"
         static let filters = "post"
+        static let startTimeText = "start_time"
+        static let startFromText = "start_from"
     }
 
     /// Типы пути запросов
@@ -47,7 +49,7 @@ final class VKAPIService {
         case groups
         case photos(id: Int)
         case searchGroups(query: String)
-        case news
+        case news(startTime: Int, startFrom: String)
 
         var urlString: String {
             switch self {
@@ -91,11 +93,13 @@ final class VKAPIService {
                     Constants.queryText: query,
                     Constants.versionText: Constants.versionValue
                 ]
-            case .news:
+            case let .news(startTime, startFrom):
                 return [
                     Constants.tokenText: Session.shared.token,
                     Constants.filtersText: Constants.filters,
-                    Constants.versionText: Constants.versionValue
+                    Constants.versionText: Constants.versionValue,
+                    Constants.startTimeText: startTime,
+                    Constants.startFromText: startFrom
                 ]
             }
         }
@@ -108,8 +112,12 @@ final class VKAPIService {
 
     // MARK: - Public methods
 
-    func fetchNews(completion: @escaping (Result<PostResponse, Error>) -> Void) {
-        request(.news) { [weak self] data in
+    func fetchNews(
+        startTime: Int?,
+        startFrom: String? = nil,
+        completion: @escaping (Result<PostResponse, Error>) -> Void
+    ) {
+        request(.news(startTime: startTime ?? 0, startFrom: startFrom ?? "")) { [weak self] data in
             guard
                 let self = self,
                 let data = data,
@@ -188,7 +196,12 @@ final class VKAPIService {
 
     // MARK: - Private methods
 
-    private func request(_ method: RequestType, completion: @escaping (Data?) -> Void) {
+    private func request(
+        startTime: TimeInterval? = nil,
+        startFrom: String? = nil,
+        _ method: RequestType,
+        completion: @escaping (Data?) -> Void
+    ) {
         let methodParameters = method.parameters
         let url = "\(VkUrl.baseUrl)\(method.urlString)"
         AF.request(url, parameters: methodParameters).responseData { response in
