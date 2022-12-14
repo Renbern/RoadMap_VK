@@ -7,7 +7,11 @@ import UIKit
 final class TextPostTableViewCell: UITableViewCell, PostConfigurable {
     // MARK: - Private visual elements
 
-    @IBOutlet var postTextLabel: UILabel!
+    @IBOutlet private var postTextLabel: UILabel!
+
+    // MARK: - Public properties
+
+    let refreshControl = UIRefreshControl()
 
     // MARK: - Public methods
 

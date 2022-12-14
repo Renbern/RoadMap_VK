@@ -33,7 +33,6 @@ final class PostViewController: UIViewController {
 
     private let vkAPIService = VKAPIService()
     private let photoCacheService = PhotoCacheService()
-    private let refreshControl = UIRefreshControl()
     private let textViewContent = TextPostTableViewCell()
 
     private var nextFrom = Constants.emptyString
@@ -66,13 +65,13 @@ final class PostViewController: UIViewController {
         guard let colorTitle = UIColor(named: Constants.VKBlueColor) else { return }
         let refreshControlAttributes: [NSAttributedString.Key: UIColor] =
             [.foregroundColor: colorTitle]
-        refreshControl.attributedTitle = NSAttributedString(
+        textViewContent.refreshControl.attributedTitle = NSAttributedString(
             string: Constants.refreshControlText,
             attributes: refreshControlAttributes
         )
-        refreshControl.tintColor = colorTitle
-        refreshControl.addTarget(self, action: #selector(refreshNewsAction), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        textViewContent.refreshControl.tintColor = colorTitle
+        textViewContent.refreshControl.addTarget(self, action: #selector(refreshNewsAction), for: .valueChanged)
+        tableView.addSubview(textViewContent.refreshControl)
     }
 
     private func fetchNews() {
@@ -81,7 +80,7 @@ final class PostViewController: UIViewController {
         }
         vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] result in
             guard let self = self else { return }
-            self.refreshControl.endRefreshing()
+            self.textViewContent.refreshControl.endRefreshing()
             switch result {
             case let .success(data):
                 self.newsFilter(newsFeedResponse: data)
@@ -177,23 +176,24 @@ extension PostViewController: UITableViewDataSourcePrefetching {
         prefetchRowsAt indexPaths:
         [IndexPath]
     ) {
-        guard let maxSection = indexPaths.map(\.section).max() else { return }
-        if maxSection > news.count - 3, !isLoading {
-            isLoading = true
-            vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] response in
-                guard let self = self else { return }
-                switch response {
-                case let .success(data):
-                    let indexSet = IndexSet(
-                        integersIn: self.news.count ..<
-                            self.news.count + data.news.count
-                    )
-                    self.news.append(contentsOf: self.news)
-                    self.tableView.insertSections(indexSet, with: .automatic)
-                    self.isLoading = false
-                case let .failure(error):
-                    print(error.localizedDescription)
-                }
+        guard let maxSection = indexPaths.map(\.section).max(),
+              maxSection > news.count - 3,
+              !isLoading
+        else { return }
+        isLoading = true
+        vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                let indexSet = IndexSet(
+                    integersIn: self.news.count ..<
+                        self.news.count + data.news.count
+                )
+                self.news.append(contentsOf: self.news)
+                self.tableView.insertSections(indexSet, with: .automatic)
+                self.isLoading = false
+            case let .failure(error):
+                print(error.localizedDescription)
             }
         }
     }

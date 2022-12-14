@@ -4,11 +4,15 @@
 /// Публикации
 final class Post: Decodable {
     /// Идентификатор
-    var id: Int
+    let id: Int
     /// Идентификатор публикации
-    var sourceId: Int
+    let sourceId: Int
     /// Текст публикации
-    var text: String
+    let text: String
+    /// Дата публикации
+    let date: Double
+    /// Вложения
+    let attachments: [Attachment]?
     /// Автор публикации
     var authorName: String?
     /// Аватар автора публикации
@@ -17,10 +21,6 @@ final class Post: Decodable {
     var likes: Likes?
     /// Просмотры
     var views: Views?
-    /// Дата публикации
-    var date: Double
-    /// Вложения
-    var attachments: [Attachment]?
     /// Тип публикации
     var type: PostType?
 

@@ -115,9 +115,9 @@ extension AuthorizationViewController: WKNavigationDelegate {
         Session.shared.userId = userId
         decisionHandler(.cancel)
         let storyBoard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
-        let vc = storyBoard
+        let tabBarController = storyBoard
             .instantiateViewController(withIdentifier: Constants.firstViewControllerName)
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true, completion: nil)
     }
 }
