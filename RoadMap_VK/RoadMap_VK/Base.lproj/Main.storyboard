@@ -247,37 +247,35 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextPostTableViewCell" id="Fp5-cf-2Dp" customClass="TextPostTableViewCell" customModule="RoadMap_VK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="129" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="129" width="390" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fp5-cf-2Dp" id="BPs-fA-2jf">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWa-8b-FL8">
-                                                    <rect key="frame" x="10" y="10" width="370" height="40"/>
-                                                    <color key="backgroundColor" name="VKWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ip-Zi-cZu">
+                                                    <rect key="frame" x="30" y="21" width="330" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="NOI-cN-s23"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="pf7-Cs-yXk"/>
                                                     </constraints>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <color key="textColor" systemColor="labelColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="WWa-8b-FL8" firstAttribute="top" secondItem="BPs-fA-2jf" secondAttribute="top" constant="10" id="1Qt-uC-YWt"/>
-                                                <constraint firstAttribute="bottom" secondItem="WWa-8b-FL8" secondAttribute="bottom" constant="10" id="RMR-ng-Rta"/>
-                                                <constraint firstAttribute="trailing" secondItem="WWa-8b-FL8" secondAttribute="trailing" constant="10" id="YHX-YZ-KCo"/>
-                                                <constraint firstItem="WWa-8b-FL8" firstAttribute="leading" secondItem="BPs-fA-2jf" secondAttribute="leading" constant="10" id="cLD-2D-3Aa"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="4Ip-Zi-cZu" secondAttribute="bottom" constant="10" id="0Ip-bo-XU8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="4Ip-Zi-cZu" secondAttribute="trailing" constant="10" id="6xw-YT-gHM"/>
+                                                <constraint firstItem="4Ip-Zi-cZu" firstAttribute="top" secondItem="BPs-fA-2jf" secondAttribute="topMargin" constant="10" id="Dhy-uL-fVf"/>
+                                                <constraint firstItem="4Ip-Zi-cZu" firstAttribute="leading" secondItem="BPs-fA-2jf" secondAttribute="leadingMargin" constant="10" id="G4L-2q-nB8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="postTextView" destination="WWa-8b-FL8" id="rwb-uD-MxZ"/>
+                                            <outlet property="postTextLabel" destination="4Ip-Zi-cZu" id="hSK-Vd-2o8"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ImagePostTableViewCell" id="vtF-PI-i4c" customClass="ImagePostTableViewCell" customModule="RoadMap_VK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="189" width="390" height="322"/>
+                                        <rect key="frame" x="0.0" y="211" width="390" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vtF-PI-i4c" id="EbI-Kd-YQi">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="322"/>
@@ -302,7 +300,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostFooterTableViewCell" id="5Yy-Io-ZCU" customClass="PostFooterTableViewCell" customModule="RoadMap_VK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="511" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="533" width="390" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Yy-Io-ZCU" id="blk-xJ-wQP">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
@@ -816,9 +814,6 @@
         <namedColor name="VKWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
