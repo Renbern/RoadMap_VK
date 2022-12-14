@@ -5,10 +5,10 @@ import UIKit
 
 /// Ячейка хэдера секции поста
 final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
-    // MARK: - Private visual elements
-
+    // MARK: - Private properties
     private let dateFormat = DateFormatter()
 
+    // MARK: - Private visual elements
     @IBOutlet private var postAuthorLabel: UILabel!
     @IBOutlet private var authorImageView: UIImageView!
     @IBOutlet private var postDateLabel: UILabel!
