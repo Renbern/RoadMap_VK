@@ -9,10 +9,6 @@ final class TextPostTableViewCell: UITableViewCell, PostConfigurable {
 
     @IBOutlet var postTextLabel: UILabel!
 
-    // MARK: - Private properties
-
-    private let instets: CGFloat = 10
-
     // MARK: - Public methods
 
     func configure(post: Post, photoCacheService: PhotoCacheService) {
