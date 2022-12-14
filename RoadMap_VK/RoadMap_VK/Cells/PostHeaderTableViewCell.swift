@@ -7,13 +7,11 @@ import UIKit
 final class PostHeaderTableViewCell: UITableViewCell, PostConfigurable {
     // MARK: - Private visual elements
 
+    private let dateFormat = DateFormatter()
+
     @IBOutlet private var postAuthorLabel: UILabel!
     @IBOutlet private var authorImageView: UIImageView!
     @IBOutlet private var postDateLabel: UILabel!
-
-    // MARK: - Private properties
-
-    private let dateFormat = DateFormatter()
 
     // MARK: - Public methods
 

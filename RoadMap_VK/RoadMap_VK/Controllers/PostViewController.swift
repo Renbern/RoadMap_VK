@@ -74,23 +74,6 @@ final class PostViewController: UIViewController {
         tableView.addSubview(textViewContent.refreshControl)
     }
 
-    private func fetchNews() {
-        if let firstItem = news.first {
-            mostFreshDate = Int(firstItem.date) + 1
-        }
-        vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] result in
-            guard let self = self else { return }
-            self.textViewContent.refreshControl.endRefreshing()
-            switch result {
-            case let .success(data):
-                self.newsFilter(newsFeedResponse: data)
-                self.tableView.reloadData()
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-
     private func newsFilter(newsFeedResponse: PostResponse) {
         newsFeedResponse.news.forEach { news in
             guard let group = newsFeedResponse.groups.filter({ group in
@@ -192,6 +175,26 @@ extension PostViewController: UITableViewDataSourcePrefetching {
                 self.news.append(contentsOf: self.news)
                 self.tableView.insertSections(indexSet, with: .automatic)
                 self.isLoading = false
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+// MARK: - Fetch news method
+extension PostViewController {
+    private func fetchNews() {
+        if let firstItem = news.first {
+            mostFreshDate = Int(firstItem.date) + 1
+        }
+        vkAPIService.fetchNews(startTime: mostFreshDate, startFrom: nextFrom) { [weak self] result in
+            guard let self = self else { return }
+            self.textViewContent.refreshControl.endRefreshing()
+            switch result {
+            case let .success(data):
+                self.newsFilter(newsFeedResponse: data)
+                self.tableView.reloadData()
             case let .failure(error):
                 print(error.localizedDescription)
             }
